@@ -4,6 +4,7 @@ TAP Viewer
 This project will hold the design discussion and ultimately code, for the new Web-based TAP vieweer.
 
 Project TEAM:
+-------------
 
 Alex Miranda: Web UI developer
 
