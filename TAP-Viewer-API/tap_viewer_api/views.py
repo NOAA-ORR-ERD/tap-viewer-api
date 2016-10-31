@@ -1,5 +1,9 @@
 from pyramid.response import Response
 from pyramid.view import view_config
+import os
+import json
+
+data_dir = './'
 
 def hello_world(request):
     print(request.matchdict)
@@ -14,4 +18,7 @@ def locations(request):
 
 @view_config(renderer='json')
 def location_setup(request):
-    loc = request.matchdict
+    loc = request.matchdict['location_name']
+    site_path = os.path.join(data_dir, "locations", loc, "site.json")
+    with open(site_path) as site_file:
+       return json.load(site_file)

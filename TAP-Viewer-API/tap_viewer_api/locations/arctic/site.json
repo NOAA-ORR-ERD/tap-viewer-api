@@ -1,0 +1,34 @@
+{
+	"name": "Arctic TAP",
+	"map_name": "arctic_coast3.bna",
+	"num_spills": 40,
+	"seasons": ["Winter", "Spring"],
+        "output_times": [
+		2880,
+		2160,
+		1680,
+		1200,
+		720,
+		480,
+		360,
+		240,
+		168,
+		120,
+		72,
+		48,
+		24
+	],
+	"output_amounts": [
+		1000,
+		100
+	],
+	"locs": [
+		5,
+		10,
+		20
+	],
+	"source_locations": [
+		[200.306, 71.2612],
+		[201, 72]
+	]
+}
