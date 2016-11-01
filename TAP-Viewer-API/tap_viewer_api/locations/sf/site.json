@@ -1,9 +1,26 @@
 {
-  "num_spills": 500,
+  "output_times": [
+    120,
+    96,
+    72,
+    60,
+    48,
+    36,
+    24,
+    12,
+    6,
+    1
+  ],
   "seasons": [
     "Mar - Aug",
     "Sept - Feb"
   ],
+  "locs": [
+    10,
+    5,
+    1
+  ],
+  "map_name": "SF.BNA",
   "source_locations": [
     [
       -122.410448,
@@ -938,26 +955,9 @@
       38.07866667
     ]
   ],
-  "locs": [
-    10,
-    5,
-    1
-  ],
-  "output_times": [
-    120,
-    96,
-    72,
-    60,
-    48,
-    36,
-    24,
-    12,
-    6,
-    1
-  ],
-  "map_name": "SF.BNA",
-  "name": "SAN FRANCISCO BAY",
+  "num_spills": 500,
   "output_amounts": [
     1000.0
-  ]
+  ],
+  "name": "SAN FRANCISCO BAY"
 }

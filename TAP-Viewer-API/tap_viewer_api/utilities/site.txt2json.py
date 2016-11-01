@@ -13,7 +13,7 @@ import sys
 import os
 import json
 import geojson
-from geojson import Polygon, Feature
+from geojson import Polygon, Feature, FeatureCollection
 
 
 
@@ -46,7 +46,7 @@ def sites2geojson(fp):
             poly = Feature(geometry=Polygon([poly]), site_num=site_num)
             polys.append(poly)
             print(poly)
-        geojson.dump(polys, outfile, indent=2)
+        geojson.dump(FeatureCollection(polys), outfile, indent=2)
 
 
 data = {}
