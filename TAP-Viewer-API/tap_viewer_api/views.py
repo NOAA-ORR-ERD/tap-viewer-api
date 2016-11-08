@@ -6,12 +6,10 @@ import json
 data_dir = './'
 
 def hello_world(request):
-    print(request.matchdict)
     return Response('Hello %(name)s!' % request.matchdict)
 
 @view_config(renderer='json')
 def locations(request):
-    
     sf = {'route_name': 'sf', 'name': 'San Francisco', 'lonlat': [-122.42, 37.77]}
     arctic = {'route_name': 'arctic', 'name': 'US Arctic Waters', 'lonlat': [-156.79, 71.29]}
     return {'locations': [sf, arctic]}
