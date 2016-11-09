@@ -9,6 +9,8 @@ def includeme(config):
     config.add_view(home, route_name='home')
     config.add_view(locations, route_name='locations', renderer='json')
     config.add_view(location_setup, route_name='location_setup', renderer='json')
+    config.add_view(impact_analysis, route_name='impact_analysis', renderer='json')
+    config.add_view(oiling_analysis, route_name='oiling_analysis', renderer='json')
 
 def home(request):
     return Response('Hello!')
@@ -23,3 +25,9 @@ def location_setup(request):
     site_path = os.path.join(data_dir, "locations", loc, "site.json")
     with open(site_path) as site_file:
        return json.load(site_file)
+
+def impact_analysis(request):
+    loc = request.matchdict['location_name']
+
+def oiling_analysis(request):
+    loc = request.matchdict['location_name']
