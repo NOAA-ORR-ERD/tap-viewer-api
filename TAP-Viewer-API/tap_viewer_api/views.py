@@ -27,16 +27,18 @@ def location_setup(request):
        return json.load(site_file)
 
 def impact_analysis(request):
-    req_obj = request.json
+    req_obj = request.json_body
     loc_id = req_obj['location_id']
     season = req_obj['season']
     oil_type = req_obj['oil_type']
     level_of_concern = req_obj['level_of_concern']
     amount_spilled_bbl = req_obj['amount_spilled_bbl']
     time_since_start_hrs = req_obj['time_since_start_hrs']
+    return req_obj
 
 def oiling_analysis(request):
-    req_obj = request.json
+    req_obj = request.json_body
     loc_id = req_obj['location_id']
     season = req_obj['season']
     oil_type = req_obj['oil_type']
+    return req_obj
