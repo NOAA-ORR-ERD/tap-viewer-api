@@ -2,6 +2,7 @@ from pyramid.response import Response
 from pyramid.view import view_config
 import os
 import json
+import numpy as np
 
 data_dir = os.path.dirname(__file__)
 
@@ -28,17 +29,23 @@ def location_setup(request):
 
 def impact_analysis(request):
     req_obj = request.json_body
-    loc_id = req_obj['location_id']
-    season = req_obj['season']
-    oil_type = req_obj['oil_type']
-    level_of_concern = req_obj['level_of_concern']
-    amount_spilled_bbl = req_obj['amount_spilled_bbl']
-    time_since_start_hrs = req_obj['time_since_start_hrs']
-    return req_obj
+    return {'data': tap_impact_analysis(req_obj)}
+    # loc_id = req_obj['location_id']
+    # season = req_obj['season']
+    # oil_type = req_obj['oil_type']
+    # level_of_concern = req_obj['level_of_concern']
+    # amount_spilled_bbl = req_obj['amount_spilled_bbl']
+    # time_since_start_hrs = req_obj['time_since_start_hrs']
 
 def oiling_analysis(request):
     req_obj = request.json_body
-    loc_id = req_obj['location_id']
-    season = req_obj['season']
-    oil_type = req_obj['oil_type']
-    return req_obj
+    return {'data': tap_oiling_analysis(req_obj)}
+    # loc_id = req_obj['location_id']
+    # season = req_obj['season']
+    # oil_type = req_obj['oil_type']
+
+def tap_impact_analysis(req_obj):
+    return np.random.rand(100).tolist()
+
+def tap_oiling_analysis(req_obj):
+    return np.random.rand(100).tolist()
