@@ -6,13 +6,16 @@ This project will hold the design discussion and ultimately code, for the new We
 Project TEAM:
 -------------
 
-Gennady Kachook: Web UI developer
+Alex Miranda: Web UI developer emeritus
+
+Gennady Kachook: Web UI and back-end API developer
 
 Dylan Righi: Back end computation developer and subject matter expert
 
 Chris Barker: Subject mater expert, software architecture support -- maybe some code :-)
 
 Glen Watabayashi: Making sure we get it done on schedule :-)
+
 
 Running the API Server
 ======================
