@@ -1,0 +1,34 @@
+# This can be used with conda to get the dependencies
+#
+#  NOTE: as of 3/7/2016, not all requirements were available for python 3.6 yet.
+#        so this file uses python3.5
+#
+#  1) create an environment::
+#    conda create -n tap python=3.5
+#
+#  2) load the dependencies:
+#    conda install --file conda_requirements.txt
+#
+#  3) active the environment
+#    activate tap  (Windows)
+#     or
+#    source activate tap  (OS-X, Linux)
+#
+#  4) install the app:
+#    python setup.py develop
+#
+#  5) start the app
+#    pserve --reload development.ini
+#
+
+python=3.5.*
+numpy
+pyramid
+pyramid_debugtoolbar
+waitress
+
+# for testing:
+webtest
+pytest
+pytest-cov
+

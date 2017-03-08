@@ -4,11 +4,19 @@ from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-requires = [
-    'pyramid',
-    'pyramid_debugtoolbar',
-    'waitress',
-    ]
+
+# better to use:
+# conda install --file conda_requirements
+# or
+# pip install -r requiremrents.txt
+# rather than havin setuptools pull this stuff in..
+
+requires = []
+# requires = ['pyramid',
+#             'pyramid_debugtoolbar',
+#             'waitress',
+#             ]
+
 
 setup(name='TAP-Viewer-API',
       version='0.0',
@@ -27,9 +35,9 @@ setup(name='TAP-Viewer-API',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
-      #install_requires=requires,
-      tests_require=requires,
-      test_suite="tapviewer",
+      # install_requires=requires,
+      # tests_require=requires,
+      # test_suite="tapviewer",
       entry_points="""\
       [paste.app_factory]
       main = tap_viewer_api:main
