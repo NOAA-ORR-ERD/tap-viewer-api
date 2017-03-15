@@ -69,16 +69,14 @@ with open(infilename, 'r') as sitefile:
     data["output_times"] = []
     for i in range(num):
         lin = sitefile.readline()
-        print("line:", lin)
         lin = lin.split("//")[0].strip()
         val = lin.split(" ", 1)[0]
         s = lin.split(" ", 1)[1].strip().strip('"')
-        print("string is", s)
-        print("val is", val)
         data["output_times"].append([int(val), s])
 
     num = int(sitefile.readline().split()[0])
-    data["output_amounts"] = [float(sitefile.readline().split()[0]) for i in (range(num))]
+    data["output_amounts"] = [[float(lin[0]), lin[1].strip()] for lin in (sitefile.readline().split() for i in range(num))]
+
 
     num = int(sitefile.readline().split()[0])
     data["locs"] = [int(sitefile.readline().split()[0]) for i in (range(num))]
