@@ -41,31 +41,13 @@
       ""
     ]
   ],
-  "locs": [
-    [
-      10.0,
-      "barrels"
-    ],
-    [
-      5.0,
-      "barrels"
-    ],
-    [
-      1.0,
-      "barrels"
-    ]
-  ],
+  "name": "SAN FRANCISCO BAY",
   "output_amounts": [
     [
-      1000.0,
+      1000,
       "barrels"
     ]
   ],
-  "seasons": [
-    "Mar - Aug",
-    "Sept - Feb"
-  ],
-  "name": "SAN FRANCISCO BAY",
   "source_locations": [
     [
       "source: 0",
@@ -1697,6 +1679,24 @@
         -121.911,
         38.07866667
       ]
+    ]
+  ],
+  "seasons": [
+    "Mar - Aug",
+    "Sept - Feb"
+  ],
+  "locs": [
+    [
+      10.0,
+      "barrels"
+    ],
+    [
+      5.0,
+      "barrels"
+    ],
+    [
+      1.0,
+      "barrels"
     ]
   ],
   "num_spills": 500

@@ -1,31 +1,31 @@
 "Arctic TAP"  //Map Name for User
-"arctic_coast3.bna"  "BNA"  // "map file name"  "map file type" -- either "BNA" or "PICT" 
-500 SPILLS // number of spills per site and time in every cube  
+"arctic_coast3.bna"  "BNA"  // "map file name"  "map file type" -- either "BNA" or "PICT"
+500 SPILLS // number of spills per site and time in every cube
 3 SEASONS
 "AllYear" "Arc_" "AllYear" // Name for menu, prefix of cube names, name of directory
 "Ice" "Arc_" "Ice" // Name for menu, prefix of cube names, name of directory
 "NoIce" "Arc_" "NoIce" // Name for menu, prefix of cube names, name of directory
-13 TIMES 
-4320 "180 days" // numHours  "user string" blank user string means not in menu 
-2880 "120 days" // numHours  "user string" blank user string means not in menu 
-2160 "90 days" // numHours  "user string" blank user string means not in menu 
-1680 "70 days" // numHours  "user string" blank user string means not in menu 
-1200 "60 days" // numHours  "user string" blank user string means not in menu 
-720 "30 days" // numHours  "user string" blank user string means not in menu 
-480 "20 days" // numHours  "user string" blank user string means not in menu 
-360 "15 days" // numHours  "user string" blank user string means not in menu 
-240 "10 days" // numHours  "user string" blank user string means not in menu 
-168 "7 days" // numHours  "user string" blank user string means not in menu 
-120 "5 days" // numHours  "user string" blank user string means not in menu 
-72 "3 days" // numHours  "user string" blank user string means not in menu 
-24 "1 day" // numHours  "user string" blank user string means not in menu 
+13 TIMES
+4320 "180 days" // numHours  "user string" blank user string means not in menu
+2880 "120 days" // numHours  "user string" blank user string means not in menu
+2160 "90 days" // numHours  "user string" blank user string means not in menu
+1680 "70 days" // numHours  "user string" blank user string means not in menu
+1200 "60 days" // numHours  "user string" blank user string means not in menu
+720 "30 days" // numHours  "user string" blank user string means not in menu
+480 "20 days" // numHours  "user string" blank user string means not in menu
+360 "15 days" // numHours  "user string" blank user string means not in menu
+240 "10 days" // numHours  "user string" blank user string means not in menu
+168 "7 days" // numHours  "user string" blank user string means not in menu
+120 "5 days" // numHours  "user string" blank user string means not in menu
+72 "3 days" // numHours  "user string" blank user string means not in menu
+24 "1 day" // numHours  "user string" blank user string means not in menu
 2 AMOUNTS // amounts of oil preset for the user
-1000 barrels  
-100 barrels  
-3 LOCS // levels of concern (LOC) preset for the user 
-5 barrels  
-10 barrels  
-20 barrels  
+1000 barrels
+100 barrels
+3 LOCS // levels of concern (LOC) preset for the user
+5 barrels
+10 barrels
+20 barrels
 12221 SITES // number of sites
 "#1","1",5
  170.000000,   65.000000
@@ -73380,4 +73380,4 @@
 201.248863, 71.015865
 203.005162, 71.390327
 211.822157, 70.469724
-213.70959,  70.274933,
+213.70959,  70.274933

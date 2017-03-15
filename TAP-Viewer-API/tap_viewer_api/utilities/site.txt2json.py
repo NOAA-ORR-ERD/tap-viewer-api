@@ -3,9 +3,11 @@
 """
 Hacky script to convert a TAP site.txt file to JSON for the Web App
 
-PAss in the path to teh site,txt you want to convert:
+Pass in the path to the site.txt you want to convert:
 
-site.txt2json locations/sf/stie.txt
+site.txt2json locations/sf/site.txt
+
+It has been tested with sf and arctic SITE.txt files
 
 """
 
@@ -16,33 +18,34 @@ import geojson
 from geojson import Polygon, Feature, FeatureCollection
 
 
-
-from pprint import pprint
-
 infilename = sys.argv[1]
-
 location_dir = os.path.dirname(infilename)
+
+
+def readline_clean(fp):
+    """
+    reads a line, striping off the comments and whitespace
+    """
+    return fp.readline().strip().split('//')[0]
+
 
 def sites2geojson(fp):
     """
-    read the sites polygon definitions and write to geojson
+    Read the sites polygon definitions and write to geojson file: recpotors.json
 
-    for now,  skip over it..
     """
-    fp.readline()
+    readline_clean(fp)
     polys = []
-    with open(os.path.join(location_dir, "receptors.json"), 'w') as outfile:
+    with open(os.path.join(location_dir, "receptors.geojson"), 'w') as outfile:
         for line in fp:
-            # we're done
-            if "CUBES" in line:
+            if "CUBES" in line:  # done with sites
                 break
             # header line:
-            # print("processing:", line)
-            site_num = line.split('"')[1].strip('#')
+            site_num = int(line.split('"')[1].strip('#')) - 1  # change to zero-based indexing!
             num_points = int(line.split(',')[-1])
             poly = []
             for i in range(num_points):
-                poly.append([float(i) for i in fp.readline().split(',')])
+                poly.append([float(i) for i in readline_clean(fp).split(',')])
             poly = Feature(geometry=Polygon([poly]), site_num=site_num)
             polys.append(poly)
         geojson.dump(FeatureCollection(polys), outfile, indent=2)
@@ -50,47 +53,51 @@ def sites2geojson(fp):
 
 data = {}
 with open(infilename, 'r') as sitefile:
-    line = sitefile.readline()
-    data['name'] = line.split("//")[0].strip(' "')
+    line = readline_clean(sitefile)
+    data['name'] = line.strip(' "')
+    print("location name:", data['name'])
+    # ignore the map name
+    line = readline_clean(sitefile)
 
-    line = sitefile.readline()
-    # data['map_name'] = line.split('"')[1]
-
-    line = sitefile.readline()
+    line = readline_clean(sitefile)
     data['num_spills'] = int(line.split()[0])
+    print("number of spills", data['num_spills'])
 
-    line = sitefile.readline()
+    line = readline_clean(sitefile)
     num = int(line.split()[0])
-    data['seasons'] = [sitefile.readline().split('"')[1] for i in (range(num))]
+    data['seasons'] = [readline_clean(sitefile).split('"')[1] for i in (range(num))]
+    print("seasons", data['seasons'])
 
-    line = sitefile.readline()
+    line = readline_clean(sitefile)
     num = int(line.split()[0])
-    print ("reading %i amounts"%num)
+    print ("reading %i output times" % num)
     data["output_times"] = []
     for i in range(num):
-        lin = sitefile.readline()
-        lin = lin.split("//")[0].strip()
-        val = lin.split(" ", 1)[0]
-        s = lin.split(" ", 1)[1].strip().strip('"')
+        line = readline_clean(sitefile)
+        val = line.split(" ", 1)[0]
+        s = line.split(" ", 1)[1].strip().strip('"')
         data["output_times"].append([int(val), s])
+    print("output times:", data["output_times"])
 
-    num = int(sitefile.readline().split()[0])
-    data["output_amounts"] = [[float(lin[0]), lin[1].strip()] for lin in (sitefile.readline().split() for i in range(num))]
+    num = int(readline_clean(sitefile).split()[0])
+    print("reading %i output amounts:" % num)
+    data["output_amounts"] = [[int(lin[0]), lin[1]]
+                              for lin in (readline_clean(sitefile).split()
+                                          for i in range(num))]
+    print("output amounts:", data["output_amounts"])
 
+    num = int(readline_clean(sitefile).split()[0])
+    # data["locs"] = [int(sitefile.readline().split()[0]) for i in (range(num))]
+    data["locs"] = [[float(lin[0]), lin[1].strip()]
+                    for lin in (readline_clean(sitefile).split() for i in range(num))]
+    print("LOCs:", data["locs"])
 
-    num = int(sitefile.readline().split()[0])
-    #data["locs"] = [int(sitefile.readline().split()[0]) for i in (range(num))]
-    data["locs"] = [[float(lin[0]), lin[1].strip()] for lin in (sitefile.readline().split() for i in range(num))]
-
-
+    # This should skip over the receptor sites definitions
     sites2geojson(sitefile)
 
-    data["source_locations"] = [["source: %i" % j, [float(i) for i in lin.split(',')]] for j, lin in enumerate(sitefile)]
+    data["source_locations"] = [["source: %i" % j, [float(i) for i in lin.split(',')]]
+                                for j, lin in enumerate(sitefile)]
 
-
-#pprint(data)
 
 with open(os.path.join(location_dir, "site.json"), 'w') as outfile:
     json.dump(data, outfile, indent=2)
-
-
