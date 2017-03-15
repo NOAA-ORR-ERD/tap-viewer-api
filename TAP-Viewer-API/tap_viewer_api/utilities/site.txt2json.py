@@ -76,8 +76,7 @@ with open(infilename, 'r') as sitefile:
 
     sites2geojson(sitefile)
 
-    data["source_locations"] = [[float(i) for i in line.split(',')] for line in sitefile]
-
+    data["source_locations"] = [["source: %i" % j, [float(i) for i in lin.split(',')]] for j, lin in enumerate(sitefile)]
 
 
 pprint(data)

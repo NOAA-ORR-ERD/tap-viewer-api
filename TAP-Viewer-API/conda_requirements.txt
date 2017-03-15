@@ -32,3 +32,5 @@ webtest
 pytest
 pytest-cov
 
+# for development
+geojson
