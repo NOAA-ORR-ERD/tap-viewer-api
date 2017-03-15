@@ -37,7 +37,7 @@ def sites2geojson(fp):
             if "CUBES" in line:
                 break
             # header line:
-            print("processing:", line)
+            # print("processing:", line)
             site_num = line.split('"')[1].strip('#')
             num_points = int(line.split(',')[-1])
             poly = []
@@ -45,7 +45,6 @@ def sites2geojson(fp):
                 poly.append([float(i) for i in fp.readline().split(',')])
             poly = Feature(geometry=Polygon([poly]), site_num=site_num)
             polys.append(poly)
-            print(poly)
         geojson.dump(FeatureCollection(polys), outfile, indent=2)
 
 
@@ -66,7 +65,17 @@ with open(infilename, 'r') as sitefile:
 
     line = sitefile.readline()
     num = int(line.split()[0])
-    data["output_times"] = [int(sitefile.readline().split()[0]) for i in (range(num))]
+    print ("reading %i amounts"%num)
+    data["output_times"] = []
+    for i in range(num):
+        lin = sitefile.readline()
+        print("line:", lin)
+        lin = lin.split("//")[0].strip()
+        val = lin.split(" ", 1)[0]
+        s = lin.split(" ", 1)[1].strip().strip('"')
+        print("string is", s)
+        print("val is", val)
+        data["output_times"].append([int(val), s])
 
     num = int(sitefile.readline().split()[0])
     data["output_amounts"] = [float(sitefile.readline().split()[0]) for i in (range(num))]
@@ -79,7 +88,7 @@ with open(infilename, 'r') as sitefile:
     data["source_locations"] = [["source: %i" % j, [float(i) for i in lin.split(',')]] for j, lin in enumerate(sitefile)]
 
 
-pprint(data)
+#pprint(data)
 
 with open(os.path.join(location_dir, "site.json"), 'w') as outfile:
     json.dump(data, outfile, indent=2)
