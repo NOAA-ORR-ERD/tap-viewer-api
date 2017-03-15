@@ -21,8 +21,10 @@ def home(request):
 
 
 def locations(request):
-    sf = {'route_name': 'sf', 'name': 'San Francisco', 'lonlat': [-122.42, 37.77]}
-    arctic = {'route_name': 'arctic', 'name': 'US Arctic Waters', 'lonlat': [-156.79, 71.29]}
+    sf = {'route_name': 'sf', 'name': 'San Francisco', 'bounding_box': [[-122.707986, 38.1523666],
+                                                                        [-121.902153, 37.4429131]]}
+    arctic = {'route_name': 'arctic', 'name': 'US Arctic Waters', 'bounding_box': [[170.0, 80.0],
+                                                                                   [230.0, 65.0]]}
     return {'locations': [sf, arctic]}
 
 

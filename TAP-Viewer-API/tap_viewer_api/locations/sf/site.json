@@ -42,11 +42,30 @@
     ]
   ],
   "locs": [
-    10,
-    5,
-    1
+    [
+      10.0,
+      "barrels"
+    ],
+    [
+      5.0,
+      "barrels"
+    ],
+    [
+      1.0,
+      "barrels"
+    ]
   ],
-  "num_spills": 500,
+  "output_amounts": [
+    [
+      1000.0,
+      "barrels"
+    ]
+  ],
+  "seasons": [
+    "Mar - Aug",
+    "Sept - Feb"
+  ],
+  "name": "SAN FRANCISCO BAY",
   "source_locations": [
     [
       "source: 0",
@@ -1680,16 +1699,5 @@
       ]
     ]
   ],
-  "seasons": [
-    "Mar - Aug",
-    "Sept - Feb"
-  ],
-  "output_amounts": [
-    [
-      1000.0,
-      "barrels"
-    ]
-  ],
-  "name": "SAN FRANCISCO BAY",
-  "map_name": "SF.BNA"
+  "num_spills": 500
 }

@@ -54,7 +54,7 @@ with open(infilename, 'r') as sitefile:
     data['name'] = line.split("//")[0].strip(' "')
 
     line = sitefile.readline()
-    data['map_name'] = line.split('"')[1]
+    # data['map_name'] = line.split('"')[1]
 
     line = sitefile.readline()
     data['num_spills'] = int(line.split()[0])
@@ -79,7 +79,9 @@ with open(infilename, 'r') as sitefile:
 
 
     num = int(sitefile.readline().split()[0])
-    data["locs"] = [int(sitefile.readline().split()[0]) for i in (range(num))]
+    #data["locs"] = [int(sitefile.readline().split()[0]) for i in (range(num))]
+    data["locs"] = [[float(lin[0]), lin[1].strip()] for lin in (sitefile.readline().split() for i in range(num))]
+
 
     sites2geojson(sitefile)
 
