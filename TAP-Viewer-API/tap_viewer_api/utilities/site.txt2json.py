@@ -26,7 +26,7 @@ def readline_clean(fp):
     """
     reads a line, striping off the comments and whitespace
     """
-    return fp.readline().strip().split('//')[0]
+    return fp.readline().strip().split('//')[0].strip()
 
 
 def sites2geojson(fp):
@@ -36,6 +36,8 @@ def sites2geojson(fp):
     """
     readline_clean(fp)
     polys = []
+    # [[min_lon, max_lat],[max_lon, min_lat]]
+    b_box = [[None, None], [None, None]]
     with open(os.path.join(location_dir, "receptors.geojson"), 'w') as outfile:
         for line in fp:
             if "CUBES" in line:  # done with sites
@@ -45,16 +47,25 @@ def sites2geojson(fp):
             num_points = int(line.split(',')[-1])
             poly = []
             for i in range(num_points):
-                poly.append([float(i) for i in readline_clean(fp).split(',')])
+                lon, lat = [float(i) for i in readline_clean(fp).split(',')]
+                b_box[0][0] = lon if b_box[0][0] is None else min(b_box[0][0], lon)
+                b_box[0][1] = lat if b_box[0][1] is None else max(b_box[0][1], lat)
+                b_box[1][0] = lon if b_box[1][0] is None else max(b_box[1][0], lon)
+                b_box[1][1] = lat if b_box[1][1] is None else min(b_box[1][1], lat)
+                print(lon, lat)
+                print(b_box)
+                poly.append([lon, lat])
+
             poly = Feature(geometry=Polygon([poly]), site_num=site_num)
             polys.append(poly)
         geojson.dump(FeatureCollection(polys), outfile, indent=2)
+    return b_box
 
 
 data = {}
 with open(infilename, 'r') as sitefile:
     line = readline_clean(sitefile)
-    data['name'] = line.strip(' "')
+    data['name'] = line.strip('"')
     print("location name:", data['name'])
     # ignore the map name
     line = readline_clean(sitefile)
@@ -93,7 +104,8 @@ with open(infilename, 'r') as sitefile:
     print("LOCs:", data["locs"])
 
     # This should skip over the receptor sites definitions
-    sites2geojson(sitefile)
+    data["bounding_box"] = sites2geojson(sitefile)
+    print("bounding box of sites is:", data["bounding_box"])
 
     data["source_locations"] = [["source: %i" % j, [float(i) for i in lin.split(',')]]
                                 for j, lin in enumerate(sitefile)]

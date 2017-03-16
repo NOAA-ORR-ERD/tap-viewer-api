@@ -26,6 +26,7 @@ numpy
 pyramid
 pyramid_debugtoolbar
 waitress
+docutils
 
 # for testing:
 webtest
