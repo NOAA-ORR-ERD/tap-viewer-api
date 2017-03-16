@@ -1,4 +1,4 @@
-"Arctic TAP"  //Map Name for User
+"Arctic TAP: Vessels"  //Map Name for User
 "arctic_coast3.bna"  "BNA"  // "map file name"  "map file type" -- either "BNA" or "PICT"
 500 SPILLS // number of spills per site and time in every cube
 3 SEASONS

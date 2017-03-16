@@ -1,24 +1,4 @@
 {
-  "output_amounts": [
-    [
-      1000,
-      "barrels"
-    ],
-    [
-      100,
-      "barrels"
-    ]
-  ],
-  "bounding_box": [
-    [
-      170.0,
-      80.0
-    ],
-    [
-      230.0,
-      65.0
-    ]
-  ],
   "output_times": [
     [
       4320,
@@ -71,25 +51,6 @@
     [
       24,
       "1 day"
-    ]
-  ],
-  "seasons": [
-    "AllYear",
-    "Ice",
-    "NoIce"
-  ],
-  "locs": [
-    [
-      5.0,
-      "barrels"
-    ],
-    [
-      10.0,
-      "barrels"
-    ],
-    [
-      20.0,
-      "barrels"
     ]
   ],
   "source_locations": [
@@ -283,6 +244,45 @@
       ]
     ]
   ],
-  "name": "Arctic TAP",
-  "num_spills": 500
+  "num_spills": 500,
+  "seasons": [
+    "AllYear",
+    "Ice",
+    "NoIce"
+  ],
+  "output_amounts": [
+    [
+      1000,
+      "barrels"
+    ],
+    [
+      100,
+      "barrels"
+    ]
+  ],
+  "locs": [
+    [
+      5.0,
+      "barrels"
+    ],
+    [
+      10.0,
+      "barrels"
+    ],
+    [
+      20.0,
+      "barrels"
+    ]
+  ],
+  "name": "Arctic TAP: Vessels",
+  "bounding_box": [
+    [
+      170.0,
+      80.0
+    ],
+    [
+      230.0,
+      65.0
+    ]
+  ]
 }
