@@ -1,4 +1,4 @@
-from pyramid.config import Configurator
+﻿from pyramid.config import Configurator
 from pyramid.events import NewRequest
 from tap_viewer_api.views import cors_policy
 
@@ -9,9 +9,9 @@ def add_cors_headers_response_callback(event):
     def cors_headers(request, response):
         if 'Origin' in request.headers:
             origin = request.headers['Origin']
-            if origin in ALLOWED_ORIGIN:
+            if ALLOWED_ORIGIN in origin:
                 response.headers['Access-Control-Allow-Origin'] = origin
-        event.request.add_response_callback(cors_headers)
+    event.request.add_response_callback(cors_headers)
 
 
 def main(global_config, **settings):
