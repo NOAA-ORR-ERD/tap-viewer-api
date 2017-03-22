@@ -2,9 +2,9 @@
 from pyramid.events import NewRequest
 from tap_viewer_api.views import cors_policy
 
-ALLOWED_ORIGINS = ('http://localhost',
-                   'http://127.0.0.1',
-                   'http://0.0.0.0',
+ALLOWED_ORIGINS = ('http://localhost:8080',
+                   'http://127.0.0.1:8080',
+                   'http://0.0.0.0:8080',
                    )
 
 def add_cors_headers_response_callback(event):
@@ -15,10 +15,8 @@ def add_cors_headers_response_callback(event):
         except KeyError:
             return None
         print("origin:", origin)
-        for allowed in ALLOWED_ORIGINS:
-            if allowed in origin:
-                response.headers['Access-Control-Allow-Origin'] = origin
-                break
+        if origin in ALLOWED_ORIGINS:
+            response.headers['Access-Control-Allow-Origin'] = origin
     event.request.add_response_callback(cors_headers)
 
 
