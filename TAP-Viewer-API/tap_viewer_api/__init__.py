@@ -1,6 +1,6 @@
 ﻿from pyramid.config import Configurator
 from pyramid.events import NewRequest
-from tap_viewer_api.views import cors_policy
+# from tap_viewer_api.views import cors_policy
 
 ALLOWED_ORIGINS = ('http://localhost',
                    'http://127.0.0.1',

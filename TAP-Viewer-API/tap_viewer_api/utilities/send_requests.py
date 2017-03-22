@@ -35,7 +35,27 @@ def impact_analysis(location):
     print("results:")
     print(r.json())
 
+def oiling_analysis(location):
+    url = base_url + "/locations/%s/oiling_analysis" % location
+    params = dict(season='summer',
+                  oil_type='non-weathering',
+                  amount_spilled_bbl=3000,
+                  time_since_start_hrs=96,
+                  source_id=34,
+                  receptor_id=15
+                  )
+    r = requests.post(url, json=params)
+    print("made request")
+
+    print("status:", r.status_code)
+    print("results:")
+    print(r.json())
+
+
 impact_analysis('sf')
 #impact_analysis('arctic')
+oiling_analysis('arctic')
+
+
 
 

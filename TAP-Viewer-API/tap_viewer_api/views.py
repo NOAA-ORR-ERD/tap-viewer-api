@@ -12,7 +12,7 @@ locations_dir = os.path.join(data_dir, 'locations')
 # load up the locations:
 all_locations = models.load_locations(locations_dir)
 
-cors_policy = {'credentials': True}
+#cors_policy = {'credentials': True}
 
 
 def includeme(config):
@@ -44,35 +44,44 @@ def location_setup(request):
 
 
 def impact_analysis(request):
+    """
+    returns impact analysis results for teh given json request
+
+    request should have the following fields (example data):
+
+        params = {"season": "winter",
+                  "oil_type": "diesel",
+                  "level_of_concern_bbl":1.5,
+                  "amount_spilled_bbl":1000,
+                  "time_since_start_hrs":72,
+                  "source_id":3,
+                  }
+    """
     loc = request.matchdict['location_name']
     loc_obj = all_locations[loc]
-
     req_obj = request.json_body
-    print("got an impact analysis request")
-    print(req_obj)
-    print(type(req_obj))
-    # loc_id = req_obj['location_id']
-    # season = req_obj['season']
-    # oil_type = req_obj['oil_type']
-    # level_of_concern = req_obj['level_of_concern']
-    # amount_spilled_bbl = req_obj['amount_spilled_bbl']
-    # time_since_start_hrs = req_obj['time_since_start_hrs']
-    ##Fixme: this needs to pass in the info in the JSON request..
-    #return {'impact_analysis_results': loc_obj.impact_analysis(req_obj)}
     return {'impact_analysis_results': loc_obj.impact_analysis(**req_obj)}
 
 
 def oiling_analysis(request):
+    """
+    returns site oiling analysis for the given parmeters
+
+    JSON request should have:
+
+    {
+    season, str
+    oil_type, str
+    amount_spilled_bbl, number
+    time_since_start_hrs, number
+    location_id,
+    receptor_id
+    }
+    """
     loc = request.matchdict['location_name']
     loc_obj = all_locations[loc]
-
-    # req_obj = request.json_body
-    # return {'data': tap_oiling_analysis(req_obj)}
-    # loc_id = req_obj['location_id']
-    # season = req_obj['season']
-    # oil_type = req_obj['oil_type']
-    # return {'oiling_analysis_results': loc_obj.oiling_analysis(req_obj)}
-    return {'oiling_analysis_results': loc_obj.oiling_analysis()}
+    req_obj = request.json_body
+    return {'oiling_analysis_results': loc_obj.oiling_analysis(**req_obj)}
 
 
 def tap_impact_analysis(req_obj):

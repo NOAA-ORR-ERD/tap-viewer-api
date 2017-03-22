@@ -63,14 +63,21 @@ class TapLocation:
         """
         compute an impact analysis
 
-        If request_obj  is None, return random values
+        For now, it only returns random values
         """
         return np.random.random(self.num_sites).tolist()
 
-    def oiling_analysis(self, request_obj=None):
+    def oiling_analysis(self,
+                        season=None,
+                        oil_type=None,
+                        amount_spilled_bbl=None,
+                        time_since_start_hrs=None,
+                        source_id=None,
+                        receptor_id=None
+                        ):
         """
-        compute an impact analysis
+        Compute an oiling analysis
 
-        If request_obj  is None, return random values
+        For now, it only returns random values
         """
         return (np.random.random(self.num_spills) * 10000.0).tolist()
