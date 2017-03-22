@@ -1,4 +1,8 @@
-name: tap
+## Environment file for tap viewer
+## you should be able to re-create this environment with:
+##   conda env create -f conda_environ.yaml
+
+name: tap_view
 channels: !!python/tuple
 - !!python/unicode
   'conda-forge'
@@ -7,21 +11,30 @@ channels: !!python/tuple
 - !!python/unicode
   'defaults'
 dependencies:
+- conda-forge::beautifulsoup4=4.5.3=py35_0
 - conda-forge::blas=1.1=openblas
 - conda-forge::ca-certificates=2017.1.23=0
 - conda-forge::certifi=2017.1.23=py35_0
+- conda-forge::coverage=4.3.4=py35_0
+- conda-forge::docutils=0.13.1=py35_0
+- conda-forge::geojson=1.3.4=py35_0
 - conda-forge::libgfortran=3.0.0=0
 - conda-forge::markupsafe=0.23=py35_1
 - conda-forge::ncurses=5.9=10
 - conda-forge::nose=1.3.7=py35_2
-- conda-forge::numpy=1.12.0=py35_blas_openblas_200
+- conda-forge::numpy=1.12.1=py35_blas_openblas_200
 - conda-forge::openblas=0.2.19=1
 - conda-forge::openssl=1.0.2h=3
 - conda-forge::pip=9.0.1=py35_0
+- conda-forge::py=1.4.33=py35_0
 - conda-forge::pygments=2.2.0=py35_0
+- conda-forge::pytest=3.0.7=py35_0
+- conda-forge::pytest-cov=2.4.0=py35_0
 - conda-forge::python=3.5.3=1
 - conda-forge::readline=6.2=0
-- conda-forge::setuptools=33.1.0=py35_0
+- conda-forge::requests=2.13.0=py35_0
+- conda-forge::setuptools=33.1.1=py35_0
+- conda-forge::six=1.10.0=py35_1
 - conda-forge::sqlite=3.13.0=1
 - conda-forge::tk=8.5.19=1
 - conda-forge::wheel=0.29.0=py35_0
@@ -37,8 +50,8 @@ dependencies:
 - venusian=1.0=py35_0
 - waitress=0.9.0=py35_0
 - webob=1.4.1=py35_0
+- webtest=2.0.23=py35_0
 - zope=1.0=py35_0
 - zope.deprecation=4.1.2=py35_1
 - zope.interface=4.1.2=py35_1
-prefix: /Users/chris.barker/miniconda2/envs/tap
 
