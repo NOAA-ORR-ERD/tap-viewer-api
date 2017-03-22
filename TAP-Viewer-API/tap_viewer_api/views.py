@@ -47,7 +47,10 @@ def impact_analysis(request):
     loc = request.matchdict['location_name']
     loc_obj = all_locations[loc]
 
-    #req_obj = request.json_body
+    req_obj = request.json_body
+    print("got an impact analysis request")
+    print(req_obj)
+    print(type(req_obj))
     # loc_id = req_obj['location_id']
     # season = req_obj['season']
     # oil_type = req_obj['oil_type']
@@ -56,7 +59,7 @@ def impact_analysis(request):
     # time_since_start_hrs = req_obj['time_since_start_hrs']
     ##Fixme: this needs to pass in the info in the JSON request..
     #return {'impact_analysis_results': loc_obj.impact_analysis(req_obj)}
-    return {'impact_analysis_results': loc_obj.impact_analysis()}
+    return {'impact_analysis_results': loc_obj.impact_analysis(**req_obj)}
 
 
 def oiling_analysis(request):

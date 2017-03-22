@@ -32,6 +32,7 @@ docutils
 webtest
 pytest
 pytest-cov
+requests
 
 # for development
 geojson

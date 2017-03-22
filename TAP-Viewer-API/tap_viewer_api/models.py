@@ -52,7 +52,14 @@ class TapLocation:
                 self._num_sites = len(sites["features"])
         return self._num_sites
 
-    def impact_analysis(self, request_obj=None):
+    def impact_analysis(self,
+                        season=None,
+                        oil_type=None,
+                        level_of_concern_bbl=None,
+                        amount_spilled_bbl=None,
+                        time_since_start_hrs=None,
+                        source_id=None,
+                        ):
         """
         compute an impact analysis
 
