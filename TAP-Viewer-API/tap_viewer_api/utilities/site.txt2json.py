@@ -17,6 +17,7 @@ import json
 import geojson
 from geojson import Polygon, Feature, FeatureCollection
 
+from bna2geojson import is_clockwise  # for the clockwise check
 
 infilename = sys.argv[1]
 location_dir = os.path.dirname(infilename)
@@ -52,10 +53,11 @@ def sites2geojson(fp):
                 b_box[0][1] = lat if b_box[0][1] is None else max(b_box[0][1], lat)
                 b_box[1][0] = lon if b_box[1][0] is None else max(b_box[1][0], lon)
                 b_box[1][1] = lat if b_box[1][1] is None else min(b_box[1][1], lat)
-                print(lon, lat)
-                print(b_box)
                 poly.append([lon, lat])
-
+            # check orientation -- geojson wants "right hand rule"
+            if is_clockwise(poly):
+                print("poly is clockwise -- reversing")
+                poly.reverse()
             poly = Feature(geometry=Polygon([poly]), site_num=site_num)
             polys.append(poly)
         geojson.dump(FeatureCollection(polys), outfile, indent=2)
