@@ -112,6 +112,16 @@ with open(infilename, 'r') as sitefile:
     data["source_locations"] = [["source: %i" % j, [float(i) for i in lin.split(',')]]
                                 for j, lin in enumerate(sitefile)]
 
+    # this is the default list
+    data["oil_types"] = ["Non-weathering",
+                         "Gasoline",
+                         "Diesel",
+                         "Light Crude",
+                         "Medium Crude",
+                         "Heavy Crude",
+                         "Medium fuel oil",
+                         "Fuel oil #6",
+                         ]
 
 with open(os.path.join(location_dir, "site.json"), 'w') as outfile:
     json.dump(data, outfile, indent=2)
