@@ -78,12 +78,31 @@ def GetNextBNAPolygon(f):
         points.append([float(j) for j in f.readline().split(',')])
 
     if poly_type == 'polygon':  # first and last points should be duplicated in geojson
-        if not points[0] != points[-1]:
+        if points[0] != points[-1]:
             points.append(points[0])
 
     return (points, poly_type, name, sname)
 
+def is_clockwise(poly):
+    """
+    returns True if the polygon is clockwise ordered, false if not
 
+    expects a sequence of tuples, or something like it (Nx2 array for instance),
+    of the points:
+
+    [ (x1, y1), (x2, y2), (x3, y3), ...(xi, yi) ]
+
+    See: http://paulbourke.net/geometry/clockwise/
+    """
+
+    total = poly[-1][0] * poly[0][1] - poly[0][0]*poly[-1][1] # last point to first point
+    for i in range(len(poly)-1):
+        total += poly[i][0] * poly[i+1][1] - poly[i+1][0]*poly[i][1]
+
+    if total <= 0:
+        return True
+    else:
+        return False
 
 
 def sites2geojson(fp):
@@ -99,6 +118,14 @@ def sites2geojson(fp):
             if points is None:
                 break
             if poly_type == "polygon":  # only do polygons for now
+                # check orientation -- geojson wants "right hand rule"
+                if is_clockwise(points):
+                    print("poly is clockwise -- reversing")
+                    points.reverse()
+                else:
+                    print("poly is already counter-clockwise")
+                if points[0] != points[-1]:
+                    print("Endpoints not equal", points[0], points[-1])
                 ptype = "land" if sname == "1" else "lake"  # maybe not right, but there is something like that...
                 geo_poly = Feature(geometry=Polygon([points]), poly_type=ptype)
                 polys.append(geo_poly)
