@@ -68,6 +68,19 @@ Will return a JSON response which contains data from the site.txt for the respec
 
 ::
 
+  base_url/locations/{location_name}/map
+
+Will return a response which contains the base map as land polygons as geoJSON
+
+::
+
+  base_url/locations/{location_name}/receptors
+
+Will return a JSON response which contains the receptors as geoJSON
+
+
+::
+
   base_url/locations/{location_name}/impact_analysis
 
 Will return a JSON response which contains an approproate sized array of values for the response -- ne value for each receptor site.

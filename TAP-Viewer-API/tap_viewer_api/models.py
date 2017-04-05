@@ -44,6 +44,25 @@ class TapLocation:
         return info
 
     @property
+    def map(self):
+        """
+        dynamically load the map from the geojson map
+        """
+        with open(os.path.join(data_dir, "map.geojson")) as map_file:
+            map = json.load(map_file)
+        return map
+
+    @property
+    def receptors(self):
+        """
+        dynamically load the receptors from the geojson map
+        """
+        with open(os.path.join(self.data_dir, "receptors.geojson")) as receptors_file:
+            map = json.load(receptors_file)
+        return map
+
+
+    @property
     def num_sites(self):
         if self._num_sites is None:
             # read the site_file

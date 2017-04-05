@@ -19,6 +19,8 @@ def includeme(config):
     config.add_view(home, route_name='home')
     config.add_view(locations, route_name='locations', renderer='json')
     config.add_view(location_setup, route_name='location_setup', renderer='json')
+    config.add_view(location_map, route_name='location_map', renderer='json')
+    config.add_view(location_receptors, route_name='location_receptors', renderer='json')
     config.add_view(impact_analysis, route_name='impact_analysis', renderer='json')
     config.add_view(oiling_analysis, route_name='oiling_analysis', renderer='json')
 
@@ -41,6 +43,16 @@ def locations(request):
 def location_setup(request):
     loc = request.matchdict['location_name']
     return all_locations[loc].site_data
+
+def location_map(request):
+    print("calling location_map")
+    loc = request.matchdict['location_name']
+    return all_locations[loc].map
+
+def location_receptors(request):
+    loc = request.matchdict['location_name']
+    return all_locations[loc].receptors
+
 
 
 def impact_analysis(request):
