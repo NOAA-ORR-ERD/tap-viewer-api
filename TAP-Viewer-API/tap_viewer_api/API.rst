@@ -1,7 +1,7 @@
 TAP Viewer API
 ==============
 
-This application is a JSON AP --no nifty html here
+This application is a JSON API -- no nifty html here
 
 
 Running the API Server
@@ -82,6 +82,20 @@ Will return a JSON response which contains the receptors as geoJSON
 ::
 
   base_url/locations/{location_name}/impact_analysis
+
+and sending JSON data (example):
+
+::
+
+ {'location': 'sb', 
+  'source': 'source: 0', 
+  'mode': 'impact_analysis', 
+  'oil_type': 'Heavy Crude', 
+  'season': 'AllYear', 
+  'output_amount': [1000, 'barrels'], 
+  'output_time': [480, '20 days'], 
+  'loc': [5.0, 'barrels']
+ }
 
 Will return a JSON response which contains an approproate sized array of values for the response -- ne value for each receptor site.
 
