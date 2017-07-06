@@ -13,6 +13,64 @@
       "barrels"
     ]
   ],
+  "seasons": [
+    "Winter",
+    "Spring",
+    "Summer",
+    "Faller"
+  ],
+  "output_amounts": [
+    [
+      1000,
+      "barrels"
+    ],
+    [
+      100,
+      "barrels"
+    ]
+  ],
+  "bounding_box": [
+    [
+      -122.0,
+      36.0
+    ],
+    [
+      -116.26,
+      32.0
+    ]
+  ],
+  "num_spills": 500,
+  "output_times": [
+    [
+      336,
+      "14 days"
+    ],
+    [
+      240,
+      "10 days"
+    ],
+    [
+      168,
+      "7 days"
+    ],
+    [
+      120,
+      "5 days"
+    ],
+    [
+      72,
+      "3 days"
+    ],
+    [
+      48,
+      "2 days"
+    ],
+    [
+      24,
+      "1 day"
+    ]
+  ],
+  "name": "SoCal TAP",
   "source_locations": [
     [
       "source: 0",
@@ -176,47 +234,6 @@
       ]
     ]
   ],
-  "output_times": [
-    [
-      336,
-      "14 days"
-    ],
-    [
-      240,
-      "10 days"
-    ],
-    [
-      168,
-      "7 days"
-    ],
-    [
-      120,
-      "5 days"
-    ],
-    [
-      72,
-      "3 days"
-    ],
-    [
-      48,
-      "2 days"
-    ],
-    [
-      24,
-      "1 day"
-    ]
-  ],
-  "output_amounts": [
-    [
-      1000,
-      "barrels"
-    ],
-    [
-      100,
-      "barrels"
-    ]
-  ],
-  "name": "SoCal TAP",
   "oil_types": [
     "Non-weathering",
     "Gasoline",
@@ -226,19 +243,5 @@
     "Heavy Crude",
     "Medium fuel oil",
     "Fuel oil #6"
-  ],
-  "seasons": [
-    "AllYear"
-  ],
-  "num_spills": 500,
-  "bounding_box": [
-    [
-      -123.0,
-      36.0
-    ],
-    [
-      -116.0,
-      30.0
-    ]
   ]
 }
