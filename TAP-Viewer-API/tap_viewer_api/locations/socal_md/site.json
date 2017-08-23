@@ -20,7 +20,7 @@
   "output_amounts": [
     [
       100,
-      "units"
+      "percent"
     ]
   ],
   "bounding_box": [

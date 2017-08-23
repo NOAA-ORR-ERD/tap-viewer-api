@@ -1,10 +1,10 @@
-from pyramid.response import Response
+
 import os
-import json
+
+from pyramid.response import Response
+from pyramid.view import view_config
 
 from docutils.core import publish_string
-
-import numpy as np
 
 from . import models
 
@@ -29,16 +29,15 @@ def includeme(config):
     config.add_view(location_receptors, route_name='location_receptors')
 
 
-def json_response(json_string):
+def json_response(json_obj):
     """
     Creates a json response object from a string that contains the json.
 
     This does no validating or anything of the json content -- that's up to you.
     """
     resp = Response()
-    resp.charset = "UTF-8"  # the default, but just making sure.
     resp.content_type = "application/json"
-    resp.text = json_string
+    resp.json = json_obj
     return resp
 
 
@@ -53,13 +52,18 @@ def home(request):
     return Response(publish_string(open(os.path.join(data_dir, "API.rst")).read(),
                                    writer_name='html'))
 
+
+@view_config(renderer='json')
 def locations(request):
-    return {name: loc.location_info for name, loc in all_locations.items()}
+    result = {name: loc.location_info for name, loc in all_locations.items()}
+#    return json_response(result)
+    return result
 
 
 def location_setup(request):
     loc = request.matchdict['location_name']
     return all_locations[loc].site_data
+
 
 def location_map(request):
     loc = request.matchdict['location_name']
@@ -73,17 +77,18 @@ def location_receptors(request):
 
 def impact_analysis(request):
     """
-    returns impact analysis results for teh given json request
+    returns impact analysis results for the given json request
 
     request should have the following fields (example data):
 
-        params = {"season": "winter",
-                  "oil_type": "diesel",
-                  "level_of_concern_bbl":1.5,
-                  "amount_spilled_bbl":1000,
-                  "time_since_start_hrs":72,
-                  "source_id":3,
-                  }
+    {
+    "season": "winter",
+    "oil_type": "diesel",
+    "level_of_concern_bbl":1.5,
+    "amount_spilled_bbl":1000,
+    "time_since_start_hrs":72,
+    "source_id":3,
+    }
     """
     loc = request.matchdict['location_name']
     loc_obj = all_locations[loc]
@@ -110,11 +115,3 @@ def oiling_analysis(request):
     loc_obj = all_locations[loc]
     req_obj = request.json_body
     return {'oiling_analysis_results': loc_obj.oiling_analysis(**req_obj)}
-
-
-def tap_impact_analysis(req_obj):
-    return np.random.rand(100).tolist()
-
-
-def tap_oiling_analysis(req_obj):
-    return np.random.rand(100).tolist()
