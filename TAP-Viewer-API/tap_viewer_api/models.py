@@ -16,6 +16,7 @@ def load_locations(location_dir):
     loads up a set of classes for each location that exists
     """
     locations = os.listdir(location_dir)
+    locations = [name for name in locations if os.path.isdir(os.path.join(location_dir, name))]
     return {loc: TapLocation(os.path.join(location_dir, loc)) for loc in locations}
 
 
