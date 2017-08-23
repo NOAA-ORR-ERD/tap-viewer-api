@@ -1,0 +1,109 @@
+{
+  "locs": [
+    [
+      0.1,
+      "percent"
+    ],
+    [
+      1.0,
+      "percent"
+    ],
+    [
+      10.0,
+      "percent"
+    ]
+  ],
+  "seasons": [
+    "Winter",
+    "Summer"
+  ],
+  "output_amounts": [
+    [
+      100,
+      "units"
+    ]
+  ],
+  "bounding_box": [
+    [
+      -122.0,
+      36.0
+    ],
+    [
+      -116.26,
+      32.0
+    ]
+  ],
+  "num_spills": 200,
+  "output_times": [
+    [
+      336,
+      "14 days"
+    ],
+    [
+      240,
+      "10 days"
+    ],
+    [
+      168,
+      "7 days"
+    ],
+    [
+      120,
+      "5 days"
+    ],
+    [
+      72,
+      "3 days"
+    ],
+    [
+      48,
+      "2 days"
+    ],
+    [
+      24,
+      "1 day"
+    ]
+  ],
+  "name": "Southern California Marine Debris",
+  "source_locations": [
+    [
+      "LA River",
+      [
+        -118.1656,
+        33.7281
+      ]
+    ],
+    [
+      "Ballona Creek",
+      [
+        -118.485217,
+        33.95407
+      ]
+    ],
+    [
+      "Offshore, Shelf",
+      [
+        -120.74319,
+        34.46899
+      ]
+    ],
+    [
+      "Offshore, Shelf Break",
+      [
+        -121.239662,
+        34.4636
+      ]
+    ],
+    [
+      "Off Shelf Break",
+      [
+        -121.834122,
+        34.46899
+      ]
+    ]
+  ],
+  "oil_types": [
+    "Windage - 0-1%",
+    "Windage - 4-5%"
+  ]
+}
