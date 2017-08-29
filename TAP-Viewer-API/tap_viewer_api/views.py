@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 import os
 
@@ -19,7 +20,7 @@ all_locations = models.load_locations(locations_dir)
 
 
 def includeme(config):
-    config.add_view(home, route_name='home')
+    config.add_view(home, route_name='home', renderer='string')
     config.add_view(locations, route_name='locations', renderer='json')
     config.add_view(location_setup, route_name='location_setup', renderer='json')
     config.add_view(impact_analysis, route_name='impact_analysis', renderer='json')
@@ -29,6 +30,7 @@ def includeme(config):
     config.add_view(location_receptors, route_name='location_receptors')
 
 
+# this should be handled by the json renderer
 def json_response(json_obj):
     """
     Creates a json response object from a string that contains the json.
@@ -49,6 +51,8 @@ def home(request):
 
     This is the documentation of the API
     """
+    request.response.content_type = "text/html"
+
     return Response(publish_string(open(os.path.join(data_dir, "API.rst")).read(),
                                    writer_name='html'))
 
@@ -56,7 +60,6 @@ def home(request):
 @view_config(renderer='json')
 def locations(request):
     result = {name: loc.location_info for name, loc in all_locations.items()}
-#    return json_response(result)
     return result
 
 
