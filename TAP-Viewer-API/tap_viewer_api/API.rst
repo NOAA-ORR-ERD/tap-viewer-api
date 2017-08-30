@@ -87,15 +87,18 @@ and sending JSON data (example):
 
 ::
 
- {'location': 'sb', 
-  'source': 'source: 0', 
-  'mode': 'impact_analysis', 
-  'oil_type': 'Heavy Crude', 
-  'season': 'AllYear', 
-  'output_amount': [1000, 'barrels'], 
-  'output_time': [480, '20 days'], 
+ {'location': 'sb',
+  'source': 'source: 0',
+  'mode': 'impact_analysis',
+  'oil_type': 'Heavy Crude',
+  'season': 'AllYear',
+  'output_amount': [1000, 'barrels'],
+  'output_time': 3,
   'loc': [5.0, 'barrels']
  }
+
+output_time is an index into the output times array.
+
 
 Will return a JSON response which contains an approproate sized array of values for the response -- ne value for each receptor site.
 
