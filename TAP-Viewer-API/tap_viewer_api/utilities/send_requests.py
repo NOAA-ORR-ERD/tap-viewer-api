@@ -21,13 +21,15 @@ def impact_analysis(location):
     }
     """
     url = base_url + "/locations/%s/impact_analysis" % location
-    params = {"season": "winter",
-               "oil_type": "diesel",
-               "level_of_concern_bbl":1.5,
-               "amount_spilled_bbl":1000,
-               "time_since_start_hrs":72,
-               "source_id":3,
-               }
+    params = {'location': 'sb',
+              'source': 'source: 0',
+              'mode': 'impact_analysis',
+              'oil_type': 'Heavy Crude',
+              'season': 'AllYear',
+              'output_amount': [1000, 'barrels'],
+              'output_time': 3,
+              'loc': [5.0, 'barrels']
+              }
     r = requests.post(url, json=params)
     print("made request")
 

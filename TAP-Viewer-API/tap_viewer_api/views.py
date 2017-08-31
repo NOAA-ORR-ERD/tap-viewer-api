@@ -87,10 +87,10 @@ def impact_analysis(request):
     {
     "season": "winter",
     "oil_type": "diesel",
-    "level_of_concern_bbl":1.5,
-    "amount_spilled_bbl":1000,
-    "time_since_start_hrs":72,
     "source_id":3,
+    "level_of_concern_bbl":[1.5, "bbl"],
+    "amount_spilled_bbl": [1000, "bbl"],
+    "output_time_index": 3,
     }
     """
     loc = request.matchdict['location_name']

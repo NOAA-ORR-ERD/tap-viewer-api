@@ -87,15 +87,14 @@ and sending JSON data (example):
 
 ::
 
- {'location': 'sb',
-  'source': 'source: 0',
-  'mode': 'impact_analysis',
-  'oil_type': 'Heavy Crude',
-  'season': 'AllYear',
-  'output_amount': [1000, 'barrels'],
-  'output_time': 3,
-  'loc': [5.0, 'barrels']
- }
+     {
+    "season": "winter",
+    "oil_type": "diesel",
+    "source_id":3,
+    "level_of_concern":[1.5, "bbl"],
+    "amount_spilled": [1000, "bbl"],
+    "output_time_index": 3,
+    }
 
 output_time is an index into the output times array.
 

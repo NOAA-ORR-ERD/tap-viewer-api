@@ -75,15 +75,25 @@ class TapLocation:
     def impact_analysis(self,
                         season=None,
                         oil_type=None,
-                        level_of_concern_bbl=None,
-                        amount_spilled_bbl=None,
-                        time_since_start_hrs=None,
                         source_id=None,
+                        level_of_concern=None,
+                        amount_spilled=None,
+                        output_time_index=None,
                         ):
+
         """
         compute an impact analysis
 
         For now, it only returns random values
+
+        example input:
+            {"season": "winter",
+             "oil_type": "diesel",
+             "source_id":3,
+             "level_of_concern":[1.5, "bbl"],
+             "amount_spilled": [1000, "bbl"],
+             "output_time_index": 3,
+             }
         """
         return np.random.random(self.num_sites).tolist()
 

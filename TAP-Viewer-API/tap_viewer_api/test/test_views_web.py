@@ -1,0 +1,83 @@
+#!/usr/bin/env python
+
+"""
+Integration tests for the views.
+
+This can test the actual response objects
+"""
+
+import pytest
+
+from pyramid import testing
+import webtest
+
+from tap_viewer_api import views
+
+
+@pytest.fixture
+def test_app():
+    """
+    this fixture provides an applicaiton object to test against
+    """
+    from tap_viewer_api import main
+    app = main({})
+    test_app = webtest.TestApp(app)
+    return test_app
+
+
+def test_home(test_app):
+    """
+    This one does retrun a response object
+    """
+    response = test_app.get('/', status=200)
+    assert response.status_code == 200
+    assert response.content_type == "text/html"
+    assert "TAP Viewer API" in response.text
+
+
+def test_locations(test_app):
+    """
+    Do all the locations expected end up in the response?
+    """
+
+    response = test_app.get('/locations', status=200)
+    assert response.status_code == 200
+    assert response.content_type == 'application/json'
+    result = response.json
+
+    assert set(result.keys()) == set(['sb', 'sf', 'arctic', 'socal_md'])
+
+
+@pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
+def test_location_setup(test_app, location):
+    response = test_app.get('/locations/{}/setup'.format(location), status=200)
+    assert response.status_code == 200
+    assert response.content_type == 'application/json'
+    result = response.json
+
+    assert set(result.keys()) == set(('bounding_box', 'output_times', 'locs', 'name',
+                                      'seasons', 'source_locations', 'oil_types',
+                                      'num_spills', 'output_amounts'))
+
+
+@pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
+def test_impact_analysis(test_app, location):
+
+    params = {"season": "winter",
+              "oil_type": "diesel",
+              "source_id": 3,
+              "level_of_concern": [1.5, "bbl"],
+              "amount_spilled": [1000, "bbl"],
+              "output_time_index": 3,
+              }
+
+
+    response = test_app.post_json('/locations/{}/impact_analysis'.format(location), params)
+    assert response.status_code == 200
+    assert response.content_type == 'application/json'
+    result = response.json
+
+    assert 'impact_analysis_results' in result
+
+    # Fixme: add some more testing -- sizeof result array maybe?
+
