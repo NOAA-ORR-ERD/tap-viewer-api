@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 
 import os
 
@@ -87,9 +87,9 @@ def impact_analysis(request):
     {
     "season": "winter",
     "oil_type": "diesel",
-    "source_id":3,
-    "level_of_concern_bbl":[1.5, "bbl"],
-    "amount_spilled_bbl": [1000, "bbl"],
+    "source_id": 3,
+    "level_of_concern": [1.5, "bbl"],
+    "amount_spilled": [1000, "bbl"],
     "output_time_index": 3,
     }
     """
@@ -103,15 +103,15 @@ def oiling_analysis(request):
     """
     returns site oiling analysis for the given parmeters
 
-    JSON request should have:
+    JSON request should have the following fields (example data):
 
     {
-    season, str
-    oil_type, str
-    amount_spilled_bbl, number
-    time_since_start_hrs, number
-    location_id,
-    receptor_id
+    "season": "winter",
+    "oil_type": "diesel",
+    "source_id": 3,
+    "receptor_id": 4
+    "amount_spilled": [1000, "bbl"],
+    "output_time_index": 2,
     }
     """
     loc = request.matchdict['location_name']

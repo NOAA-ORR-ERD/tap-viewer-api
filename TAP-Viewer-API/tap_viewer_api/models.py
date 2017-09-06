@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 
 """
 Here are the models for the actual computation, etc.
@@ -100,10 +100,10 @@ class TapLocation:
     def oiling_analysis(self,
                         season=None,
                         oil_type=None,
-                        amount_spilled_bbl=None,
-                        time_since_start_hrs=None,
                         source_id=None,
-                        receptor_id=None
+                        receptor_id=None,
+                        amount_spilled=None,
+                        output_time_indext=None,
                         ):
         """
         Compute an oiling analysis
