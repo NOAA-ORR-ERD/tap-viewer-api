@@ -1,22 +1,6 @@
 {
-  "seasons": [
-    "AllYear",
-    "Winter",
-    "Spring",
-    "Summer",
-    "Fall"
-  ],
   "name": "Debris TAP",
-  "oil_types": [
-    "Non-weathering",
-    "Gasoline",
-    "Diesel",
-    "Light Crude",
-    "Medium Crude",
-    "Heavy Crude",
-    "Medium fuel oil",
-    "Fuel oil #6"
-  ],
+  "num_spills": 200,
   "source_locations": [
     [
       "source: 0",
@@ -117,6 +101,33 @@
       ]
     ]
   ],
+  "seasons": [
+    "AllYear",
+    "Winter",
+    "Spring",
+    "Summer",
+    "Fall"
+  ],
+  "bounding_box": [
+    [
+      -122.0,
+      36.0
+    ],
+    [
+      -116.26,
+      32.0
+    ]
+  ],
+  "oil_types": [
+    "Non-weathering",
+    "Gasoline",
+    "Diesel",
+    "Light Crude",
+    "Medium Crude",
+    "Heavy Crude",
+    "Medium fuel oil",
+    "Fuel oil #6"
+  ],
   "output_times": [
     [
       336,
@@ -157,16 +168,6 @@
       "barrels"
     ]
   ],
-  "bounding_box": [
-    [
-      -122.0,
-      36.0
-    ],
-    [
-      -116.26,
-      32.0
-    ]
-  ],
   "locs": [
     [
       5.0,
@@ -180,6 +181,5 @@
       20.0,
       "barrels"
     ]
-  ],
-  "num_spills": 200
+  ]
 }
