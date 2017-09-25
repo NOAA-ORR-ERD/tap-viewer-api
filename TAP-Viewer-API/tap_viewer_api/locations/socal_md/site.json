@@ -1,39 +1,103 @@
 {
-  "name": "Debris TAP",
-  "num_spills": 200,
-  "source_locations": [
+  "locs": [
     [
-      "source: 0",
-      [
-        -118.485217,
-        33.95407
-      ]
+      0.1,
+      "percent"
     ],
     [
-      "source: 1",
+      1.0,
+      "percent"
+    ],
+    [
+      10.0,
+      "percent"
+    ]
+  ],
+  "seasons": [
+    "Winter",
+    "Summer"
+  ],
+  "output_amounts": [
+    [
+      100,
+      "percent"
+    ]
+  ],
+  "bounding_box": [
+    [
+      -122.0,
+      36.0
+    ],
+    [
+      -116.26,
+      32.0
+    ]
+  ],
+  "num_spills": 200,
+  "output_times": [
+    [
+      336,
+      "14 days"
+    ],
+    [
+      240,
+      "10 days"
+    ],
+    [
+      168,
+      "7 days"
+    ],
+    [
+      120,
+      "5 days"
+    ],
+    [
+      72,
+      "3 days"
+    ],
+    [
+      48,
+      "2 days"
+    ],
+    [
+      24,
+      "1 day"
+    ]
+  ],
+  "name": "Southern California Marine Debris",
+  "source_locations": [
+    [
+      "LA River",
       [
         -118.1656,
         33.7281
       ]
     ],
     [
-      "source: 2",
+      "Ballona Creek",
       [
-        -121.834122,
+        -118.485217,
+        33.95407
+      ]
+    ],
+    [
+      "Offshore, Shelf",
+      [
+        -120.743187,
         34.46899
       ]
     ],
     [
-      "source: 3",
+      "Offshore, Shelf Break",
       [
         -121.239662,
         34.463603
       ]
     ],
     [
-      "source: 4",
+      "Off Shelf Break",
       [
-        -120.743187,
+        -121.834122,
         34.46899
       ]
     ],
@@ -101,85 +165,8 @@
       ]
     ]
   ],
-  "seasons": [
-    "AllYear",
-    "Winter",
-    "Spring",
-    "Summer",
-    "Fall"
-  ],
-  "bounding_box": [
-    [
-      -122.0,
-      36.0
-    ],
-    [
-      -116.26,
-      32.0
-    ]
-  ],
   "oil_types": [
-    "Non-weathering",
-    "Gasoline",
-    "Diesel",
-    "Light Crude",
-    "Medium Crude",
-    "Heavy Crude",
-    "Medium fuel oil",
-    "Fuel oil #6"
-  ],
-  "output_times": [
-    [
-      336,
-      "14 days"
-    ],
-    [
-      240,
-      "10 days"
-    ],
-    [
-      168,
-      "7 days"
-    ],
-    [
-      120,
-      "5 days"
-    ],
-    [
-      72,
-      "3 days"
-    ],
-    [
-      48,
-      "2 days"
-    ],
-    [
-      24,
-      "1 day"
-    ]
-  ],
-  "output_amounts": [
-    [
-      1000,
-      "barrels"
-    ],
-    [
-      100,
-      "barrels"
-    ]
-  ],
-  "locs": [
-    [
-      5.0,
-      "barrels"
-    ],
-    [
-      10.0,
-      "barrels"
-    ],
-    [
-      20.0,
-      "barrels"
-    ]
+    "Windage - 0-1%",
+    "Windage - 4-5%"
   ]
 }
