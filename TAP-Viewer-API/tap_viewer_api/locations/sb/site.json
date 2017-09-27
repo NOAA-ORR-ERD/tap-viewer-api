@@ -73,6 +73,13 @@
   "name": "SoCal TAP",
   "source_locations": [
     [
+      "source: _test",
+      [
+        -120.102005,
+        34.439909
+      ]
+    ],
+    [
       "source: 0",
       [
         -120.1205306,
