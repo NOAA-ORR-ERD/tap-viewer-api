@@ -1,7 +1,9 @@
 {
-  "type": "FeatureCollection",
+  "bbox": null,
   "features": [
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -7449,11 +7451,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -7641,11 +7643,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -7973,11 +7975,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -8473,11 +8475,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -9085,11 +9087,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -18789,11 +18791,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -19317,11 +19319,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -19513,11 +19515,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -19601,11 +19603,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -19701,11 +19703,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -20701,11 +20703,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -20913,11 +20915,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -23569,11 +23571,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -23649,11 +23651,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -24757,11 +24759,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -32237,11 +32239,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -32849,11 +32851,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -32985,11 +32987,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -33321,11 +33323,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -33685,11 +33687,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -34109,11 +34111,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -34429,11 +34431,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -34825,11 +34827,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -34901,11 +34903,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -35357,11 +35359,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -37689,11 +37691,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -38537,11 +38539,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -39385,11 +39387,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -40917,11 +40919,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -41665,11 +41667,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -41761,11 +41763,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -42197,11 +42199,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -42317,11 +42319,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -42397,11 +42399,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -42633,11 +42635,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -43033,11 +43035,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -43101,11 +43103,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -43221,11 +43223,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -43405,11 +43407,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -43853,11 +43855,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -43949,11 +43951,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -44285,11 +44287,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -44401,11 +44403,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -44493,11 +44495,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -45305,11 +45307,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -45509,11 +45511,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -46213,11 +46215,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -46793,11 +46795,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -47037,11 +47039,11 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     },
     {
+      "properties": {},
+      "poly_type": "land",
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
@@ -47121,9 +47123,8 @@
             ]
           ]
         ]
-      },
-      "properties": {},
-      "poly_type": "land"
+      }
     }
-  ]
+  ],
+  "type": "FeatureCollection"
 }
