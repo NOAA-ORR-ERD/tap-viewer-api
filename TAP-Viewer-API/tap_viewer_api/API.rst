@@ -87,23 +87,200 @@ and sending JSON data (example):
 
 ::
 
-     {
+    {
     "season": "winter",
     "oil_type": "diesel",
-    "source_id":3,
-    "level_of_concern":[1.5, "bbl"],
+    "source_id": 3,
     "amount_spilled": [1000, "bbl"],
-    "output_time_index": 3,
+    "level_of_concern": [1.5, "bbl"],
+    "output_time_index": 3
     }
 
 output_time is an index into the output times array.
 
 
-Will return a JSON response which contains an approproate sized array of values for the response -- ne value for each receptor site.
+Will return a JSON response which contains an approproate sized array of values for the response -- one value for each receptor site.
+
+Example of response:
+
+.. code-block:: javascript
+
+    {
+        [
+         0.0045762,
+         0.0192111,
+         0.0799285,
+         0.2933418,
+         0.4001939,
+         ...
+        ]
+    }
 
 ::
 
   base_url/locations/{location_name}/oiling_analysis
 
+and sending JSON data (example):
+
+::
+
+    {
+    "season": "winter",
+    "oil_type": "diesel",
+    "source_id": 3,
+    "receptor_id": 392,
+    "amount_spilled": [1000, "bbl"],
+    "output_time_index": 3
+    }
+
+output_time is an index into the output times array.
+
 
 Will return a JSON response which contains a randomized 100 element array of floating point numbers that range between 0 and 1. (For prototyping purposes currently)
+
+Example of response:
+
+.. code-block:: javascript
+
+    {
+        [
+         0.9678321,
+         0.9145672,
+         0.8309376,
+         0.6633418,
+         0.4001939,
+         ...
+        ]
+    }
+
+
+::
+
+  base_url/locations/{location_name}/response_time_analysis
+
+and sending JSON data (example):
+
+::
+
+    {
+    "season": "winter",
+    "oil_type": "diesel",
+    "source_id": 3,
+    "receptor_id": 392,
+    "amount_spilled": [1000, "bbl"],
+    "level_of_concern": [1.5, "bbl"],
+    "response_threshold": 95
+    }
+
+
+Will return a JSON response which contains an object of two arrays -- array of values for the response time (one value for each receptor site) and randomized 100 element array of floating point numbers that range between 0 and 1. (For prototyping purposes currently)
+
+Example of response:
+
+.. code-block:: javascript
+
+    {
+        "response_time_days": [30, 30, 20, 15, 15, 10, 3, 3, 1, ...],
+        "probability": [0.036738, 0.194565, 0.232296, ...]
+    }
+
+
+::
+
+  base_url/locations/{location_name}/threat_analysis
+
+and sending JSON data (example):
+
+::
+
+     {
+    "season": "winter",
+    "oil_type": "diesel",
+    "receptor_id": 392,
+    "amount_spilled": [1000, "bbl"],
+    "level_of_concern": [1.5, "bbl"],
+    "output_time_index": 3
+    }
+
+output_time is an index into the output times array.
+
+
+Will return a JSON response which contains a randomized approproate sized array (one value for each source) of floating point numbers that range between 0 and 1. (For prototyping purposes currently)
+
+Example of response:
+
+.. code-block:: javascript
+
+    {
+        [0.275538, 0.012273, 0.782321, 0.553491, ....]
+    }
+
+
+::
+
+  base_url/locations/{location_name}/impact_by_spill
+
+and sending JSON data (example):
+
+::
+
+    {
+    "season": "winter",
+    "oil_type": "diesel",
+    "source_id": 3,
+    "amount_spilled": [1000, "bbl"],
+    "level_of_concern": [1.5, "bbl"],
+    "output_time_index": 3,
+    "spill_number": 7
+    }
+
+output_time is an index into the output times array.
+
+
+Will return a JSON response which contains an approproate sized array of values for the response -- one value for each receptor site.
+
+Example of response:
+
+.. code-block:: javascript
+
+    {
+        [
+         0.0045762,
+         0.0192111,
+         0.0799285,
+         0.2933418,
+         0.4001939,
+         ...
+        ]
+    }
+
+
+::
+
+  base_url/locations/{location_name}/response_time_by_spill
+
+and sending JSON data (example):
+
+::
+
+    {
+    "season": "winter",
+    "oil_type": "diesel",
+    "source_id": 3,
+    "amount_spilled": [1000, "bbl"],
+    "level_of_concern": [1.5, "bbl"],
+    "spill_number": 7
+    }
+
+
+Will return a JSON response which contains an array of values for the response time (one value for each receptor site).
+
+Example of response:
+
+.. code-block:: javascript
+
+    {
+        [30, 30, 20, 15, 15, 10, 3, 3, 1, ...]
+    }
+
+

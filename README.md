@@ -61,16 +61,16 @@ Will return a JSON response that contains the supported locations.
 Schema of response:
 
 ```javascript
-{
-	'locations': [
-		{
-			'route_name': 'arctic',
-			'name': 'US Arctic Waters',
-			'lonlat': [-156.79, 71.29]
-		},
-		...
-	]
-}
+  {'locations': [
+            {
+              'route_name': 'arctic',
+              'name': 'US Arctic Waters',
+              'bounding_box': [[-122.707986, 38.1523666],
+                               [-121.902153, 37.4429131]]
+            },
+            ...
+                ]
+  }
 ```
 
 ```
