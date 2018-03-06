@@ -109,5 +109,14 @@ class TapLocation:
         Compute an oiling analysis
 
         For now, it only returns random values
+
+        example input:
+            {"season": "winter",
+             "oil_type": "diesel",
+             "source_id": 3,
+             "receptor_id": 111,
+             "amount_spilled": [1000, "bbl"],
+             "output_time_index": 3,
+             }
         """
         return (np.random.random(self.num_spills) * 10000.0).tolist()

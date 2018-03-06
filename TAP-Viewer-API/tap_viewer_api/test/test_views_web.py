@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 
 """
 Integration tests for the views.
@@ -78,6 +78,25 @@ def test_impact_analysis(test_app, location):
     result = response.json
 
     assert 'impact_analysis_results' in result
+
+@pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
+def test_oiling_analysis(test_app, location):
+
+    params = {"season": "winter",
+              "oil_type": "diesel",
+              "source_id": 3,
+              "receptor_id": 111,
+              "amount_spilled": [1000, "bbl"],
+              "output_time_index": 3,
+              }
+    
+    response = test_app.post_json('/locations/{}/oiling_analysis'.format(location), params)
+    assert response.status_code == 200
+    assert response.content_type == 'application/json'
+    result = response.json
+
+    assert 'oiling_analysis_results' in result
+
 
     # Fixme: add some more testing -- sizeof result array maybe?
 
