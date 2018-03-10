@@ -100,6 +100,7 @@ output_time is an index into the output times array.
 
 
 Will return a JSON response which contains an approproate sized array of values for the response -- one value for each receptor site.
+(For prototyping purposes it will return rundom values currently.)
 
 Example of response:
 
@@ -136,21 +137,15 @@ and sending JSON data (example):
 output_time is an index into the output times array.
 
 
-Will return a JSON response which contains a randomized 100 element array of floating point numbers that range between 0 and 1. (For prototyping purposes currently)
+Will return a JSON response which contains an approproate sized array of values for response - one value for each spill.
+(For prototyping purposes it will return rundom values currently)
 
 Example of response:
 
 .. code-block:: javascript
 
     {
-        [
-         0.9678321,
-         0.9145672,
-         0.8309376,
-         0.6633418,
-         0.4001939,
-         ...
-        ]
+        [0, 0, 1, 2, 15, 60, 235, 182, 96, 17, 1, 0, 0, 3, 43, 102, ...]
     }
 
 
@@ -173,7 +168,10 @@ and sending JSON data (example):
     }
 
 
-Will return a JSON response which contains an object of two arrays -- array of values for the response time (one value for each receptor site) and randomized 100 element array of floating point numbers that range between 0 and 1. (For prototyping purposes currently)
+Will return a JSON response which contains an object of two arrays:
+1) response time values -- one value for each receptor site
+2) response time values -- one value for each spill
+(For prototyping purposes it will return rundom values currently)
 
 Example of response:
 
@@ -181,9 +179,8 @@ Example of response:
 
     {
         "response_time_days": [30, 30, 20, 15, 15, 10, 3, 3, 1, ...],
-        "probability": [0.036738, 0.194565, 0.232296, ...]
+        "response_time_for_spill_days": [30, 20, 20, 15, 10, 10, 3, 2, 1, ...]
     }
-
 
 ::
 
@@ -206,13 +203,14 @@ output_time is an index into the output times array.
 
 
 Will return a JSON response which contains a randomized approproate sized array (one value for each source) of floating point numbers that range between 0 and 1. (For prototyping purposes currently)
+(For prototyping purposes it will return rundom values currently)
 
 Example of response:
 
 .. code-block:: javascript
 
     {
-        [0.275538, 0.012273, 0.782321, 0.553491, ....]
+        [0.275538, 0.012273, 0.782321, 0.553491, ...]
     }
 
 
