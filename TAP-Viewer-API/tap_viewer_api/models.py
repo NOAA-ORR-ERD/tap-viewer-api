@@ -106,7 +106,7 @@ class TapLocation:
                         source_id=None,
                         receptor_id=None,
                         amount_spilled=None,
-                        output_time_indext=None,
+                        output_time_index=None,
                         ):
         """
         Compute an oiling analysis
@@ -149,7 +149,8 @@ class TapLocation:
              "response_threshold": 95
              }
         """
-        return (np.random.random(self.num_sites) * max(self.output_times)).tolist(), (np.random.random(self.num_spills) * max(self.output_times)).tolist()
+        max_days = np.array(self.output_times)[:,0].astype(np.float).max()/24
+        return (np.random.random(self.num_sites) * max_days).tolist(), (np.random.random(self.num_spills) * max_days).tolist()
 
 
     def threat_analysis(self,
@@ -158,7 +159,7 @@ class TapLocation:
                         receptor_id=None,
                         amount_spilled=None,
                         level_of_concern=None,
-                        output_time_indext=None,
+                        output_time_index=None,
                         ):
 
         """

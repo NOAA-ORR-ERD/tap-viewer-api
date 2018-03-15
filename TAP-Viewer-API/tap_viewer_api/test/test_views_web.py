@@ -100,3 +100,22 @@ def test_oiling_analysis(test_app, location):
 
     # Fixme: add some more testing -- sizeof result array maybe?
 
+@pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
+def test_response_time_analysis(test_app, location):
+
+    params = {"season": "winter",
+              "oil_type": "diesel",
+              "source_id": 3,
+              "receptor_id": 111,
+              "amount_spilled": [1000, "bbl"],
+              "level_of_concern": [1.5, "bbl"],
+              "response_threshold": 95
+              }
+    
+    response = test_app.post_json('/locations/{}/response_time_analysis'.format(location), params)
+    assert response.status_code == 200
+    assert response.content_type == 'application/json'
+    result = response.json
+
+    assert 'response_time_analysis_results' in result
+
