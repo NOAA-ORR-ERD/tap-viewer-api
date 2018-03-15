@@ -177,3 +177,58 @@ class TapLocation:
              }
         """
         return (np.random.random(self.num_sources)).tolist()
+
+    def impact_by_spill(self,
+                        season=None,
+                        oil_type=None,
+                        source_id=None,
+                        amount_spilled=None,
+                        level_of_concern=None,
+                        output_time_index=None,
+                        spill_number=None,
+                        ):
+
+        """
+        Compute an impact by spill
+
+        For now, it only returns random values
+
+        example input:
+            {
+            "season": "winter",
+            "oil_type": "diesel",
+            "source_id": 3,
+            "amount_spilled": [1000, "bbl"],
+            "level_of_concern": [1.5, "bbl"],
+            "output_time_index": 3,
+            "spill_number": 7
+            }
+        """
+        return (np.random.random(self.num_sites)).tolist()
+
+    def response_time_by_spill(self,
+                               season=None,
+                               oil_type=None,
+                               rource_id=None,
+                               amount_spilled=None,
+                               level_of_concern=None,
+                               spill_number=None,
+                              ):
+
+        """
+        Compute a threat analysis
+
+        For now, it only returns random values
+
+        example input:
+            {
+            "season": "winter",
+            "oil_type": "diesel",
+            "source_id": 3,
+            "amount_spilled": [1000, "bbl"],
+            "level_of_concern": [1.5, "bbl"],
+            "spill_number": 7
+            }
+        """
+        max_days = np.array(self.output_times)[:,0].astype(np.float).max()/24
+        return (np.random.random(self.num_sites) * max_days).tolist()

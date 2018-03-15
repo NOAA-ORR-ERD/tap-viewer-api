@@ -13,7 +13,6 @@ import webtest
 
 from tap_viewer_api import views
 
-
 @pytest.fixture
 def test_app():
     """
@@ -58,6 +57,8 @@ def test_location_setup(test_app, location):
     assert set(result.keys()) == set(('bounding_box', 'output_times', 'locs', 'name',
                                       'seasons', 'source_locations', 'oil_types',
                                       'num_spills', 'output_amounts'))
+
+    #num_sources[{}] = len(result['source_locations'])
 
 
 @pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
@@ -119,3 +120,20 @@ def test_response_time_analysis(test_app, location):
 
     assert 'response_time_analysis_results' in result
 
+@pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
+def test_threat_analysis(test_app, location):
+
+    params = {"season": "winter",
+              "oil_type": "diesel",
+              "receptor_id": 314,
+              "amount_spilled": [1000, "bbl"],
+              "level_of_concern": [1.5, "bbl"],
+              "output_time_index": 3,
+              }
+
+    response = test_app.post_json('/locations/{}/threat_analysis'.format(location), params)
+    assert response.status_code == 200
+    assert response.content_type == 'application/json'
+    result = response.json
+
+    assert 'threat_analysis_results' in result
