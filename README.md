@@ -4,9 +4,7 @@ TAP Viewer
 This project will hold the design discussion and ultimately code, for the new Web-based TAP vieweer.
 
 Project TEAM:
--------------
-
-Alex Miranda: Web UI developer emeritus
+-------
 
 Gennady Kachook: Web UI and back-end API developer
 
@@ -14,7 +12,9 @@ Dylan Righi: Back end computation developer and subject matter expert
 
 Chris Barker: Subject mater expert, software architecture support -- maybe some code :-)
 
-Glen Watabayashi: Making sure we get it done on schedule :-)
+  Emeritus TEAM:
+    Glen Watabayashi: Making sure we get it done on schedule :-)
+    Alex Miranda: Web UI developer 
 
 
 Running the API Server
