@@ -174,8 +174,6 @@ def impact_by_spill(request):
     "season": "winter",
     "oil_type": "diesel",
     "source_id": 3,
-    "amount_spilled": [1000, "bbl"],
-    "level_of_concern": [1.5, "bbl"],
     "output_time_index": 3,
     "spill_number": 7
     }
@@ -185,7 +183,7 @@ def impact_by_spill(request):
     req_obj = request.json_body
     return {'impact_by_spill_results': loc_obj.impact_by_spill(**req_obj)}
 
-def response_time_by_spill(response):    
+def response_time_by_spill(request):    
     """
     returns site impact by spill for the given parmeters
 
@@ -197,7 +195,6 @@ def response_time_by_spill(response):
     "source_id": 3,
     "amount_spilled": [1000, "bbl"],
     "level_of_concern": [1.5, "bbl"],
-    "output_time_index": 3,
     "spill_number": 7
     }
     """
@@ -205,4 +202,3 @@ def response_time_by_spill(response):
     loc_obj = all_locations[loc]
     req_obj = request.json_body
     return {'response_time_by_spill_results': loc_obj.response_time_by_spill(**req_obj)}
-

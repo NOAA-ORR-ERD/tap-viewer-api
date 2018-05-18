@@ -182,8 +182,6 @@ class TapLocation:
                         season=None,
                         oil_type=None,
                         source_id=None,
-                        amount_spilled=None,
-                        level_of_concern=None,
                         output_time_index=None,
                         spill_number=None,
                         ):
@@ -198,8 +196,6 @@ class TapLocation:
             "season": "winter",
             "oil_type": "diesel",
             "source_id": 3,
-            "amount_spilled": [1000, "bbl"],
-            "level_of_concern": [1.5, "bbl"],
             "output_time_index": 3,
             "spill_number": 7
             }
@@ -209,7 +205,7 @@ class TapLocation:
     def response_time_by_spill(self,
                                season=None,
                                oil_type=None,
-                               rource_id=None,
+                               source_id=None,
                                amount_spilled=None,
                                level_of_concern=None,
                                spill_number=None,

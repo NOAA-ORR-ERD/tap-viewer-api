@@ -137,3 +137,40 @@ def test_threat_analysis(test_app, location):
     result = response.json
 
     assert 'threat_analysis_results' in result
+
+@pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
+def test_impact_by_spill(test_app, location):
+
+    params = {"season": "winter",
+              "oil_type": "diesel",
+              "source_id": 3,
+              "output_time_index": 3,
+              "spill_number": 7
+             }
+    
+    response = test_app.post_json('/locations/{}/impact_by_spill'.format(location), params)
+    assert response.status_code == 200
+    assert response.content_type == 'application/json'
+    result = response.json
+
+    assert 'impact_by_spill_results' in result
+
+@pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
+def test_response_time_by_spill(test_app, location):
+
+    params = {"season": "winter",
+              "oil_type": "diesel",
+              "source_id": 3,
+              "amount_spilled": [1000, "bbl"],
+              "level_of_concern": [1.5, "bbl"],
+              "spill_number": 7
+             }
+    
+    response = test_app.post_json('/locations/{}/response_time_by_spill'.format(location), params)
+    assert response.status_code == 200
+    assert response.content_type == 'application/json'
+    result = response.json
+
+    assert 'response_time_by_spill_results' in result
+
+
