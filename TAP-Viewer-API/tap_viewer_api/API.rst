@@ -226,8 +226,6 @@ and sending JSON data (example):
     "season": "winter",
     "oil_type": "diesel",
     "source_id": 3,
-    "amount_spilled": [1000, "bbl"],
-    "level_of_concern": [1.5, "bbl"],
     "output_time_index": 3,
     "spill_number": 7
     }
