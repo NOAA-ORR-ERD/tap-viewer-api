@@ -1,4 +1,88 @@
 {
+  "output_times": [
+    [
+      120,
+      "5 days"
+    ],
+    [
+      96,
+      "4 days"
+    ],
+    [
+      72,
+      "3 days"
+    ],
+    [
+      60,
+      "2.5 days"
+    ],
+    [
+      48,
+      "2 days"
+    ],
+    [
+      36,
+      "1.5 days"
+    ],
+    [
+      24,
+      "1 day"
+    ],
+    [
+      12,
+      "12 hours"
+    ],
+    [
+      6,
+      "6 hours"
+    ],
+    [
+      1,
+      ""
+    ]
+  ],
+  "bounding_box": [
+    [
+      -122.705986,
+      38.1523666
+    ],
+    [
+      -121.902153,
+      37.4429131
+    ]
+  ],
+  "output_amounts": [
+    [
+      1000,
+      "barrels"
+    ]
+  ],
+  "num_spills": 500,
+  "name": "San Francisco Bay",
+  "oil_types": [
+    "Non-weathering",
+    "Gasoline",
+    "Diesel",
+    "Light Crude",
+    "Medium Crude",
+    "Heavy Crude",
+    "Medium fuel oil",
+    "Fuel oil #6"
+  ],
+  "locs": [
+    [
+      10.0,
+      "barrels"
+    ],
+    [
+      5.0,
+      "barrels"
+    ],
+    [
+      1.0,
+      "barrels"
+    ]
+  ],
   "source_locations": [
     [
       "source: 0",
@@ -1632,92 +1716,8 @@
       ]
     ]
   ],
-  "locs": [
-    [
-      10.0,
-      "barrels"
-    ],
-    [
-      5.0,
-      "barrels"
-    ],
-    [
-      1.0,
-      "barrels"
-    ]
-  ],
-  "bounding_box": [
-    [
-      -122.705986,
-      38.1523666
-    ],
-    [
-      -121.902153,
-      37.4429131
-    ]
-  ],
-  "output_amounts": [
-    [
-      1000,
-      "barrels"
-    ]
-  ],
   "seasons": [
     "Mar - Aug",
     "Sept - Feb"
-  ],
-  "name": "San Francisco Bay",
-  "num_spills": 500,
-  "oil_types": [
-    "Non-weathering",
-    "Gasoline",
-    "Diesel",
-    "Light Crude",
-    "Medium Crude",
-    "Heavy Crude",
-    "Medium fuel oil",
-    "Fuel oil #6"
-  ],
-  "output_times": [
-    [
-      120,
-      "5 days"
-    ],
-    [
-      96,
-      "4 days"
-    ],
-    [
-      72,
-      "3 days"
-    ],
-    [
-      60,
-      "2.5 days"
-    ],
-    [
-      48,
-      "2 days"
-    ],
-    [
-      36,
-      "1.5 days"
-    ],
-    [
-      24,
-      "1 day"
-    ],
-    [
-      12,
-      "12 hours"
-    ],
-    [
-      6,
-      "6 hours"
-    ],
-    [
-      1,
-      ""
-    ]
   ]
 }

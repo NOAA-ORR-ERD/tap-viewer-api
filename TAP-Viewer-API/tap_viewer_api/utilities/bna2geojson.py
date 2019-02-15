@@ -12,7 +12,7 @@ import os
 import json
 import geojson
 from geojson import Polygon, Feature, FeatureCollection
-
+import numpy as np
 
 infilename = sys.argv[1]
 location_dir = os.path.dirname(infilename)
@@ -105,18 +105,27 @@ def is_clockwise(poly):
         return False
 
 
-def sites2geojson(fp):
+def bna2geojson(fp):
     """
     Read the BNA polygon definitions and write to geojson file.
     """
 
-    polys = []
+    geo_polys = []
+    bbox = None
 
     with open("map.geojson", 'w') as outfile:
         while True:
             points, poly_type, name, sname = GetNextBNAPolygon(fp)
             if points is None:
                 break
+            if name == "Map Bounds":    
+                # Map Bounds - a polygon, but geojson uses bounding box for this, so build one
+                lons = np.array(points)[:, 0]
+                lats = np.array(points)[:, 1]
+                bbox = [np.min(lons), np.min(lats), np.max(lons), np.max(lats)]
+                continue
+            if sname != "1": # G.K. - added to exclude lakes
+                continue
             if poly_type == "polygon":  # only do polygons for now
                 # check orientation -- geojson wants "right hand rule"
                 if is_clockwise(points):
@@ -128,12 +137,12 @@ def sites2geojson(fp):
                     print("Endpoints not equal", points[0], points[-1])
                 ptype = "land" if sname == "1" else "lake"  # maybe not right, but there is something like that...
                 geo_poly = Feature(geometry=Polygon([points]), poly_type=ptype)
-                polys.append(geo_poly)
-        geojson.dump(FeatureCollection(polys), outfile, indent=2)
+                geo_polys.append(geo_poly)
+        geojson.dump(FeatureCollection(geo_polys, bbox = bbox), outfile, indent=2)
     return
 
 if __name__ == "__main__":
     bna_name = sys.argv[1]
     with open(bna_name, 'r') as bna_file:
-        sites2geojson(bna_file)
+        bna2geojson(bna_file)
 

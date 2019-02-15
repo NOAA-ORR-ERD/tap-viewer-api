@@ -4,9 +4,7 @@ TAP Viewer
 This project will hold the design discussion and ultimately code, for the new Web-based TAP vieweer.
 
 Project TEAM:
--------------
-
-Alex Miranda: Web UI developer emeritus
+-------
 
 Gennady Kachook: Web UI and back-end API developer
 
@@ -14,7 +12,9 @@ Dylan Righi: Back end computation developer and subject matter expert
 
 Chris Barker: Subject mater expert, software architecture support -- maybe some code :-)
 
-Glen Watabayashi: Making sure we get it done on schedule :-)
+  Emeritus TEAM:
+    Glen Watabayashi: Making sure we get it done on schedule :-)
+    Alex Miranda: Web UI developer 
 
 
 Running the API Server
@@ -61,16 +61,16 @@ Will return a JSON response that contains the supported locations.
 Schema of response:
 
 ```javascript
-{
-	'locations': [
-		{
-			'route_name': 'arctic',
-			'name': 'US Arctic Waters',
-			'lonlat': [-156.79, 71.29]
-		},
-		...
-	]
-}
+  {'locations': [
+            {
+              'route_name': 'arctic',
+              'name': 'US Arctic Waters',
+              'bounding_box': [[-122.707986, 38.1523666],
+                               [-121.902153, 37.4429131]]
+            },
+            ...
+                ]
+  }
 ```
 
 ```
