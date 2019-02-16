@@ -146,19 +146,29 @@ with open(infilename, 'r') as sitefile:
     data["bounding_box"] = sites2geojson(sitefile, bna_filename)
     print("bounding box of sites is:", data["bounding_box"])
 
-    data["source_locations"] = [["source: %i" % j, [float(i) for i in lin.split(',')]]
-                                for j, lin in enumerate(sitefile)]
+    if data["name"] == "SoCal TAP":
+        data["oil_types"] = []
+        data["source_locations"] = [{"name": "source %i" % j,
+                                    "coordinates": [float(i) for i in lin.split(',')],
+                                    "oil_type": random.choice(["Hondo", "Crude oil"])
+                                    }
+                                    for j, lin in enumerate(sitefile)]
 
-    # this is the default list
-    data["oil_types"] = ["Non-weathering",
-                         "Gasoline",
-                         "Diesel",
-                         "Light Crude",
-                         "Medium Crude",
-                         "Heavy Crude",
-                         "Medium fuel oil",
-                         "Fuel oil #6",
-                        ]
+
+    else:    
+        data["source_locations"] = [["source: %i" % j, [float(i) for i in lin.split(',')]]
+                                    for j, lin in enumerate(sitefile)]
+
+        # this is the default list
+        data["oil_types"] = ["Non-weathering",
+                            "Gasoline",
+                            "Diesel",
+                            "Light Crude",
+                            "Medium Crude",
+                            "Heavy Crude",
+                            "Medium fuel oil",
+                            "Fuel oil #6",
+                            ]
 
 with open(os.path.join(location_dir, "site.json"), 'w') as outfile:
     json.dump(data, outfile, indent=2)
