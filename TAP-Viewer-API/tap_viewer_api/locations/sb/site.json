@@ -1,55 +1,11 @@
 {
+  "name": "SoCal TAP",
+  "num_spills": 500,
   "seasons": [
     "Winter",
     "Spring",
     "Summer",
     "Faller"
-  ],
-  "bounding_box": [
-    [
-      -122.0,
-      36.0
-    ],
-    [
-      -116.26,
-      32.0
-    ]
-  ],
-  "num_spills": 500,
-  "output_amounts": [
-    [
-      1000,
-      "barrels"
-    ],
-    [
-      100,
-      "barrels"
-    ]
-  ],
-  "oil_types": [
-    "Non-weathering",
-    "Gasoline",
-    "Diesel",
-    "Light Crude",
-    "Medium Crude",
-    "Heavy Crude",
-    "Medium fuel oil",
-    "Fuel oil #6"
-  ],
-  "name": "SoCal TAP",
-  "locs": [
-    [
-      5.0,
-      "barrels"
-    ],
-    [
-      10.0,
-      "barrels"
-    ],
-    [
-      20.0,
-      "barrels"
-    ]
   ],
   "output_times": [
     [
@@ -81,174 +37,225 @@
       "1 day"
     ]
   ],
-  "source_locations": [
+  "output_amounts": [
     [
-      "source: _test",
-      [
-        -120.102005,
-        34.439909
-      ]
+      1000,
+      "barrels"
     ],
     [
-      "source: 0",
-      [
+      100,
+      "barrels"
+    ]
+  ],
+  "locs": [
+    [
+      5.0,
+      "barrels"
+    ],
+    [
+      10.0,
+      "barrels"
+    ],
+    [
+      20.0,
+      "barrels"
+    ]
+  ],
+  "bounding_box": [
+    [
+      -122.0,
+      36.0
+    ],
+    [
+      -116.26,
+      32.0
+    ]
+  ],
+  "oil_types": [],
+  "source_locations": [
+    {
+      "name": "source 0",
+      "coordinates": [
         -120.1205306,
         34.39073056
-      ]
-    ],
-    [
-      "source: 1",
-      [
+      ],
+      "oil_type": "Crude oil"
+    },
+    {
+      "name": "source 1",
+      "coordinates": [
         -118.1282222,
         33.58236667
-      ]
-    ],
-    [
-      "source: 2",
-      [
+      ],
+      "oil_type": "Hondo"
+    },
+    {
+      "name": "source 2",
+      "coordinates": [
         -118.1104222,
         33.58340278
-      ]
-    ],
-    [
-      "source: 3",
-      [
+      ],
+      "oil_type": "Hondo"
+    },
+    {
+      "name": "source 3",
+      "coordinates": [
         -118.1164944,
         33.56378056
-      ]
-    ],
-    [
-      "source: 4",
-      [
+      ],
+      "oil_type": "Hondo"
+    },
+    {
+      "name": "source 4",
+      "coordinates": [
         -120.6808167,
         34.46913611
-      ]
-    ],
-    [
-      "source: 5",
-      [
+      ],
+      "oil_type": "Hondo"
+    },
+    {
+      "name": "source 5",
+      "coordinates": [
         -120.6463889,
         34.45550833
-      ]
-    ],
-    [
-      "source: 6",
-      [
+      ],
+      "oil_type": "Hondo"
+    },
+    {
+      "name": "source 6",
+      "coordinates": [
         -120.7022889,
         34.49501389
-      ]
-    ],
-    [
-      "source: 7",
-      [
+      ],
+      "oil_type": "Crude oil"
+    },
+    {
+      "name": "source 7",
+      "coordinates": [
         -120.167525,
         34.376675
-      ]
-    ],
-    [
-      "source: 8",
-      [
+      ],
+      "oil_type": "Crude oil"
+    },
+    {
+      "name": "source 8",
+      "coordinates": [
         -120.2791833,
         34.35039167
-      ]
-    ],
-    [
-      "source: 9",
-      [
+      ],
+      "oil_type": "Crude oil"
+    },
+    {
+      "name": "source 9",
+      "coordinates": [
         -118.1406861,
         33.59578611
-      ]
-    ],
-    [
-      "source: 10",
-      [
+      ],
+      "oil_type": "Crude oil"
+    },
+    {
+      "name": "source 10",
+      "coordinates": [
         -119.2762583,
         34.11749722
-      ]
-    ],
-    [
-      "source: 11",
-      [
+      ],
+      "oil_type": "Crude oil"
+    },
+    {
+      "name": "source 11",
+      "coordinates": [
         -119.4185639,
         34.18234167
-      ]
-    ],
-    [
-      "source: 12",
-      [
+      ],
+      "oil_type": "Crude oil"
+    },
+    {
+      "name": "source 12",
+      "coordinates": [
         -119.6124694,
         34.33188611
-      ]
-    ],
-    [
-      "source: 13",
-      [
+      ],
+      "oil_type": "Crude oil"
+    },
+    {
+      "name": "source 13",
+      "coordinates": [
         -119.6215361,
         34.33236944
-      ]
-    ],
-    [
-      "source: 14",
-      [
+      ],
+      "oil_type": "Crude oil"
+    },
+    {
+      "name": "source 14",
+      "coordinates": [
         -119.6307667,
         34.332925
-      ]
-    ],
-    [
-      "source: 15",
-      [
+      ],
+      "oil_type": "Hondo"
+    },
+    {
+      "name": "source 15",
+      "coordinates": [
         -119.6032472,
         34.33134444
-      ]
-    ],
-    [
-      "source: 16",
-      [
+      ],
+      "oil_type": "Hondo"
+    },
+    {
+      "name": "source 16",
+      "coordinates": [
         -119.5603972,
         34.33325556
-      ]
-    ],
-    [
-      "source: 17",
-      [
+      ],
+      "oil_type": "Hondo"
+    },
+    {
+      "name": "source 17",
+      "coordinates": [
         -119.5880944,
         34.28661667
-      ]
-    ],
-    [
-      "source: 18",
-      [
+      ],
+      "oil_type": "Hondo"
+    },
+    {
+      "name": "source 18",
+      "coordinates": [
         -120.7294278,
         34.61041944
-      ]
-    ],
-    [
-      "source: 19",
-      [
+      ],
+      "oil_type": "Hondo"
+    },
+    {
+      "name": "source 19",
+      "coordinates": [
         -119.5414861,
         34.337675
-      ]
-    ],
-    [
-      "source: 20",
-      [
+      ],
+      "oil_type": "Crude oil"
+    },
+    {
+      "name": "source 20",
+      "coordinates": [
         -119.5521167,
         34.33499167
-      ]
-    ],
-    [
-      "source: 21",
-      [
+      ],
+      "oil_type": "Hondo"
+    },
+    {
+      "name": "source 21",
+      "coordinates": [
         -119.4002167,
         34.12508056
-      ]
-    ],
-    [
-      "source: 22",
-      [
+      ],
+      "oil_type": "Hondo"
+    },
+    {
+      "name": "source 22",
+      "coordinates": [
         -119.4678278,
         34.17957222
-      ]
-    ]
+      ],
+      "oil_type": "Hondo"
+    }
   ]
 }

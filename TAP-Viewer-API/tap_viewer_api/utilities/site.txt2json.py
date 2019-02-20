@@ -26,6 +26,7 @@ from bna2geojson import GetNextBNAPolygon
 
 import matplotlib.path as mplPath
 import numpy as np
+import random
 
 infilename = sys.argv[1]
 location_dir = os.path.dirname(infilename)
