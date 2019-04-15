@@ -61,10 +61,14 @@ def test_location_setup(test_app, location):
     #num_sources[{}] = len(result['source_locations'])
 
 
-@pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
-def test_impact_analysis(test_app, location):
+@pytest.mark.parametrize(("location", "season"),[('sb', 'AllYear'),
+                                                 # ('sf', 'AllYear'),
+                                                 ('arctic', 'AllYear'),
+                                                 # ('socal_md','AllYear')
+                                                  ])
+def test_impact_analysis(test_app, location,season):
 
-    params = {"season": "winter",
+    params = {"season": season,
               "oil_type": "diesel",
               "source_id": 3,
               "level_of_concern": [1.5, "bbl"],
@@ -79,6 +83,7 @@ def test_impact_analysis(test_app, location):
     result = response.json
 
     assert 'impact_analysis_results' in result
+    assert False
 
 @pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
 def test_oiling_analysis(test_app, location):

@@ -8,6 +8,8 @@ import os
 import json
 import numpy as np
 
+from tap_viewer_api.tap_comp.cube_crunching import cube_impact_analysis
+
 locations = {}
 
 
@@ -32,7 +34,9 @@ class TapLocation:
         self.num_spills = self.site_data["num_spills"]
         self.num_sources = len(self.site_data["source_locations"])
         self.output_times = self.site_data["output_times"]
-        self._num_sites = None
+        print(self.data_dir)
+        print(self.site_data["num_sites"])
+        self.num_sites = self.site_data["num_sites"]
 
     @property
     def location_info(self):
@@ -65,14 +69,14 @@ class TapLocation:
         return open(os.path.join(self.data_dir, "receptors.geojson")).read()
 
 
-    @property
-    def num_sites(self):
-        if self._num_sites is None:
-            # read the site_file
-            with open(os.path.join(self.data_dir, "receptors.geojson")) as sites_file:
-                sites = json.load(sites_file)
-                self._num_sites = len(sites["features"])
-        return self._num_sites
+    # @property
+    # def num_sites(self):
+    #     if self._num_sites is None:
+    #         # read the site_file
+    #         with open(os.path.join(self.data_dir, "receptors.geojson")) as sites_file:
+    #             sites = json.load(sites_file)
+    #             self._num_sites = len(sites["features"])
+    #     return self._num_sites
 
 
     def impact_analysis(self,
@@ -98,7 +102,10 @@ class TapLocation:
              "output_time_index": 3,
              }
         """
-        return np.random.random(self.num_sites).tolist()
+       
+        return cube_impact_analysis(self,season,oil_type,source_id,level_of_concern,
+                        amount_spilled,output_time_index).tolist()
+        # return np.random.random(self.num_sites).tolist()
 
     def oiling_analysis(self,
                         season=None,

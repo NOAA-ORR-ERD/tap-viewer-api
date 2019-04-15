@@ -16,7 +16,7 @@ locations_dir = os.path.join(data_dir, 'locations')
 # load up the locations:
 all_locations = models.load_locations(locations_dir)
 
-#cors_policy = {'credentials': True}
+cors_policy = {'credentials': True}
 
 
 def includeme(config):

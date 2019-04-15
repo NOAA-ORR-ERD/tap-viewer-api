@@ -63,7 +63,7 @@ def sites2geojson(fp, fb):
     Read the sites polygon definitions and write to geojson file: recpotors.json
 
     """
-    readline_clean(fp)
+    readline_clean(fp)   
     geo_polys = []
     # [[min_lon, max_lat],[max_lon, min_lat]]
     b_box = [[None, None], [None, None]]
@@ -99,7 +99,10 @@ def sites2geojson(fp, fb):
                 geo_poly = Feature(geometry=Polygon([poly]), properties={"site_val": 0, "site_num": site_num})# site_num=site_num)
                 geo_polys.append(geo_poly)
         geojson.dump(FeatureCollection(geo_polys), outfile, indent=2)
-    return b_box
+        print(len(geo_polys))
+        n_sites = len(geo_polys)
+
+    return b_box,n_sites
 
 
 data = {}
@@ -143,8 +146,9 @@ with open(infilename, 'r') as sitefile:
                     for lin in (readline_clean(sitefile).split() for i in range(num))]
     print("LOCs:", data["locs"])
 
+    
     # This should skip over the receptor sites definitions
-    data["bounding_box"] = sites2geojson(sitefile, bna_filename)
+    data["bounding_box"],data["num_sites"] = sites2geojson(sitefile, bna_filename)
     print("bounding box of sites is:", data["bounding_box"])
 
     if data["name"] == "SoCal TAP":
