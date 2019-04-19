@@ -33,7 +33,7 @@ def getcube(data_dir,season,cube_id,cubeshape):
         # convert from int16
         raise NotImplementedError
     elif cube.size == cubesize:
-        raise NotImplementedError
+        pass
     else:
         raise ValueError("cube size not a nice multiple")
 
@@ -51,6 +51,7 @@ def cube_impact_analysis(self,season,oil_type,source_id,level_of_concern,
     # get the correct cube
     cube = getcube(self.data_dir,season,source_id,cubeshape)
 
+    print(level_of_concern)
     print(output_time_index)
     # find values greater than LOC
     boolcube = cube[output_time_index,:,:]*amount_spilled[0] >= level_of_concern[0]
@@ -62,3 +63,18 @@ def cube_impact_analysis(self,season,oil_type,source_id,level_of_concern,
     print(np.amax(imp_cube))
 
     return imp_cube
+
+
+def cube_oiling_analysis(self,season,oil_type,source_id,receptor_id,
+                             amount_spilled,output_time_index):
+
+
+    # get the correct cube
+    cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
+    cube = getcube(self.data_dir,season,source_id,cubeshape)
+
+    print(output_time_index)
+
+    oil_cube = cube[output_time_index,receptor_id,:]*amount_spilled[0]
+
+    return oil_cube

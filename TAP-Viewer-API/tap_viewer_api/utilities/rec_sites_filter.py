@@ -31,6 +31,7 @@ def rec_sites_filter(site_file,bna_file):
         raise Exception("BNA file: %s doesn't exist"%bna_file)
     
     tappath = os.path.dirname(site_file)
+    tapsite = os.path.split(tappath)[-1]
     # print(tappath)
 
     if os.path.isfile(os.path.join(tappath,'recept_index.npy')):
@@ -44,8 +45,8 @@ def rec_sites_filter(site_file,bna_file):
         bna_polys = rd_bna(bna_file)
         recept_polys_filt,recept_index_filt = filter_ReceptPolys(recept_polys,bna_polys)
                
-        np.save(os.path.join(tappath,'arctic_recept_polys.npy'),recept_polys_filt)
-        np.save(os.path.join(tappath,'arctic_recept_index.npy'),recept_index_filt)
+        np.save(os.path.join(tappath,'recept_polys.npy'),recept_polys_filt)
+        np.save(os.path.join(tappath,'recept_index.npy'),recept_index_filt)
 
 
     ### write out a new site.txt file  

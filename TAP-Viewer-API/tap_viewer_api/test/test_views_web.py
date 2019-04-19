@@ -44,10 +44,10 @@ def test_locations(test_app):
     assert response.content_type == 'application/json'
     result = response.json
 
-    assert set(result.keys()) == set(['sb', 'sf', 'arctic', 'socal_md'])
+    assert set(result.keys()) == set(['socal', 'sf', 'arctic', 'socal_md'])
 
 
-@pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
+@pytest.mark.parametrize("location", ['socal', 'sf', 'arctic', 'socal_md'])
 def test_location_setup(test_app, location):
     response = test_app.get('/locations/{}/setup'.format(location), status=200)
     assert response.status_code == 200
@@ -61,10 +61,10 @@ def test_location_setup(test_app, location):
     #num_sources[{}] = len(result['source_locations'])
 
 
-@pytest.mark.parametrize(("location", "season"),[('sb', 'AllYear'),
+@pytest.mark.parametrize(("location", "season"),[('socal', 'AllYear'),
                                                  # ('sf', 'AllYear'),
                                                  ('arctic', 'AllYear'),
-                                                 # ('socal_md','AllYear')
+                                                 ('socal_md','AllYear')
                                                   ])
 def test_impact_analysis(test_app, location,season):
 
@@ -83,12 +83,12 @@ def test_impact_analysis(test_app, location,season):
     result = response.json
 
     assert 'impact_analysis_results' in result
-    assert False
+    # assert False
 
-@pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
+@pytest.mark.parametrize("location", ['socal', 'sf', 'arctic', 'socal_md'])
 def test_oiling_analysis(test_app, location):
 
-    params = {"season": "winter",
+    params = {"season": "AllYear",
               "oil_type": "diesel",
               "source_id": 3,
               "receptor_id": 111,
@@ -106,7 +106,7 @@ def test_oiling_analysis(test_app, location):
 
     # Fixme: add some more testing -- sizeof result array maybe?
 
-@pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
+@pytest.mark.parametrize("location", ['socal', 'sf', 'arctic', 'socal_md'])
 def test_response_time_analysis(test_app, location):
 
     params = {"season": "winter",
@@ -125,7 +125,7 @@ def test_response_time_analysis(test_app, location):
 
     assert 'response_time_analysis_results' in result
 
-@pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
+@pytest.mark.parametrize("location", ['socal', 'sf', 'arctic', 'socal_md'])
 def test_threat_analysis(test_app, location):
 
     params = {"season": "winter",
@@ -143,7 +143,7 @@ def test_threat_analysis(test_app, location):
 
     assert 'threat_analysis_results' in result
 
-@pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
+@pytest.mark.parametrize("location", ['socal', 'sf', 'arctic', 'socal_md'])
 def test_impact_by_spill(test_app, location):
 
     params = {"season": "winter",
@@ -160,7 +160,7 @@ def test_impact_by_spill(test_app, location):
 
     assert 'impact_by_spill_results' in result
 
-@pytest.mark.parametrize("location", ['sb', 'sf', 'arctic', 'socal_md'])
+@pytest.mark.parametrize("location", ['socal', 'sf', 'arctic', 'socal_md'])
 def test_response_time_by_spill(test_app, location):
 
     params = {"season": "winter",
