@@ -71,6 +71,7 @@
       32.0
     ]
   ],
+  "num_sites": 46431,
   "oil_types": [],
   "source_locations": [
     {
@@ -79,7 +80,7 @@
         -120.1205306,
         34.39073056
       ],
-      "oil_type": "Crude oil"
+      "oil_type": "Hondo"
     },
     {
       "name": "source 1",
@@ -87,7 +88,7 @@
         -118.1282222,
         33.58236667
       ],
-      "oil_type": "Hondo"
+      "oil_type": "Crude oil"
     },
     {
       "name": "source 2",
@@ -95,7 +96,7 @@
         -118.1104222,
         33.58340278
       ],
-      "oil_type": "Hondo"
+      "oil_type": "Crude oil"
     },
     {
       "name": "source 3",
@@ -111,7 +112,7 @@
         -120.6808167,
         34.46913611
       ],
-      "oil_type": "Hondo"
+      "oil_type": "Crude oil"
     },
     {
       "name": "source 5",
@@ -119,7 +120,7 @@
         -120.6463889,
         34.45550833
       ],
-      "oil_type": "Hondo"
+      "oil_type": "Crude oil"
     },
     {
       "name": "source 6",
@@ -127,7 +128,7 @@
         -120.7022889,
         34.49501389
       ],
-      "oil_type": "Crude oil"
+      "oil_type": "Hondo"
     },
     {
       "name": "source 7",
@@ -135,7 +136,7 @@
         -120.167525,
         34.376675
       ],
-      "oil_type": "Crude oil"
+      "oil_type": "Hondo"
     },
     {
       "name": "source 8",
@@ -151,7 +152,7 @@
         -118.1406861,
         33.59578611
       ],
-      "oil_type": "Crude oil"
+      "oil_type": "Hondo"
     },
     {
       "name": "source 10",
@@ -159,7 +160,7 @@
         -119.2762583,
         34.11749722
       ],
-      "oil_type": "Crude oil"
+      "oil_type": "Hondo"
     },
     {
       "name": "source 11",
@@ -167,7 +168,7 @@
         -119.4185639,
         34.18234167
       ],
-      "oil_type": "Crude oil"
+      "oil_type": "Hondo"
     },
     {
       "name": "source 12",
@@ -175,7 +176,7 @@
         -119.6124694,
         34.33188611
       ],
-      "oil_type": "Crude oil"
+      "oil_type": "Hondo"
     },
     {
       "name": "source 13",
@@ -191,7 +192,7 @@
         -119.6307667,
         34.332925
       ],
-      "oil_type": "Hondo"
+      "oil_type": "Crude oil"
     },
     {
       "name": "source 15",
@@ -223,7 +224,7 @@
         -120.7294278,
         34.61041944
       ],
-      "oil_type": "Hondo"
+      "oil_type": "Crude oil"
     },
     {
       "name": "source 19",
@@ -231,7 +232,7 @@
         -119.5414861,
         34.337675
       ],
-      "oil_type": "Crude oil"
+      "oil_type": "Hondo"
     },
     {
       "name": "source 20",
