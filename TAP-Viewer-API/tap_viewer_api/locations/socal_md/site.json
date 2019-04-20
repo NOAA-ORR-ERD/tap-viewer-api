@@ -1,39 +1,9 @@
 {
-  "locs": [
-    [
-      0.1,
-      "percent"
-    ],
-    [
-      1.0,
-      "percent"
-    ],
-    [
-      10.0,
-      "percent"
-    ]
-  ],
-  "seasons": [
-    "Winter",
-    "Summer"
-  ],
-  "output_amounts": [
-    [
-      100,
-      "percent"
-    ]
-  ],
-  "bounding_box": [
-    [
-      -122.0,
-      36.0
-    ],
-    [
-      -116.26,
-      32.0
-    ]
-  ],
+  "name": "Debris TAP",
   "num_spills": 200,
+  "seasons": [
+    "AllYear"
+  ],
   "output_times": [
     [
       336,
@@ -64,40 +34,74 @@
       "1 day"
     ]
   ],
-  "name": "Southern California Marine Debris",
-  "source_locations": [
+  "output_amounts": [
     [
-      "LA River",
-      [
-        -118.1656,
-        33.7281
-      ]
+      1000,
+      "barrels"
     ],
     [
-      "Ballona Creek",
+      100,
+      "barrels"
+    ]
+  ],
+  "locs": [
+    [
+      5.0,
+      "barrels"
+    ],
+    [
+      10.0,
+      "barrels"
+    ],
+    [
+      20.0,
+      "barrels"
+    ]
+  ],
+  "bounding_box": [
+    [
+      -122.0,
+      36.0
+    ],
+    [
+      -116.856364,
+      32.0
+    ]
+  ],
+  "num_sites": 24461,
+  "source_locations": [
+    [
+      "source: 0",
       [
         -118.485217,
         33.95407
       ]
     ],
     [
-      "Offshore, Shelf",
+      "source: 1",
       [
-        -120.743187,
+        -118.1656,
+        33.7281
+      ]
+    ],
+    [
+      "source: 2",
+      [
+        -121.834122,
         34.46899
       ]
     ],
     [
-      "Offshore, Shelf Break",
+      "source: 3",
       [
         -121.239662,
         34.463603
       ]
     ],
     [
-      "Off Shelf Break",
+      "source: 4",
       [
-        -121.834122,
+        -120.743187,
         34.46899
       ]
     ],
@@ -166,7 +170,13 @@
     ]
   ],
   "oil_types": [
-    "Windage - 0-1%",
-    "Windage - 4-5%"
+    "Non-weathering",
+    "Gasoline",
+    "Diesel",
+    "Light Crude",
+    "Medium Crude",
+    "Heavy Crude",
+    "Medium fuel oil",
+    "Fuel oil #6"
   ]
 }

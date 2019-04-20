@@ -1,4 +1,10 @@
 {
+  "name": "San Francisco Bay",
+  "num_spills": 500,
+  "seasons": [
+    "Mar - Aug",
+    "Sept - Feb"
+  ],
   "output_times": [
     [
       120,
@@ -41,33 +47,11 @@
       ""
     ]
   ],
-  "bounding_box": [
-    [
-      -122.705986,
-      38.1523666
-    ],
-    [
-      -121.902153,
-      37.4429131
-    ]
-  ],
   "output_amounts": [
     [
       1000,
       "barrels"
     ]
-  ],
-  "num_spills": 500,
-  "name": "San Francisco Bay",
-  "oil_types": [
-    "Non-weathering",
-    "Gasoline",
-    "Diesel",
-    "Light Crude",
-    "Medium Crude",
-    "Heavy Crude",
-    "Medium fuel oil",
-    "Fuel oil #6"
   ],
   "locs": [
     [
@@ -83,6 +67,17 @@
       "barrels"
     ]
   ],
+  "bounding_box": [
+    [
+      -122.705986,
+      38.1523666
+    ],
+    [
+      -121.902153,
+      37.4429131
+    ]
+  ],
+  "num_sites": 185,
   "source_locations": [
     [
       "source: 0",
@@ -1716,8 +1711,14 @@
       ]
     ]
   ],
-  "seasons": [
-    "Mar - Aug",
-    "Sept - Feb"
+  "oil_types": [
+    "Non-weathering",
+    "Gasoline",
+    "Diesel",
+    "Light Crude",
+    "Medium Crude",
+    "Heavy Crude",
+    "Medium fuel oil",
+    "Fuel oil #6"
   ]
 }

@@ -12,10 +12,6 @@ Dylan Righi: Back end computation developer and subject matter expert
 
 Chris Barker: Subject mater expert, software architecture support -- maybe some code :-)
 
-  Emeritus TEAM:
-    Glen Watabayashi: Making sure we get it done on schedule :-)
-    Alex Miranda: Web UI developer 
-
 
 Running the API Server
 ======================
