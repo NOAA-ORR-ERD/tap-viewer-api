@@ -1,26 +1,29 @@
-TAP Viewer
-==========
+TAP Viewer API
+==============
 
-This project will hold the design discussion and ultimately code, for the new Web-based TAP vieweer.
+Python application served up with Pyramid web framework for the new web-based TAP viewer.
 
-Project TEAM:
--------
+## Project TEAM:
 
 Gennady Kachook: Web UI and back-end API developer
-
 Dylan Righi: Back end computation developer and subject matter expert
-
 Chris Barker: Subject mater expert, software architecture support -- maybe some code :-)
 
+## Project Dependecies and Installation Instructions
 
-Running the API Server
-======================
+In order to run the TAP-Viewer-API you need to install the dependencies:
 
-* Make sure to activate a relevant virtualenv (if necessary)
+```
+conda install --file conda_requirements.txt
+```
+Make sure to activate a relevant virtualenv (if necessary)
+
+## Running the API Server
+
 * To install the API package:
 
 ```
-cd TAP_Viewer_API
+cd TAP-Viewer-API
 python setup.py develop
 ```
 
@@ -32,8 +35,8 @@ pserve --reload development.ini
 
 * Now your server should be running on the port you specified in the development.ini file. The port provided will be displayed after you run the above command.
 
-Existing API Route Structure
-============================
+
+## Existing API Route Structure
 
 The base url of the API will be represented by:
 
