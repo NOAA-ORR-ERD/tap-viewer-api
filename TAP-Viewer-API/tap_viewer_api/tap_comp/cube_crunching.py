@@ -51,7 +51,6 @@ def cube_impact_analysis(self,season,oil_type,source_id,level_of_concern,
     # get the correct cube
     cube = getcube(self.data_dir,season,source_id,cubeshape)
 
-    print(level_of_concern)
     print(output_time_index)
     # find values greater than LOC
     boolcube = cube[output_time_index,:,:]*amount_spilled[0] >= level_of_concern[0]
@@ -60,7 +59,7 @@ def cube_impact_analysis(self,season,oil_type,source_id,level_of_concern,
     imp_cube = np.sum(boolcube,1)/cubeshape[2]
     
     # print(imp_cube.shape)
-    print(np.amax(imp_cube))
+    # print(np.amax(imp_cube))
 
     return imp_cube
 
@@ -76,5 +75,15 @@ def cube_oiling_analysis(self,season,oil_type,source_id,receptor_id,
     print(output_time_index)
 
     oil_cube = cube[output_time_index,receptor_id,:]*amount_spilled[0]
+    print(np.amax(oil_cube))
 
     return oil_cube
+
+def cube_impact_by_spill(self,season,oil_type,source_id,
+                             output_time_index,spill_number):
+
+    # get the correct cube
+    cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
+    cube = getcube(self.data_dir,season,source_id,cubeshape)    
+
+    return cube[output_time_index,:,spill_number]
