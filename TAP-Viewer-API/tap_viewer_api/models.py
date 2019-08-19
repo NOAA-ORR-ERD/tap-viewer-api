@@ -8,7 +8,8 @@ import os
 import json
 import numpy as np
 
-from tap_viewer_api.tap_comp.cube_crunching import cube_impact_analysis, cube_oiling_analysis
+from tap_viewer_api.tap_comp.cube_crunching import (cube_impact_analysis, cube_oiling_analysis, 
+                                                   cube_impact_by_spill)
 
 locations = {}
 
@@ -209,7 +210,10 @@ class TapLocation:
             "spill_number": 7
             }
         """
-        return (np.random.random(self.num_sites)).tolist()
+
+        return cube_impact_by_spill(self,season,oil_type,source_id,
+                        output_time_index,spill_number).tolist()
+        # return (np.random.random(self.num_sites)).tolist()
 
     def response_time_by_spill(self,
                                season=None,
