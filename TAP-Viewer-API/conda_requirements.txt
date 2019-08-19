@@ -21,7 +21,7 @@
 #    pserve --reload development.ini
 #
 
-python=3.*
+python=3.6.*
 numpy
 pyramid
 pyramid_debugtoolbar
@@ -33,7 +33,3 @@ webtest
 pytest
 pytest-cov
 requests
-
-# for development
-conda-forge::geojson
-matplotlib
