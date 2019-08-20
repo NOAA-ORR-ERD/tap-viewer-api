@@ -1,4 +1,4 @@
-# conda_requirments_dev
+# conda_requirements_dev
 
 matplotlib
 geojson

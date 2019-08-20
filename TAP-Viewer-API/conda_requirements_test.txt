@@ -1,0 +1,5 @@
+# for testing:
+webtest
+pytest
+pytest-cov
+requests
