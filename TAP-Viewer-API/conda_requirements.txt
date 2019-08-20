@@ -22,14 +22,12 @@
 #
 
 python=3.6.*
-numpy
-pyramid
+numpy=1.16.*
+pyramid=1.*
 pyramid_debugtoolbar
+pastedeploy=2.*
 waitress
+webob
 docutils
 
-# for testing:
-webtest
-pytest
-pytest-cov
-requests
+
