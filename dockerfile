@@ -1,7 +1,7 @@
 # TAP Viewer Docker configuration
 #
 
-FROM tapviewer
+FROM gitlab.orr.noaa.gov:5002/centos:latest
 RUN yum update -y
 
 COPY ./ /tap-viewer/
