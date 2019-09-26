@@ -24,8 +24,8 @@ def getcube(data_dir,season,cube_id,cubeshape):
     cubesize = np.prod(cubeshape)
 
     cube = np.fromfile(str(cubefile),np.uint8)
-    # print(np.prod(cubeshape))
-    # print(cube.size)
+    print(np.prod(cubeshape))
+    print(cube.size)
 
     if cube.size == 4*cubesize:
         cube = np.frombuffer(cube,np.float32)
