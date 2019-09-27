@@ -10,7 +10,7 @@ RUN cd tap-viewer/TAP-Viewer-API && python setup.py develop
 
 RUN mkdir /config
 RUN cp /tap-viewer/TAP-Viewer-API/config-example.ini /config/config.ini
-RUN ln -s /config/config.ini /tap-viewer/config.ini
+RUN ln -s /config/config.ini /tap-viewer/TAP-Viewer-API/config.ini
 
 EXPOSE 9900
 VOLUME /config
