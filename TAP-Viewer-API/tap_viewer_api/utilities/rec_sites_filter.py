@@ -85,8 +85,8 @@ def rec_sites_filter(site_file,bna_file):
 
     # loop through all the season dirs
     for season in season_names:
-        # spath = os.path.join(tappath,'TAPDATA',season)
-        spath = os.path.join(tappath,'Cubes',season)
+        spath = os.path.join(tappath,'TAPDATA',season)
+        # spath = os.path.join(tappath,'Cubes',season)
         print(spath)
         cubefiles = os.listdir(spath)
         print(cubefiles)
@@ -159,11 +159,14 @@ def get_ReceptPolys(site_name):
         if "SITES" in line:      
             break
     nsites = int(line.split()[0])
+    print(nsites)
 
     # for nn in range(nsites):
 
-    for line in sitefile.readline():
-        if 'CUBES' in line: break
+    # for line in sitefile.readline():
+    for line in sitefile:
+        if 'CUBES' in line: 
+            break
 
         site_num = int(line.split('"')[1].strip('#')) - 1   # zero based index
         npts = int(line.split('"')[-1].strip(','))
@@ -171,7 +174,7 @@ def get_ReceptPolys(site_name):
         for ii in range(npts):
             lon, lat = [float(i) for i in readline_clean(sitefile).split(',')]
             points.append([lon,lat])
-
+          
         poly = Polygon(points)
         # poly = Feature(geometry=Polygon([poly]), site_num=site_num)
         polys.append(poly)
