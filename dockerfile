@@ -1,7 +1,7 @@
 # TAP Viewer Docker configuration
 #
 
-FROM gitlab.orr.noaa.gov:5002/centos:latest
+FROM registry.orr.noaa.gov/erd/centos-conda/centos7-python3
 RUN yum update -y
 
 COPY ./ /tap-viewer/
