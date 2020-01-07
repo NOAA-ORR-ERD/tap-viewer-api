@@ -9,6 +9,7 @@ import json
 import numpy as np
 
 from tap_viewer_api.tap_comp.cube_crunching import (cube_impact_analysis, cube_oiling_analysis, 
+                                                    cube_threat_analysis,
                                                    cube_impact_by_spill)
 
 locations = {}
@@ -92,8 +93,6 @@ class TapLocation:
         """
         compute an impact analysis
 
-        For now, it only returns random values
-
         example input:
             {"season": "winter",
              "oil_type": "diesel",
@@ -118,8 +117,6 @@ class TapLocation:
                         ):
         """
         Compute an oiling analysis
-
-        For now, it only returns random values
 
         example input:
             {"season": "winter",
@@ -160,7 +157,9 @@ class TapLocation:
              }
         """
         max_days = np.array(self.output_times)[:,0].astype(np.float).max()/24
-        return (np.random.random(self.num_sites) * max_days).tolist(), (np.random.random(self.num_spills) * max_days).tolist()
+        # return (np.random.random(self.num_sites) * max_days).tolist(), (np.random.random(self.num_spills) * max_days).tolist()
+        print(self.num_sites,self.num_spills)
+        return (np.random.random(self.num_sites)).tolist(), (np.random.random(self.num_spills)).tolist()
 
 
     def threat_analysis(self,
@@ -186,7 +185,10 @@ class TapLocation:
              "output_time_index": 3,
              }
         """
-        return (np.random.random(self.num_sources)).tolist()
+        # return (np.random.random(self.num_sources)).tolist()
+
+        return cube_threat_analysis(self,season,oil_type,receptor_id,
+                        amount_spilled,level_of_concern,output_time_index).tolist()
 
     def impact_by_spill(self,
                         season=None,
