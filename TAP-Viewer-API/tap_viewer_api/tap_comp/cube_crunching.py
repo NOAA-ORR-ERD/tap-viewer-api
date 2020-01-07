@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 
 
-def getcube(data_dir,season,cube_id,cubeshape):
+def getcube(data_dir,season,source_id,cubeshape):
     """
     Returns numpy array of cube with shape [nrec_sites,ntime,n_spills???]
     """
@@ -18,14 +18,14 @@ def getcube(data_dir,season,cube_id,cubeshape):
     except StopIteration:
         raise FileNotFoundError("no cubes found in "+str(cubedir))
 
-    cube_id = cube_id + 1  # TAPDATA are 1-base indexed (at least for Arctic/SoCal TAPS)  
+    cube_id = source_id + 1  # TAPDATA are 1-base indexed (at least for Arctic/SoCal TAPS)  
     cubefile = cubedir/(cubetag+str(cube_id).zfill(4)+'.bin')
-    print(cubeshape)
+    # print(cubeshape)
     cubesize = np.prod(cubeshape)
 
     cube = np.fromfile(str(cubefile),np.uint8)
-    print(np.prod(cubeshape))
-    print(cube.size)
+    # print(np.prod(cubeshape))
+    # print(cube.size)
 
     if cube.size == 4*cubesize:
         cube = np.frombuffer(cube,np.float32)
@@ -51,7 +51,6 @@ def cube_impact_analysis(self,season,oil_type,source_id,level_of_concern,
     # get the correct cube
     cube = getcube(self.data_dir,season,source_id,cubeshape)
 
-    print(output_time_index)
     # find values greater than LOC
     boolcube = cube[output_time_index,:,:]*amount_spilled[0] >= level_of_concern[0]
 
@@ -72,10 +71,11 @@ def cube_oiling_analysis(self,season,oil_type,source_id,receptor_id,
     cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
     cube = getcube(self.data_dir,season,source_id,cubeshape)
 
-    print(output_time_index)
+    # print(output_time_index)
 
     oil_cube = cube[output_time_index,receptor_id,:]*amount_spilled[0]
-    print(np.amax(oil_cube))
+    # print(np.amax(oil_cube))
+    # print(oil_cube.shape)
 
     return oil_cube
 
@@ -86,4 +86,24 @@ def cube_impact_by_spill(self,season,oil_type,source_id,
     cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
     cube = getcube(self.data_dir,season,source_id,cubeshape)    
 
-    return cube[output_time_index,:,spill_number]
+    temp = cube[output_time_index,:,spill_number]
+    print(np.amax(temp))
+    
+    return cube[output_time_index,:,spill_number]/100.
+
+def cube_threat_analysis(self,season,oil_type,receptor_id,amount_spilled,
+                            level_of_concern,output_time_index,):
+
+    # # define cubedir and get list of cube files
+    # cubedir = Path(self.data_dir)/'TAPDATA'/season
+    # cube_list = data_dir.glob('*.bin')
+
+    cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
+
+    threat = np.zeros(self.num_sources)
+    for s in range(0,self.num_sources):
+        cube = getcube(self.data_dir,season,s,cubeshape)    
+        bool_rec = cube[output_time_index,receptor_id,:]*amount_spilled[0] >= level_of_concern[0]        
+        threat[s] = np.sum(bool_rec)/cubeshape[2]
+    
+    return threat
