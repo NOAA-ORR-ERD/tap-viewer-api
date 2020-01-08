@@ -4,8 +4,9 @@ stages:
 build:
     stage: build
     script:
-        - docker build -f dockerfile . -t gitlab.orr.noaa.gov:5002/tap-viewer
-        - docker push gitlab.orr.noaa.gov:5002/tap-viewer
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker build -f dockerfile . -t registry.orr.noaa.gov/gnome/tap-viewer
+        - docker push registry.orr.noaa.gov/gnome/tap-viewer
     tags:
         - shell
         - build
