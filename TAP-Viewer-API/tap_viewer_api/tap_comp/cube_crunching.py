@@ -99,6 +99,7 @@ def cube_threat_analysis(self,season,oil_type,receptor_id,amount_spilled,
     # cube_list = data_dir.glob('*.bin')
 
     cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
+    print(receptor_id)
 
     threat = np.zeros(self.num_sources)
     for s in range(0,self.num_sources):
@@ -106,4 +107,6 @@ def cube_threat_analysis(self,season,oil_type,receptor_id,amount_spilled,
         bool_rec = cube[output_time_index,receptor_id,:]*amount_spilled[0] >= level_of_concern[0]        
         threat[s] = np.sum(bool_rec)/cubeshape[2]
     
+    # threat = np.ones(self.num_sources)*30
+    print(threat)
     return threat
