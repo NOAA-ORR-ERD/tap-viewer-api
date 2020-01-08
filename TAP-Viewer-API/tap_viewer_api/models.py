@@ -186,7 +186,7 @@ class TapLocation:
              }
         """
         # return (np.random.random(self.num_sources)).tolist()
-
+       
         return cube_threat_analysis(self,season,oil_type,receptor_id,
                         amount_spilled,level_of_concern,output_time_index).tolist()
 
