@@ -156,10 +156,20 @@ class TapLocation:
              "response_threshold": 95
              }
         """
+        
+        # just for testing:
+        #  a) response times - impact analysis data adjusted for max_days
+        #  b) spill times - oiling analysis data adjusted for max_days
+        #  c) output_time_index = 3
         max_days = np.array(self.output_times)[:,0].astype(np.float).max()/24
-        # return (np.random.random(self.num_sites) * max_days).tolist(), (np.random.random(self.num_spills) * max_days).tolist()
-        print(self.num_sites,self.num_spills)
-        return (np.random.random(self.num_sites)).tolist(), (np.random.random(self.num_spills)).tolist()
+        response_times = cube_impact_analysis(self, season, oil_type, source_id, level_of_concern, amount_spilled, 3)
+        spill_times = cube_oiling_analysis(self, season, oil_type, source_id, receptor_id, amount_spilled, 3)
+        max_rt = np.max(response_times)
+        max_st = np.max(spill_times)
+        return (response_times / max_rt * max_days).tolist(), (spill_times / max_st * max_days).tolist()
+        #return (np.random.random(self.num_sites) * max_days).tolist(), (np.random.random(self.num_spills) * max_days).tolist()
+        #print(self.num_sites,self.num_spills)
+        #return (np.random.random(self.num_sites)).tolist(), (np.random.random(self.num_spills)).tolist()
 
 
     def threat_analysis(self,
