@@ -39,9 +39,9 @@ Route responses based on route::
 
 Hitting the base url will return this document.
 
-::
 
-  base_url/locations
+``base_url/locations``
+~~~~~~~~~~~~~~~~~~~~~~
 
 Will return a JSON response that contains the supported locations.
 
@@ -60,28 +60,84 @@ Schema of response:
                 ]
   }
 
-::
 
-  base_url/locations/{location_name}/setup
+``base_url/locations/{location_name}/setup``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Will return a JSON response which contains data from the site.txt for the respective location as a JSON file.
 
-::
+Example of ``site.json`` for South California TAP:
 
-  base_url/locations/{location_name}/map
+.. code-block:: javascript
+
+  {
+    "name": "SoCalifornia TAP",
+    "num_spills": 200,
+    "num_sites": 20220,
+    "source_locations": [
+      {
+        "name": "source 0",
+        "coordinates":
+          [
+            241.8717778,
+            33.58236667
+          ],
+        "oil_type": "crude"          
+      },
+      ...  
+    ],
+    "seasons": [
+      "AllYear",
+      "Summer",
+      "Winter"
+    ],
+    "output_times": [
+      [
+        504,
+        "21 days"
+      ],
+      ...
+    ],
+    "output_amounts": [
+      [
+        1000,
+        "barrels"
+      ],
+      [
+        100,
+        "barrels"
+      ]
+    ],
+    "locs": [
+      [
+        5.0,
+        "barrels"
+      ],    
+    "bounding_box": [
+      [
+        238.5,
+        35.5
+      ],
+      [
+        243.143981,
+        32.0
+      ]
+    ]
+  }
+
+
+``base_url/locations/{location_name}/map``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Will return a response which contains the base map as land polygons as geoJSON
 
-::
-
-  base_url/locations/{location_name}/receptors
+``base_url/locations/{location_name}/receptors``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Will return a JSON response which contains the receptors as geoJSON
 
-
-::
-
-  base_url/locations/{location_name}/impact_analysis
+``base_url/locations/{location_name}/impact_analysis``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 and sending JSON data (example):
 
@@ -117,9 +173,8 @@ Example of response:
         ]
     }
 
-::
-
-  base_url/locations/{location_name}/oiling_analysis
+``base_url/locations/{location_name}/oiling_analysis``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 and sending JSON data (example):
 
@@ -149,9 +204,8 @@ Example of response:
     }
 
 
-::
-
-  base_url/locations/{location_name}/response_time_analysis
+``base_url/locations/{location_name}/response_time_analysis``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 and sending JSON data (example):
 
@@ -182,9 +236,8 @@ Example of response:
         "response_time_for_spill_days": [30, 20, 20, 15, 10, 10, 3, 2, 1, ...]
     }
 
-::
-
-  base_url/locations/{location_name}/threat_analysis
+``base_url/locations/{location_name}/threat_analysis``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 and sending JSON data (example):
 
@@ -214,9 +267,8 @@ Example of response:
     }
 
 
-::
-
-  base_url/locations/{location_name}/impact_by_spill
+``base_url/locations/{location_name}/impact_by_spill``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 and sending JSON data (example):
 
@@ -251,9 +303,8 @@ Example of response:
     }
 
 
-::
-
-  base_url/locations/{location_name}/response_time_by_spill
+``base_url/locations/{location_name}/response_time_by_spill``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 and sending JSON data (example):
 
@@ -278,5 +329,3 @@ Example of response:
     {
         [30, 30, 20, 15, 15, 10, 3, 3, 1, ...]
     }
-
-
