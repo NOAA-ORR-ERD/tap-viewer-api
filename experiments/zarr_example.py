@@ -44,6 +44,8 @@ def make_cubes():
                 z_arr = cubes.empty(name=cube_name, shape=cube_size, dtype=cube_dtype)
                 # give it some random data:
                 z_arr[:] = np.random.randint(0, 10_000, cube_size)
+                # give it an attribute
+                z_arr.attrs['max_les'] = 10_000
 
 
 def read_cube(season, site_num):
@@ -54,7 +56,7 @@ def read_cube(season, site_num):
         # acube = np.empty(zcube.shape, dtype=np.float32)
         if zcube.dtype == np.uint16:
             acube = zcube.astype(np.float32)[:]
-            acube /= 10_000
+            acube /= zcube.attrs['max_les']
         else:
             raise TypeError("I only know how to deal with uint16 cubes")
         return acube
