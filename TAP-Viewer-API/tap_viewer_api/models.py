@@ -273,6 +273,6 @@ class TapLocation:
         response_times = cube_impact_by_spill(self, season, oil_type, source_id, -1, spill_number)
         max_rt = np.max(response_times)
         if (max_rt != 0):
-            return (response_times / max_rt * max_days).tolist()
+            return (max_days * (1 - response_times / max_rt)).tolist()
         else:
             return response_times.tolist()
