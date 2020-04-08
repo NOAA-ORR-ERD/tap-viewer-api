@@ -1,10 +1,8 @@
 {
-  "name": "SoCalifornia TAP",
+  "name": "Socal TAP",
   "num_spills": 200,
   "seasons": [
-    "AllYear",
-    "Summer",
-    "Winter"
+    "AllYear"
   ],
   "output_times": [
     [
@@ -72,176 +70,189 @@
   ],
   "num_sites": 20220,
   "source_locations": [
-    [
-      "source: 0",
-      [
+    {
+      "name": "Ellen",
+      "coordinates": [
         241.8717778,
         33.58236667
-      ]
-    ],
-    [
-      "source: 1",
-      [
+      ],
+      "oil_type": "AD01438"
+    },
+    {
+      "name": "Elly",
+      "coordinates": [
         241.8729111,
         33.58340278
-      ]
-    ],
-    [
-      "source: 2",
-      [
+      ],
+      "oil_type": "AD01438"
+    },
+    {
+      "name": "Eureka",
+      "coordinates": [
         241.8835056,
         33.56378056
-      ]
-    ],
-    [
-      "source: 3",
-      [
+      ],
+      "oil_type": "AD01438"
+    },
+    {
+      "name": "Harvest",
+      "coordinates": [
         239.3191833,
         34.46913611
-      ]
-    ],
-    [
-      "source: 4",
-      [
+      ],
+      "oil_type": "AD02286"
+    },
+    {
+      "name": "Hermosa",
+      "coordinates": [
         239.3536111,
         34.45550833
-      ]
-    ],
-    [
-      "source: 5",
-      [
+      ],
+      "oil_type": "AD02286"
+    },
+    {
+      "name": "Hildago",
+      "coordinates": [
         239.2977111,
         34.49501389
-      ]
-    ],
-    [
-      "source: 6",
-      [
+      ],
+      "oil_type": "AD02286"
+    },
+    {
+      "name": "Hondo",
+      "coordinates": [
         239.832475,
         34.376675
-      ]
-    ],
-    [
-      "source: 7",
-      [
+      ],
+      "oil_type": "AD01349"
+    },
+    {
+      "name": "Harmony",
+      "coordinates": [
         239.7208167,
         34.35039167
-      ]
-    ],
-    [
-      "source: 8",
-      [
+      ],
+      "oil_type": "AD01349"
+    },
+    {
+      "name": "Heritage",
+      "coordinates": [
         239.8830025,
         34.39073056
-      ]
-    ],
-    [
-      "source: 9",
-      [
+      ],
+      "oil_type": "AD01349"
+    },
+    {
+      "name": "Edith",
+      "coordinates": [
         241.8593139,
         33.59578611
-      ]
-    ],
-    [
-      "source: 10",
-      [
+      ],
+      "oil_type": "AD01438"
+    },
+    {
+      "name": "Gina",
+      "coordinates": [
         240.7237417,
         34.11749722
-      ]
-    ],
-    [
-      "source: 11",
-      [
+      ],
+      "oil_type": "AD02302"
+    },
+    {
+      "name": "Gilda",
+      "coordinates": [
         240.5814361,
         34.18234167
-      ]
-    ],
-    [
-      "source: 12",
-      [
+      ],
+      "oil_type": "AD02323"
+    },
+    {
+      "name": "A",
+      "coordinates": [
         240.5814361,
         34.33188611
-      ]
-    ],
-    [
-      "source: 13",
-      [
+      ],
+      "oil_type": "AD02088"
+    },
+    {
+      "name": "B",
+      "coordinates": [
         240.3784639,
         34.33234167
-      ]
-    ],
-    [
-      "source: 14",
-      [
+      ],
+      "oil_type": "AD02088"
+    },
+    {
+      "name": "C",
+      "coordinates": [
         240.3692333,
         34.332925
-      ]
-    ],
-    [
-      "source: 15",
-      [
+      ],
+      "oil_type": "AD02088"
+    },
+    {
+      "name": "Hillhouse",
+      "coordinates": [
         240.3967528,
         34.33134444
-      ]
-    ],
-    [
-      "source: 16",
-      [
+      ],
+      "oil_type": "AD02088"
+    },
+    {
+      "name": "Henry",
+      "coordinates": [
         240.4396028,
         34.33325556
-      ]
-    ],
-    [
-      "source: 17",
-      [
+      ],
+      "oil_type": "AD02061"
+    },
+    {
+      "name": "Habitat",
+      "coordinates": [
         240.4119056,
         34.28661667
-      ]
-    ],
-    [
-      "source: 18",
-      [
+      ],
+      "oil_type": "AD02297"
+    },
+    {
+      "name": "Irene",
+      "coordinates": [
         239.2705722,
         34.61041944
-      ]
-    ],
-    [
-      "source: 19",
-      [
+      ],
+      "oil_type": "AD02286"
+    },
+    {
+      "name": "Hogan",
+      "coordinates": [
         240.4585139,
         34.337675
-      ]
-    ],
-    [
-      "source: 20",
-      [
+      ],
+      "oil_type": "AD02061"
+    },
+    {
+      "name": "Houchin",
+      "coordinates": [
         240.4478833,
         34.33499167
-      ]
-    ],
-    [
-      "source: 21",
-      [
+      ],
+      "oil_type": "AD02061"
+    },
+    {
+      "name": "Gail",
+      "coordinates": [
         240.5997833,
         34.12510833
-      ]
-    ],
-    [
-      "source: 22",
-      [
+      ],
+      "oil_type": "AD02298"
+    },
+    {
+      "name": "Grace",
+      "coordinates": [
         240.5306083,
         34.17957222
-      ]
-    ]
-  ],
-  "oil_types": [
-    "Non-weathering",
-    "Gasoline",
-    "Diesel",
-    "Light Crude",
-    "Medium Crude",
-    "Heavy Crude",
-    "Medium fuel oil",
-    "Fuel oil #6"
+      ],
+      "oil_type": "AD02323"
+    }
   ]
 }
