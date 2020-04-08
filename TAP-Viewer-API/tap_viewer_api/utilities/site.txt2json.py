@@ -70,6 +70,7 @@ def sites2geojson(fp, fb):
     with open(os.path.join(location_dir, "receptors.geojson"), 'w') as outfile:
         for line in fp:
             if "CUBES" in line:  # done with sites
+                n_cubes = int(line.split()[0])
                 break
             # header line:
             site_num = int(line.split('"')[1].strip('#')) - 1  # change to zero-based indexing!
@@ -102,7 +103,7 @@ def sites2geojson(fp, fb):
         print(len(geo_polys))
         n_sites = len(geo_polys)
 
-    return b_box,n_sites
+    return b_box,n_sites,n_cubes
 
 
 data = {}
@@ -148,16 +149,23 @@ with open(infilename, 'r') as sitefile:
 
     
     # This should skip over the receptor sites definitions
-    data["bounding_box"],data["num_sites"] = sites2geojson(sitefile, bna_filename)
+    data["bounding_box"],data["num_sites"],n_cubes = sites2geojson(sitefile, bna_filename)
     print("bounding box of sites is:", data["bounding_box"])
 
-    if data["name"] == "SoCal TAP":
-        data["oil_types"] = []
-        data["source_locations"] = [{"name": "source %i" % j,
-                                    "coordinates": [float(i) for i in lin.split(',')],
-                                    "oil_type": random.choice(["Hondo", "Crude oil"])
+    if data["name"] == "Socal TAP":
+        # data["oil_types"] = []
+        # data["source_locations"] = [{"name": "source %i" % j,
+        #                             "coordinates": [float(i) for i in lin.split(',')],
+        #                             "oil_type": random.choice(["Hondo", "Crude oil"])
+        #                             }
+        #                             for j, lin in enumerate(sitefile)]
+
+        data["source_loations"] = [{"name": lin[3].strip(),
+                                    "coordinates": [float(j) for j in lin[0:2]],
+                                    "oil_type": lin[2].strip()
                                     }
-                                    for j, lin in enumerate(sitefile)]
+                                    for lin in (readline_clean(sitefile).split(',') for i in range(n_cubes))
+                                   ]
 
 
     else:    
