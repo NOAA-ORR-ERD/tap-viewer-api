@@ -160,7 +160,7 @@ with open(infilename, 'r') as sitefile:
         #                             }
         #                             for j, lin in enumerate(sitefile)]
 
-        data["source_loations"] = [{"name": lin[3].strip(),
+        data["source_locations"] = [{"name": lin[3].strip(),
                                     "coordinates": [float(j) for j in lin[0:2]],
                                     "oil_type": lin[2].strip()
                                     }
