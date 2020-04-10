@@ -2,7 +2,9 @@
   "name": "Socal TAP",
   "num_spills": 200,
   "seasons": [
-    "AllYear"
+    "AllYear",
+    "Summer",
+    "Winter"
   ],
   "output_times": [
     [
