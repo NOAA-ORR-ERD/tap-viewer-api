@@ -1,10 +1,10 @@
 # This can be used with conda to get the dependencies
 #
 #  NOTE: as of 3/7/2016, not all requirements were available for python 3.6 yet.
-#        so this file uses python3.5
+#        so this file uses python3.6
 #
 #  1) create an environment::
-#    conda create -n tap python=3.5
+#    conda create -n tap python=3.6
 #
 #  2) load the dependencies:
 #    conda install --file conda_requirements.txt
@@ -28,6 +28,6 @@ pyramid_debugtoolbar
 pastedeploy=2.*
 waitress
 webob
-docutils
-
+docutils>=0.15.2
+pytest>=3.8.0
 
