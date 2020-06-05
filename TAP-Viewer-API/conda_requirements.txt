@@ -21,7 +21,7 @@
 #    pserve --reload development.ini
 #
 
-python=3.6.*
+python=3.8.*
 numpy=1.16.*
 pyramid=1.*
 pyramid_debugtoolbar
@@ -30,4 +30,7 @@ waitress
 webob
 docutils>=0.15.2
 pytest>=3.8.0
+zarr
+
+
 
