@@ -38,12 +38,18 @@
   ],
   "output_amounts": [
     [
-      1000,
+      200,
       "barrels"
     ],
     [
       100,
       "barrels"
+    ]
+  ],
+  "release_duration": [
+    [
+      7,
+      "days"
     ]
   ],
   "locs": [
@@ -78,7 +84,7 @@
         241.8717778,
         33.58236667
       ],
-      "oil_type": "AD01438"
+      "oil_type": "Beta Production (AD01438)"
     },
     {
       "name": "Elly",
@@ -86,7 +92,7 @@
         241.8729111,
         33.58340278
       ],
-      "oil_type": "AD01438"
+      "oil_type": "Beta Production (AD01438)"
     },
     {
       "name": "Eureka",
@@ -94,7 +100,7 @@
         241.8835056,
         33.56378056
       ],
-      "oil_type": "AD01438"
+      "oil_type": "Beta Production (AD01438)"
     },
     {
       "name": "Harvest",
@@ -102,7 +108,7 @@
         239.3191833,
         34.46913611
       ],
-      "oil_type": "AD02286"
+      "oil_type": "Point Arguello Heavy (AD02286)"
     },
     {
       "name": "Hermosa",
@@ -110,7 +116,7 @@
         239.3536111,
         34.45550833
       ],
-      "oil_type": "AD02286"
+      "oil_type": "Point Arguello Heavy (AD02286)"
     },
     {
       "name": "Hildago",
@@ -118,7 +124,7 @@
         239.2977111,
         34.49501389
       ],
-      "oil_type": "AD02286"
+      "oil_type": "Point Arguello Heavy (AD02286)"
     },
     {
       "name": "Hondo",
@@ -126,7 +132,7 @@
         239.832475,
         34.376675
       ],
-      "oil_type": "AD01349"
+      "oil_type": "Hondo Blend (AD01349)"
     },
     {
       "name": "Harmony",
@@ -134,7 +140,7 @@
         239.7208167,
         34.35039167
       ],
-      "oil_type": "AD01349"
+      "oil_type": "Hondo Blend (AD01349)"
     },
     {
       "name": "Heritage",
@@ -142,7 +148,7 @@
         239.8830025,
         34.39073056
       ],
-      "oil_type": "AD01349"
+      "oil_type": "Hondo Blend (AD01349)"
     },
     {
       "name": "Edith",
@@ -150,7 +156,7 @@
         241.8593139,
         33.59578611
       ],
-      "oil_type": "AD01438"
+      "oil_type": "Beta Production (AD01438)"
     },
     {
       "name": "Gina",
@@ -158,7 +164,7 @@
         240.7237417,
         34.11749722
       ],
-      "oil_type": "AD02302"
+      "oil_type": "Point Hueneme (AD02302)"
     },
     {
       "name": "Gilda",
@@ -166,7 +172,7 @@
         240.5814361,
         34.18234167
       ],
-      "oil_type": "AD02323"
+      "oil_type": "Santa Clara (AD02323)"
     },
     {
       "name": "A",
@@ -174,7 +180,7 @@
         240.5814361,
         34.33188611
       ],
-      "oil_type": "AD02088"
+      "oil_type": "Dos Cuadras (AD02088)"
     },
     {
       "name": "B",
@@ -182,7 +188,7 @@
         240.3784639,
         34.33234167
       ],
-      "oil_type": "AD02088"
+      "oil_type": "Dos Cuadras (AD02088)"
     },
     {
       "name": "C",
@@ -190,7 +196,7 @@
         240.3692333,
         34.332925
       ],
-      "oil_type": "AD02088"
+      "oil_type": "Dos Cuadras (AD02088)"
     },
     {
       "name": "Hillhouse",
@@ -198,7 +204,7 @@
         240.3967528,
         34.33134444
       ],
-      "oil_type": "AD02088"
+      "oil_type": "Dos Cuadras (AD02088)"
     },
     {
       "name": "Henry",
@@ -206,7 +212,7 @@
         240.4396028,
         34.33325556
       ],
-      "oil_type": "AD02061"
+      "oil_type": "Carpinteria (AD02061)"
     },
     {
       "name": "Habitat",
@@ -214,7 +220,7 @@
         240.4119056,
         34.28661667
       ],
-      "oil_type": "AD02297"
+      "oil_type": "Pitas Point (AD02297)"
     },
     {
       "name": "Irene",
@@ -222,7 +228,7 @@
         239.2705722,
         34.61041944
       ],
-      "oil_type": "AD02286"
+      "oil_type": "Pt Arguello Heavy (AD02286)"
     },
     {
       "name": "Hogan",
@@ -230,7 +236,7 @@
         240.4585139,
         34.337675
       ],
-      "oil_type": "AD02061"
+      "oil_type": "Carpinteria (AD02061)"
     },
     {
       "name": "Houchin",
@@ -238,7 +244,7 @@
         240.4478833,
         34.33499167
       ],
-      "oil_type": "AD02061"
+      "oil_type": "Carpinteria (AD02061)"
     },
     {
       "name": "Gail",
@@ -246,7 +252,7 @@
         240.5997833,
         34.12510833
       ],
-      "oil_type": "AD02298"
+      "oil_type": "Platform Gail (AD02298)"
     },
     {
       "name": "Grace",
@@ -254,7 +260,7 @@
         240.5306083,
         34.17957222
       ],
-      "oil_type": "AD02323"
+      "oil_type": "Santa Clara (AD02323)"
     }
   ]
 }
