@@ -107,3 +107,13 @@ def cube_threat_analysis(self,season,oil_type,receptor_id,amount_spilled,
         threat[s] = np.sum(bool_rec)/cubeshape[2]
     
     return threat
+
+def cube_response_time(self,season,oil_type,source_id,receptor_id,
+                        amount_spilled,level_of_concern,response_threshold):
+
+   # get the correct cube
+    cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
+    cube = getcube(self.data_dir,season,source_id,cubeshape)    
+
+
+

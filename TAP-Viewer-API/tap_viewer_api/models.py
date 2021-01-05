@@ -156,7 +156,10 @@ class TapLocation:
              "response_threshold": 95
              }
         """
-        
+        # return cube_response_time(self,season,oil_type,source_id,receptor_id,
+        #               amount_spilled,level_of_concern,response_threshold).tolist()
+
+
         #print(self.num_sites,self.num_spills)
         #return (np.random.random(self.num_sites)).tolist(), (np.random.random(self.num_spills)).tolist()
 
@@ -244,10 +247,10 @@ class TapLocation:
                                season=None,
                                oil_type=None,
                                source_id=None,
+                               receptor_id=None,
                                amount_spilled=None,
                                level_of_concern=None,
-                               spill_number=None,
-                              ):
+                               ):
 
         """
         Compute a threat analysis
@@ -263,8 +266,9 @@ class TapLocation:
             "level_of_concern": [1.5, "bbl"],
             "spill_number": 7
             }
-        """
-
+        """ 
+        
+        
         #return (np.random.random(self.num_sites) * max_days).tolist()
         # for testing (instead of random values):
         #  response times - impact by spill cube data adjusted for max_days
