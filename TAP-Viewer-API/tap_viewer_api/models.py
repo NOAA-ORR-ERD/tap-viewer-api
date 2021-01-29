@@ -224,17 +224,13 @@ class TapLocation:
                                season=None,
                                oil_type=None,
                                source_id=None,
-                               receptor_id=None,
                                amount_spilled=None,
                                level_of_concern=None,
-                               response_threshold=None,
                                spill_number=None,
                                ):
 
         """
-        Compute a threat analysis
-
-        For now, it only returns random values
+        Compute response time by spill
 
         example input:
             {
@@ -249,14 +245,4 @@ class TapLocation:
         return cube_response_time_by_spill(self,season,oil_type,source_id,amount_spilled,
                              level_of_concern,spill_number).tolist()
         
-        # #return (np.random.random(self.num_sites) * max_days).tolist()
-        # # for testing (instead of random values):
-        # #  response times - impact by spill cube data adjusted for max_days
-        # #  output_time_index = - 1 - the longest time (?)
-        # max_days = np.array(self.output_times)[:,0].astype(np.float).max() / 24
-        # response_times = cube_impact_by_spill(self, season, oil_type, source_id, -1, spill_number)
-        # max_rt = np.max(response_times)
-        # if (max_rt != 0):
-        #     return (max_days * (1 - response_times / max_rt)).tolist()
-        # else:
-        #     return response_times.tolist()
+        
