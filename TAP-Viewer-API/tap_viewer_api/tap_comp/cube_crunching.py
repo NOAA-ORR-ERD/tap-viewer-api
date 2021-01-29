@@ -79,17 +79,29 @@ def cube_oiling_analysis(self,season,oil_type,source_id,receptor_id,
 
     return oil_cube
 
-def cube_impact_by_spill(self,season,oil_type,source_id,
-                             output_time_index,spill_number):
+def cube_response_time_analysis(self,season,oil_type,source_id,receptor_id,
+                        amount_spilled,level_of_concern,response_threshold):
 
-    # get the correct cube
+   # get the correct cube
     cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
     cube = getcube(self.data_dir,season,source_id,cubeshape)    
 
-    temp = cube[output_time_index,:,spill_number]
-    print(np.amax(temp))
+    out_times = np.zeros(len(self.output_times))
+    for s in range(0,len(self.output_times)): out_times[s] = self.output_times[s][0]
+    out_times = out_times[::-1]/24.     # change to days
+
+    resp_time = np.ones(self.num_sites)*out_times[-1]*2
+    # find values greater than LOC
+    for ss in range(0,self.num_sites):
+        xx1 = np.sum(cube[:,ss,:]*amount_spilled[0] >= level_of_concern[0],1)
+        tmp = np.where(xx1 > self.num_spills*(100-response_threshold)/100.,1,0)
+        if tmp.any(): resp_time[ss] = min(out_times[np.where(tmp)])
     
-    return cube[output_time_index,:,spill_number]/100.
+    resp_time_receptor = np.sum(cube[:,receptor_id,:]*amount_spilled[0] >= level_of_concern[0],1)/self.num_spills
+    print(resp_time_receptor)
+   
+    return resp_time, resp_time_receptor
+
 
 def cube_threat_analysis(self,season,oil_type,receptor_id,amount_spilled,
                             level_of_concern,output_time_index,):
@@ -108,12 +120,38 @@ def cube_threat_analysis(self,season,oil_type,receptor_id,amount_spilled,
     
     return threat
 
-def cube_response_time(self,season,oil_type,source_id,receptor_id,
-                        amount_spilled,level_of_concern,response_threshold):
+
+
+def cube_impact_by_spill(self,season,oil_type,source_id,
+                             output_time_index,spill_number):
+
+    # get the correct cube
+    cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
+    cube = getcube(self.data_dir,season,source_id,cubeshape)    
+
+    temp = cube[output_time_index,:,spill_number]
+    
+    return cube[output_time_index,:,spill_number]/100.
+
+
+def cube_response_time_by_spill(self,season,oil_type,source_id,
+                        amount_spilled,level_of_concern,spill_number):
 
    # get the correct cube
     cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
     cube = getcube(self.data_dir,season,source_id,cubeshape)    
+    cube1 = cube[:,:,spill_number] # only keep the spill of interest
 
+    out_times = np.zeros(len(self.output_times))
+    for s in range(0,len(self.output_times)): out_times[s] = self.output_times[s][0]
+    out_times = out_times[::-1]/24.     # change to days and flip to lowest first
 
+    resp_time = np.ones(self.num_sites)*out_times[-1]*2  # initial fill with values > longest time
+    # find values greater than LOC
+    for ss in range(0,self.num_sites):
+        tmp = np.where(cube1[:,ss]*amount_spilled[0] >= level_of_concern[0],1,0)
+        if tmp.any(): resp_time[ss] = min(out_times[np.where(tmp)])
+        
+    
+    return resp_time
 
