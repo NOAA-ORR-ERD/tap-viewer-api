@@ -1,10 +1,7 @@
 # This can be used with conda to get the dependencies
 #
-#  NOTE: as of 3/7/2016, not all requirements were available for python 3.6 yet.
-#        so this file uses python3.6
-#
 #  1) create an environment::
-#    conda create -n tap python=3.6
+#    conda create -n tap python=3.9
 #
 #  2) load the dependencies:
 #    conda install --file conda_requirements.txt
@@ -21,9 +18,9 @@
 #    pserve --reload development.ini
 #
 
-python=3.6.*
-numpy=1.16.*
-pyramid=1.*
+python=3.9.*
+numpy=1.20.*
+pyramid=2.*
 pyramid_debugtoolbar
 pastedeploy=2.*
 waitress
