@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 """
+!!!!!  This is an old version
+!!!!!  Current version is in tapbuild package
+!!!!!
 Script to parse a TAP set-up to filter out receptor sites that are all land. Needs 
 a site.txt and bna file. Makes assumptions about the TAP folder structure. 
 """
@@ -15,7 +18,7 @@ import matplotlib.pyplot as plt
 
 import shapely
 from shapely.geometry import Polygon
-import fiona
+# import fiona
 
 from descartes.patch import PolygonPatch
 
@@ -24,6 +27,8 @@ from descartes.patch import PolygonPatch
 
 def rec_sites_filter(site_file,bna_file):
     
+    print("!!! Old version of htis script. Current is in tapbuild package !!!")
+ 
     if not os.path.isfile(site_file):    
         raise Exception("Sitefile: %s doesn't exist"%site_file)
 
