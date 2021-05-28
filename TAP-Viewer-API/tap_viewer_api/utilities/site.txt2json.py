@@ -152,7 +152,7 @@ with open(infilename, 'r') as sitefile:
     data["bounding_box"],data["num_sites"],n_cubes = sites2geojson(sitefile, bna_filename)
     print("bounding box of sites is:", data["bounding_box"])
 
-    if data["name"] == "Socal TAP":
+    if data["name"] == "Socal TAP" or data["name"] == "Southern California TAP":
         # data["oil_types"] = []
         # data["source_locations"] = [{"name": "source %i" % j,
         #                             "coordinates": [float(i) for i in lin.split(',')],
