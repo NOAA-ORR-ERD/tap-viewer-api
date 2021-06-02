@@ -42,6 +42,13 @@ class TapLocation:
         print(self.data_dir)
         print(self.site_data["num_sites"])
         self.num_sites = self.site_data["num_sites"]
+        print(self.site_data)
+        if "model_spill" in self.site_data:
+            self.model_spill = self.site_data["model_spill"]
+        else:
+            self.model_spill = [1.0, 'barrels']
+     
+
 
     @property
     def location_info(self):
