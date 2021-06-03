@@ -24,6 +24,7 @@ def load_locations(location_dir):
     """
     locations = os.listdir(location_dir)
     locations = [name for name in locations if os.path.isdir(os.path.join(location_dir, name))]
+    locations = [name for name in locations if not name.startswith('.')]
     return {loc: TapLocation(os.path.join(location_dir, loc)) for loc in locations}
 
 
