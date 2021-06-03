@@ -60,7 +60,7 @@ def cube_impact_analysis(self,season,oil_type,source_id,level_of_concern,
     imp_cube = np.sum(boolcube,1)/cubeshape[2]
     
     # print(imp_cube.shape)
-    # print(np.amax(imp_cube))
+    print(np.amax(imp_cube))
 
     return imp_cube
 
