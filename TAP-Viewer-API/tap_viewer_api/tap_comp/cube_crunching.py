@@ -20,12 +20,8 @@ def getcube(data_dir,season,source_id,cubeshape):
 
     cube_id = source_id + 1  # TAPDATA are 1-base indexed (at least for Arctic/SoCal TAPS)  
     cubefile = cubedir/(cubetag+str(cube_id).zfill(4)+'.bin')
-    # print(cubeshape)
     cubesize = np.prod(cubeshape)
-
     cube = np.fromfile(str(cubefile),np.uint8)
-    # print(np.prod(cubeshape))
-    # print(cube.size)
 
     if cube.size == 4*cubesize:
         cube = np.frombuffer(cube,np.float32)
@@ -33,11 +29,18 @@ def getcube(data_dir,season,source_id,cubeshape):
         # convert from int16
         raise NotImplementedError
     elif cube.size == cubesize:
-        pass
+        # reverse transfrom done when writing uint8 cubes
+        n = 1.5
+        max_val = 255
+        cube = cube.astype(np.float)
+        cube = (cube/max_val)**n  # * num_LE)
+       
+
     else:
         raise ValueError("cube size not a nice multiple")
 
     cube.shape = cubeshape
+    print('getcube:: max cube value =',np.max(cube))
 
     return cube
 
@@ -54,13 +57,9 @@ def cube_impact_analysis(self,season,oil_type,source_id,level_of_concern,
     # find values greater than LOC
     scale = amount_spilled[0]/self.model_spill[0]
     boolcube = cube[output_time_index,:,:]*scale >= level_of_concern[0]
-    print(np.max(cube[output_time_index,:,:]))
 
     # translate to percentage
     imp_cube = np.sum(boolcube,1)/cubeshape[2]
-    
-    # print(imp_cube.shape)
-    print(np.amax(imp_cube))
 
     return imp_cube
 
@@ -75,6 +74,7 @@ def cube_oiling_analysis(self,season,oil_type,source_id,receptor_id,
 
     # print(output_time_index)
     scale = amount_spilled[0]/self.model_spill[0]
+    print(scale)
     oil_cube = cube[output_time_index,receptor_id,:]*scale
     # print(np.amax(oil_cube))
     # print(oil_cube.shape)
