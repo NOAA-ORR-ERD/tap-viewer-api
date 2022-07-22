@@ -102,7 +102,7 @@ def rec_sites_filter(site_file,bna_file):
             os.mkdir(new_path)
 
         for cubefile in cubefiles:
-            if cubefile[-4:] == '.bin':
+            if cubefile[-4:].lower() == '.bin':     # # 7/20/22 - G.K. - forced to lowercase extension comparing
                 print(cubefile)
                 cube = np.fromfile(os.path.join(spath,cubefile),dtype=np.float32)
        
