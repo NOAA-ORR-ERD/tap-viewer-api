@@ -14,12 +14,14 @@ def getcube(data_dir,season,source_id,cubeshape):
     """
     cubedir = Path(data_dir)/'TAPDATA'/season
     try: 
-        cubetag = next(cubedir.glob('*001.bin')).name[:-8]  
+        cubetag = next(cubedir.glob("*001.[bB][iI][nN]")).name[:-8]  # 7/20/22 - G.K. - use case insensitive pattern for glob()
     except StopIteration:
         raise FileNotFoundError("no cubes found in "+str(cubedir))
 
     cube_id = source_id + 1  # TAPDATA are 1-base indexed (at least for Arctic/SoCal TAPS)  
-    cubefile = cubedir/(cubetag+str(cube_id).zfill(4)+'.bin')
+    # cubefile = cubedir/(cubetag+str(cube_id).zfill(4)+'.bin')
+     # 7/20/22 - G.K. - build a cube file name with a case sensitive extension
+    cubefile = cubedir/next(cubedir.glob(cubetag + str(cube_id).zfill(4) + ".[bB][iI][nN]"))
     cubesize = np.prod(cubeshape)
     cube = np.fromfile(str(cubefile),np.uint8)
 
