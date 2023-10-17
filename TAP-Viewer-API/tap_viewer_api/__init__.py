@@ -1,8 +1,26 @@
-﻿from pyramid.config import Configurator
+﻿from pathlib import Path
+
+from pyramid.config import Configurator
 from pyramid.events import NewRequest
 # from tap_viewer_api.views import cors_policy
 
 ALLOWED_ORIGINS = ()
+
+# FIXME: this should be pulled from the config.ini, not hard-coded here
+#        and shouldn't be relative to the code like this, either.
+#        then we wouldn't need this hack!
+
+LOCATION_DIR = Path(__file__).parent / 'locations'
+
+# Is there something else to look for?
+if not (LOCATION_DIR / 'san_diego' / 'site.json').is_file():
+    print("Can't find locations in with code, looking outside, "
+          "alongside this repo")
+    # set locations DIR for tests
+    LOCATION_DIR = Path(__file__).parents[3] / 'locations'
+
+DATA_DIR = Path(__file__).parent
+
 
 def add_cors_headers_response_callback(event):
     def cors_headers(request, response):
