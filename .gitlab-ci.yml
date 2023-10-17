@@ -6,7 +6,22 @@ stages:
 #     stage: test
 #     image: registry.orr.noaa.gov/erd/centos-conda
 
+    # variables:
+    #     HASH: '1e0de0123b0043031000b050bb7095a9b4f0015f'
+    #     LOCATION_IMAGE_PATH: registry.orr.noaa.gov/gnome/tap/locations/master:$HASH
+    ##     GIT_STRATEGY: none
+
 #     script:
+
+        # - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    
+        # - echo '========= creating locations volume ========='
+        # - docker run -i -v locations:/TAP-Viewer-API/tap_viewer_api/locations --name tap_locations $LOCATION_IMAGE_PATH
+        # - echo '========= locations volume created ========='
+        # - echo '========= cleaning up... ========='
+        # - docker rm tap_locations
+        # - docker image rm $IMAGE_PATH
+
 #         - cd TAP-Viewer-API
 #         - conda install --file conda_requirements.txt
 # #        - pip install -r pip_requirements.txt
