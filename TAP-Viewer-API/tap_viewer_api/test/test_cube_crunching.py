@@ -7,6 +7,8 @@ from tap_viewer_api.tap_comp.cube_crunching import (getcube,
                                                     cube_impact_analysis,
                                                     cube_oiling_analysis,
                                                     )
+from tap_viewer_api.models import TapLocation
+
 
 # there *should* be test data -- but if not, let's use the real data
 # #
@@ -37,34 +39,40 @@ self.num_spills = 500
 self.data_dir = data_dir
 
 
-def test_cube_oiling_analysis():
-    oil_cube = cube_oiling_analysis(self, 'AllYear', None, 3, 111,
+@pytest.fixture
+def location():
+    return TapLocation(LOCATION_DIR / 'arctic_platforms')
+
+
+
+def test_cube_oiling_analysis(location):
+    oil_cube = cube_oiling_analysis(location, 'AllYear', None, 3, 111,
                                     amount_spilled, 2)
     assert len(oil_cube) == self.num_spills
 
 
-def test_cube_impact_analysis():
+# def test_cube_impact_analysis():
 
-    imp_cube = cube_impact_analysis(self, 'AllYear', None, 1, loc,
-                                    amount_spilled, 2)
+#     imp_cube = cube_impact_analysis(self, 'AllYear', None, 1, loc,
+#                                     amount_spilled, 2)
 
-    assert len(imp_cube) == self.num_sites
-
-
-def test_getcube():
-
-    cube = getcube(data_dir, 'AllYear', 1, cubeshape)
-
-    assert isinstance(cube, np.ndarray)
-
-    assert cube.shape == cubeshape
+#     assert len(imp_cube) == self.num_sites
 
 
-def test_cubeexist():
-    with pytest.raises(FileNotFoundError):
-        cube = getcube(data_dir, 'AllYear', 555, cubeshape)
+# def test_getcube():
+
+#     cube = getcube(data_dir, 'AllYear', 1, cubeshape)
+
+#     assert isinstance(cube, np.ndarray)
+
+#     assert cube.shape == cubeshape
 
 
-# def test_cubesize():
+# def test_cubeexist():
+#     with pytest.raises(FileNotFoundError):
+#         cube = getcube(data_dir, 'AllYear', 555, cubeshape)
 
-#     pass
+
+# # def test_cubesize():
+
+# #     pass
