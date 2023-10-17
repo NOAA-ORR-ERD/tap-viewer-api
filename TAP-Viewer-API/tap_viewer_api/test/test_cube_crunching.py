@@ -51,26 +51,26 @@ def test_cube_oiling_analysis(location):
     assert len(oil_cube) == self.num_spills
 
 
-# def test_cube_impact_analysis():
+def test_cube_impact_analysis(location):
 
-#     imp_cube = cube_impact_analysis(self, 'AllYear', None, 1, loc,
-#                                     amount_spilled, 2)
+    imp_cube = cube_impact_analysis(location, 'AllYear', None, 1, loc,
+                                    amount_spilled, 2)
 
-#     assert len(imp_cube) == self.num_sites
-
-
-# def test_getcube():
-
-#     cube = getcube(data_dir, 'AllYear', 1, cubeshape)
-
-#     assert isinstance(cube, np.ndarray)
-
-#     assert cube.shape == cubeshape
+    assert len(imp_cube) == self.num_sites
 
 
-# def test_cubeexist():
-#     with pytest.raises(FileNotFoundError):
-#         cube = getcube(data_dir, 'AllYear', 555, cubeshape)
+def test_getcube():
+
+    cube = getcube(data_dir, 'AllYear', 1, cubeshape)
+
+    assert isinstance(cube, np.ndarray)
+
+    assert cube.shape == cubeshape
+
+
+def test_cubeexist():
+    with pytest.raises(FileNotFoundError):
+        cube = getcube(data_dir, 'AllYear', 555, cubeshape)
 
 
 # # def test_cubesize():
