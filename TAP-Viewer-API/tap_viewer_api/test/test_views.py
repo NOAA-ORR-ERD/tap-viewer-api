@@ -5,12 +5,12 @@ Tests the basics of the views
 
 This tests the views' return -- not the response object
 """
-
+from pathlib import Path
 import pytest
 
 from pyramid import testing
 
-from tap_viewer_api import views
+from tap_viewer_api import views, LOCATION_DIR
 
 
 @pytest.fixture
@@ -27,7 +27,7 @@ def config():
 
 def test_home():
     """
-    this one does retrun a response object
+    this one does return a response object
     """
     request = testing.DummyRequest()
     response = views.home(request)
@@ -38,11 +38,16 @@ def test_home():
 
 def test_locations_all():
     """
-    Do all the locations expected end up in the response
+    Do all the locations expected end up in the response?
     """
 
+    # find all the ones in the locations dir:
+    all_locs = {loc.name for loc in LOCATION_DIR.iterdir() if loc.is_dir() and not loc.name == ".git"}
+
+    print(all_locs)
     request = testing.DummyRequest()
     result = views.locations(request)
 
-    assert set(result.keys()) == set(['sb', 'sf', 'arctic', 'socal_md'])
+    print(result.keys())
+    assert set(result.keys()) == all_locs
 
