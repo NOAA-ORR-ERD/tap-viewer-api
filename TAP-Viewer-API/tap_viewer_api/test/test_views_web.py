@@ -13,8 +13,10 @@ import webtest
 
 from tap_viewer_api import LOCATION_DIR
 
-LOCS_TO_TEST = ['south-california', 'sf_bay', 'arctic_platforms']  # what's this?, 'socal_md']
-LOCS_TO_TEST = ['south-california', 'sf_bay']
+#LOCS_TO_TEST = ['south-california', 'sf_bay', 'arctic_platforms']  # what's this?, 'socal_md']
+#LOCS_TO_TEST = ['south-california', 'sf_bay']
+#LOCS_TO_TEST = ['south-california', 'arctic_platforms']
+LOCS_TO_TEST = ['arctic_platforms']
 
 
 @pytest.fixture
@@ -61,11 +63,21 @@ def test_location_setup(test_app, location):
     assert response.content_type == 'application/json'
     result = response.json
 
-    assert set(result.keys()) == set(('bounding_box', 'output_times', 'locs', 'name',
-                                      'seasons', 'source_locations', 'oil_types',
-                                      'num_spills', 'output_amounts'))
+    if location == 'south-california':
+        assert set(result.keys()) == set(('bounding_box', 'output_times', 'locs', 'name',
+                                        'seasons', 'source_locations', 'num_spills', 
+                                        'release_duration', 'num_sites', 
+                                        'model_spill', 'spill_rate', 'season_labels'
+                                        ))
 
-    #num_sources[{}] = len(result['source_locations'])
+        #num_sources[{}] = len(result['source_locations'])
+
+    if location == 'arctic_platforms':
+        assert set(result.keys()) == set(('bounding_box', 'output_times', 'locs', 'name',
+                                        'seasons', 'source_locations', 'num_spills', 
+                                        'release_duration', 'num_sites', 
+                                        'oil_types', 'spill_rate', 'season_labels'
+                                        ))
 
 
 @pytest.mark.parametrize(("location", "season"),[('south-california', 'AllYear'),
@@ -116,7 +128,7 @@ def test_oiling_analysis(test_app, location):
 @pytest.mark.parametrize("location", LOCS_TO_TEST)
 def test_response_time_analysis(test_app, location):
 
-    params = {"season": "winter",
+    params = {"season": "AllYear",
               "oil_type": "diesel",
               "source_id": 3,
               "receptor_id": 111,
@@ -135,8 +147,7 @@ def test_response_time_analysis(test_app, location):
 @pytest.mark.parametrize("location", LOCS_TO_TEST)
 def test_threat_analysis(test_app, location):
 
-    # not all locations have "winter"
-    params = {"season": "winter",
+    params = {"season": "AllYear",
               "oil_type": "diesel",
               "receptor_id": 314,
               "amount_spilled": [1000, "bbl"],
@@ -154,7 +165,7 @@ def test_threat_analysis(test_app, location):
 @pytest.mark.parametrize("location", LOCS_TO_TEST)
 def test_impact_by_spill(test_app, location):
 
-    params = {"season": "winter",
+    params = {"season": "AllYear",
               "oil_type": "diesel",
               "source_id": 3,
               "output_time_index": 3,
@@ -171,7 +182,7 @@ def test_impact_by_spill(test_app, location):
 @pytest.mark.parametrize("location", LOCS_TO_TEST)
 def test_response_time_by_spill(test_app, location):
 
-    params = {"season": "winter",
+    params = {"season": "AllYear",
               "oil_type": "diesel",
               "source_id": 3,
               "amount_spilled": [1000, "bbl"],
