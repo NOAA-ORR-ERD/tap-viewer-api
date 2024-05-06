@@ -11,8 +11,9 @@ from . import models
 
 # FixMe: maybe this should be pulled from the ini file??
 data_dir = os.path.dirname(__file__)
-l_dir = os.path.join(data_dir,"..\..\..")  #ddr edit for local structure
-locations_dir = os.path.join(l_dir, 'locations')
+l_dir = os.path.join(data_dir,'locations')  # standard locations loc
+# l_dir = os.path.join(data_dir,"..\..\..")  # ddr locations for local server 
+# locations_dir = os.path.join(l_dir, 'locations')
 # locations_dir = os.path.join(data_dir, 'locations')
 
 # load up the locations:
