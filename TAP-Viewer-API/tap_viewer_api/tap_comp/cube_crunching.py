@@ -25,7 +25,9 @@ def getcube(data_dir,season,source_id,cubeshape):
     cubesize = np.prod(cubeshape)
     cube = np.fromfile(str(cubefile),np.uint8)
 
-    if cube.size == 4*cubesize:
+    if cube.size == 8*cubesize:
+        cube = np.frombuffer(cube,np.float64)
+    elif cube.size == 4*cubesize:
         cube = np.frombuffer(cube,np.float32)
     elif cube.size == 2*cubesize:
         # convert from int16
@@ -39,6 +41,8 @@ def getcube(data_dir,season,source_id,cubeshape):
        
 
     else:
+        print(cubeshape)
+        print(cube.size)
         raise ValueError("cube size not a nice multiple")
 
     cube.shape = cubeshape
