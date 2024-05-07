@@ -1,22 +1,19 @@
 # This can be used with conda to get the dependencies
 #
-#  1) create an environment::
-#    conda create -n tap python=3.12
+#  1) create an environment with the dependencies::
+#    conda create -n tap python=3.10 --file conda_requirements.txt
 #
-#  2) load the dependencies:
-#    conda install --file conda_requirements.txt
-#
-#  3) active the environment
-#    conda activate tap  (Windows)
-#     or
-#    source activate tap  (OS-X, Linux)
-#
+#  2) active the environment
+#    conda activate tap
+
 #  4) install the app:
 #    cd TAP-Viewer-API
-#    python setup.py develop
+#    pip isntall -e ./
 #
 #  5) start the app
 #    pserve --reload development.ini
+#
+# (the --reload is if you want to change the code under development)
 #
 
 python >=3.10,<3.13

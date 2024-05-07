@@ -13,27 +13,26 @@ Chris Barker: Subject mater expert, software architecture support -- maybe some 
 
 In order to run the TAP-Viewer-API you need to install the dependencies:
 
-```
-conda install --file conda_requirements.txt
-```
-Make sure to activate a relevant virtualenv (if necessary)
+1) create an environment with the dependencies::
+   `conda create -n tap python=3.10 --file conda_requirements.txt`
 
-## Running the API Server
+2) active the environment
+   `conda activate tap`
 
-* To install the API package:
+3) install the app:
 
-```
-cd TAP-Viewer-API
-python setup.py develop
-```
+   `cd TAP-Viewer-API`
+   `pip install -e ./`
 
-* After successful installation run this command:
+4) start the app
 
-```
-pserve --reload development.ini
-```
+   `pserve --reload development.ini`
 
-* Now your server should be running on the port you specified in the development.ini file. The port provided will be displayed after you run the above command.
+   (the --reload is if you want to change the code under development)
+
+
+
+* Now your server should be running on the port specified in the development.ini file. The port provided will be displayed after you run the above command.
 
 
 ## Existing API Route Structure
