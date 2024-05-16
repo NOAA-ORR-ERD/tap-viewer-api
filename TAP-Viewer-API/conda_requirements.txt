@@ -5,12 +5,12 @@
 #
 #  2) active the environment
 #    conda activate tap
-
-#  4) install the app:
+#
+#  3) install the app:
 #    cd TAP-Viewer-API
 #    pip isntall -e ./
 #
-#  5) start the app
+#  4) start the app
 #    pserve --reload development.ini
 #
 # (the --reload is if you want to change the code under development)
