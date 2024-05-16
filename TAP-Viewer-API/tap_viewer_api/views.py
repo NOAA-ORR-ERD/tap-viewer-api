@@ -5,15 +5,16 @@ import os
 from pyramid.response import Response
 from pyramid.view import view_config
 
-import tap_viewer_api
-
 from docutils.core import publish_string
 
 from . import models
 
 # FixMe: maybe this should be pulled from the ini file??
-data_dir = tap_viewer_api.DATA_DIR
-locations_dir = tap_viewer_api.LOCATION_DIR
+data_dir = os.path.dirname(__file__)
+# l_dir = os.path.join(data_dir,'locations')  # standard locations loc
+# l_dir = os.path.join(data_dir,"..\..\..")  # ddr locations for local server 
+# locations_dir = os.path.join(l_dir, 'locations')
+locations_dir = os.path.join(data_dir, 'locations')
 
 # load up the locations:
 all_locations = models.load_locations(locations_dir)

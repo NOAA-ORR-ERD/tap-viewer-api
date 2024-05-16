@@ -1,6 +1,7 @@
 stages:
 #    - test
     - build
+    - deploy
 
 test_develop:
   stage: test
@@ -33,7 +34,7 @@ test_develop:
     - cd ../..
     - pytest tap_viewer_api/test
         
-build:
+build_api:
     stage: build
     script:
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -42,6 +43,15 @@ build:
     tags:
         - shell
         - build
+    only:
+        - master
 
+staging:
+    stage: deploy
+    variables:
+        TAP_COMMIT_TAG: $CI_COMMIT_TAG
+    trigger: gnome/tap/tap-deploy
+    only:
+        - master
 
 
