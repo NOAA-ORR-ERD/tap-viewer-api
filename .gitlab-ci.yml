@@ -28,7 +28,8 @@ test_develop:
     ####
     # get metadate from 'locations' repository and clone the root directory only
     - cd tap_viewer_api
-    - git clone --filter=blob:none --sparse https://gitlab.orr.noaa.gov/gnome/tap/locations.git
+    - git --version
+    - git clone -v --filter=blob:none --sparse https://gitlab.orr.noaa.gov/gnome/tap/locations.git
     # checkout arctic_platforms directory
     - cd locations
     - git sparse-checkout add arctic_platforms
