@@ -8,7 +8,7 @@
 #
 #  3) install the app:
 #    cd TAP-Viewer-API
-#    pip isntall -e ./
+#    pip install -e ./
 #
 #  4) start the app
 #    pserve --reload development.ini

@@ -14,7 +14,7 @@ Chris Barker: Subject mater expert, software architecture support -- maybe some 
 In order to run the TAP-Viewer-API you need to install the dependencies:
 
 1) create an environment with the dependencies::
-   `conda create -n tap python=3.10 --file conda_requirements.txt`
+   `conda create -n tap python=3.12 --file conda_requirements.txt`
 
 2) active the environment
    `conda activate tap`
