@@ -8,7 +8,8 @@ stages:
 
 test_develop:
   stage: test
-  image: registry.orr.noaa.gov/erd/centos-conda/miniforge-python$PYTHON_VER
+  #image: registry.orr.noaa.gov/erd/centos-conda/miniforge-python$PYTHON_VER
+  image: registry.orr.noaa.gov/erd/centos-conda/miniconda3-python$PYTHON_VER
   #image: registry.orr.noaa.gov/erd/centos-conda/centos7-python3
 
     # variables:
