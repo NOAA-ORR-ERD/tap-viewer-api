@@ -69,7 +69,7 @@ def test_getcube():
 
 
 def test_cubeexist():
-    with pytest.raises(FileNotFoundError):
+    with pytest.raises(StopIteration):
         cube = getcube(data_dir, 'AllYear', 555, cubeshape)
 
 
