@@ -80,7 +80,7 @@ def test_location_setup(test_app, location):
                                         ))
 
 
-@pytest.mark.parametrize(("location", "season"),[('south-california', 'AllYear'),
+@pytest.mark.parametrize(("location", "season"),[('arctic_platforms', 'AllYear'),
                                                  # ('sf_bay', 'AllYear'),
                                                  ('arctic_platforms', 'AllYear'),
                                                  # ('socal_md', 'AllYear'),
