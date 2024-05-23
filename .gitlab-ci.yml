@@ -34,9 +34,11 @@ test_develop:
     - git --version
     # --filter option doesn't work with old git versions
     - git clone --filter=blob:none --sparse https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.orr.noaa.gov/gnome/tap/locations.git
+    - ls -al
     # checkout arctic_platforms directory
     - cd locations
     - git sparse-checkout add arctic_platforms
+    - ls -al
     ####
 
     # run tests
