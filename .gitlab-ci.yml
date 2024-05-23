@@ -27,11 +27,12 @@ test_develop:
     ####
     # get locations/arctic_platforms for tests (this hardcoded in test_cube_crunching.py at this moment)
     ####
-    # get metadate from 'locations' repository and clone the root directory only
     - cd tap_viewer_api
     - rm -rf ./locations
     - ls -al
+    # get metadate from 'locations' repository and clone the root directory only
     - git --version
+    # --filter option doesn't work with old git versions
     - git clone --filter=blob:none --sparse https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.orr.noaa.gov/gnome/tap/locations.git
     # checkout arctic_platforms directory
     - cd locations

@@ -13,7 +13,9 @@ ALLOWED_ORIGINS = ()
 LOCATION_DIR = Path(__file__).parent / 'locations'
 
 # Is there something else to look for?
-if not (LOCATION_DIR / 'san_diego' / 'site.json').is_file():
+#if not (LOCATION_DIR / 'san_diego' / 'site.json').is_file():
+# fixed (G.K.): only 'arctic_platforms' location is cloned for tests on the server at this moment (GitLab job)
+if not (LOCATION_DIR / 'arctic_platforms' / 'site.json').is_file():
     print("Can't find locations in with code, looking outside, "
           "alongside this repo")
     # set locations DIR for tests
