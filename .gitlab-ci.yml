@@ -43,7 +43,7 @@ test_develop:
     ####
 
     # run tests
-    - cd ../..
+    - cd ..
     - pytest tap_viewer_api/test
         
 build_api:
