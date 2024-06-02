@@ -36,7 +36,7 @@ def getcube(data_dir,season,source_id,cubeshape):
         # reverse transfrom done when writing uint8 cubes
         n = 1.5
         max_val = 255
-        cube = cube.astype(np.float)
+        cube = cube.astype(float)   # was np.float - deprecated since NumPy ver. 1.20
         cube = (cube/max_val)**n  # * num_LE)
        
 
