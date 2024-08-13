@@ -106,7 +106,7 @@ class TapLocation:
 
         example input:
             {"season": "winter",
-             "oil_type": "diesel",
+             "oil_type": "AD01938",
              "source_id":3,
              "level_of_concern":[1.5, "bbl"],
              "amount_spilled": [1000, "bbl"],
@@ -131,7 +131,7 @@ class TapLocation:
 
         example input:
             {"season": "winter",
-             "oil_type": "diesel",
+             "oil_type": "AD01938",
              "source_id": 3,
              "receptor_id": 111,
              "amount_spilled": [1000, "bbl"],
@@ -156,7 +156,7 @@ class TapLocation:
         Compute a response time analysis
         example input:
             {"season": "winter",
-             "oil_type": "diesel",
+             "oil_type": "AD01938",
              "source_id": 3,
              "receptor_id": 111,
              "amount_spilled": [1000, "bbl"],
@@ -188,7 +188,7 @@ class TapLocation:
 
         example input:
             {"season": "winter",
-             "oil_type": "diesel",
+             "oil_type": "AD01938",
              "receptor_id": 314,
              "amount_spilled": [1000, "bbl"],
              "level_of_concern": [1.5, "bbl"],
@@ -217,7 +217,7 @@ class TapLocation:
         example input:
             {
             "season": "winter",
-            "oil_type": "diesel",
+            "oil_type": "AD01938",
             "source_id": 3,
             "output_time_index": 3,
             "spill_number": 7
@@ -243,7 +243,7 @@ class TapLocation:
         example input:
             {
             "season": "winter",
-            "oil_type": "diesel",
+            "oil_type": "AD01938",
             "source_id": 3,
             "amount_spilled": [1000, "bbl"],
             "level_of_concern": [1.5, "bbl"],
