@@ -8,20 +8,24 @@ from pathlib import Path
 import numpy as np
 
 
-def getcube(data_dir,season,source_id,cubeshape):
+def getcube(data_dir,season,oil_type,source_id,cubeshape):
     """
     Returns numpy array of cube with shape [nrec_sites,ntime,n_spills???]
     """
     cubedir = Path(data_dir)/'TAPDATA'/season
-    try: 
-        cubetag = next(cubedir.glob("*001.[bB][iI][nN]")).name[:-8]  # 7/20/22 - G.K. - use case insensitive pattern for glob()
+    oil_type = oil_type.lower()
+     
+    try:
+        cubetag = next(cubedir.glob("*001_" + oil_type + ".[bB][iI][nN]")).name[0:4] # for cube files with oil_type in name
+        # cubetag = next(cubedir.glob("*001.[bB][iI][nN]")).name[:-8]  # 7/20/22 - G.K. - use case insensitive pattern for glob()
     except StopIteration:
         raise FileNotFoundError("no cubes found in "+str(cubedir))
 
     cube_id = source_id + 1  # TAPDATA are 1-base indexed (at least for Arctic/SoCal TAPS)  
     # cubefile = cubedir/(cubetag+str(cube_id).zfill(4)+'.bin')
      # 7/20/22 - G.K. - build a cube file name with a case sensitive extension
-    cubefile = cubedir/next(cubedir.glob(cubetag + str(cube_id).zfill(4) + ".[bB][iI][nN]"))
+    cubefile = cubedir/next(cubedir.glob(cubetag + str(cube_id).zfill(4) + "_" + oil_type + ".[bB][iI][nN]"))
+    print(cubefile)
     cubesize = np.prod(cubeshape)
     cube = np.fromfile(str(cubefile),np.uint8)
 
@@ -58,7 +62,7 @@ def cube_impact_analysis(self,season,oil_type,source_id,level_of_concern,
     cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
 
     # get the correct cube
-    cube = getcube(self.data_dir,season,source_id,cubeshape)
+    cube = getcube(self.data_dir,season,oil_type,source_id,cubeshape)
 
     # find values greater than LOC
     scale = amount_spilled[0]/self.model_spill[0]
@@ -76,7 +80,7 @@ def cube_oiling_analysis(self,season,oil_type,source_id,receptor_id,
 
     # get the correct cube
     cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
-    cube = getcube(self.data_dir,season,source_id,cubeshape)
+    cube = getcube(self.data_dir,season,oil_type,source_id,cubeshape)
 
     # print(output_time_index)
     scale = amount_spilled[0]/self.model_spill[0]
@@ -92,7 +96,7 @@ def cube_response_time_analysis(self,season,oil_type,source_id,receptor_id,
 
    # get the correct cube
     cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
-    cube = getcube(self.data_dir,season,source_id,cubeshape)    
+    cube = getcube(self.data_dir,season,oil_type,source_id,cubeshape)    
 
     out_times = np.zeros(len(self.output_times))
     for s in range(0,len(self.output_times)): out_times[s] = self.output_times[s][0]
@@ -125,7 +129,7 @@ def cube_threat_analysis(self,season,oil_type,receptor_id,amount_spilled,
     scale = amount_spilled[0]/self.model_spill[0]
     threat = np.zeros(self.num_sources)
     for s in range(0,self.num_sources):
-        cube = getcube(self.data_dir,season,s,cubeshape)    
+        cube = getcube(self.data_dir,season,oil_type,s,cubeshape)    
         bool_rec = cube[output_time_index,receptor_id,:]*scale >= level_of_concern[0]        
         threat[s] = np.sum(bool_rec)/cubeshape[2]
     
@@ -138,7 +142,7 @@ def cube_impact_by_spill(self,season,oil_type,source_id,
 
     # get the correct cube
     cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
-    cube = getcube(self.data_dir,season,source_id,cubeshape)    
+    cube = getcube(self.data_dir,season,oil_type,source_id,cubeshape)    
 
     temp = cube[output_time_index,:,spill_number]/self.model_spill[0]   
     print(np.max(temp))    
@@ -152,7 +156,7 @@ def cube_response_time_by_spill(self,season,oil_type,source_id,
 
    # get the correct cube
     cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
-    cube = getcube(self.data_dir,season,source_id,cubeshape)    
+    cube = getcube(self.data_dir,season,oil_type,source_id,cubeshape)    
     cube1 = cube[:,:,spill_number] # only keep the spill of interest
 
     out_times = np.zeros(len(self.output_times))
