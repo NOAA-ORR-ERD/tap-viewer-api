@@ -13,10 +13,15 @@ def getcube(data_dir,season,oil_type,source_id,cubeshape):
     Returns numpy array of cube with shape [nrec_sites,ntime,n_spills???]
     """
     cubedir = Path(data_dir)/'TAPDATA'/season
-    oil_type = oil_type.lower()
+    oil_type = "_" + oil_type.lower()   # include underscore here
+    print(["oil_type :: " + oil_type, source_id])
+
+
+    if oil_type == "_non-weathering":
+        oil_type = ""
      
     try:
-        cubetag = next(cubedir.glob("*001_" + oil_type + ".[bB][iI][nN]")).name[0:4] # for cube files with oil_type in name
+        cubetag = next(cubedir.glob("*" + str(source_id+1).zfill(4) + oil_type + ".[bB][iI][nN]")).name[0:4] # for cube files with oil_type in name
         # cubetag = next(cubedir.glob("*001.[bB][iI][nN]")).name[:-8]  # 7/20/22 - G.K. - use case insensitive pattern for glob()
     except StopIteration:
         raise FileNotFoundError("no cubes found in "+str(cubedir))
@@ -24,7 +29,7 @@ def getcube(data_dir,season,oil_type,source_id,cubeshape):
     cube_id = source_id + 1  # TAPDATA are 1-base indexed (at least for Arctic/SoCal TAPS)  
     # cubefile = cubedir/(cubetag+str(cube_id).zfill(4)+'.bin')
      # 7/20/22 - G.K. - build a cube file name with a case sensitive extension
-    cubefile = cubedir/next(cubedir.glob(cubetag + str(cube_id).zfill(4) + "_" + oil_type + ".[bB][iI][nN]"))
+    cubefile = cubedir/next(cubedir.glob(cubetag + str(cube_id).zfill(4) + oil_type + ".[bB][iI][nN]"))
     print(cubefile)
     cubesize = np.prod(cubeshape)
     cube = np.fromfile(str(cubefile),np.uint8)
