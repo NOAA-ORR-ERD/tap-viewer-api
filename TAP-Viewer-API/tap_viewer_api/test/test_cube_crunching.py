@@ -61,7 +61,7 @@ def test_cube_impact_analysis(location):
 
 def test_getcube():
 
-    cube = getcube(data_dir, 'AllYear', 1, cubeshape)
+    cube = getcube(data_dir, 'AllYear','Non-Weathering', 1, cubeshape)
 
     assert isinstance(cube, np.ndarray)
 
@@ -69,8 +69,8 @@ def test_getcube():
 
 
 def test_cubeexist():
-    with pytest.raises(StopIteration):
-        cube = getcube(data_dir, 'AllYear', 555, cubeshape)
+    with pytest.raises(FileNotFoundError):
+        cube = getcube(data_dir, 'AllYear', 'Non-Weathering',555, cubeshape)
 
 
 # # def test_cubesize():
