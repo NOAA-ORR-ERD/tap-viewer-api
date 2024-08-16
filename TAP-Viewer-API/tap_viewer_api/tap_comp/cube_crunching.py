@@ -13,12 +13,16 @@ def getcube(data_dir,season,oil_type,source_id,cubeshape):
     Returns numpy array of cube with shape [nrec_sites,ntime,n_spills???]
     """
     cubedir = Path(data_dir)/'TAPDATA'/season
-    oil_type = "_" + oil_type.lower()   # include underscore here
+    if oil_type is None: 
+        oil_type = ''
+    else:
+        oil_type = "_" + oil_type.lower()        
     print(["oil_type :: " + oil_type, source_id])
-
-
-    if oil_type == "_non-weathering":
+    
+    # fix 
+    if oil_type in ("_non-weathering", "_"):
         oil_type = ""
+    print(["oil_type :: " + oil_type, source_id])
      
     try:
         cubetag = next(cubedir.glob("*" + str(source_id+1).zfill(4) + oil_type + ".[bB][iI][nN]")).name[0:4] # for cube files with oil_type in name

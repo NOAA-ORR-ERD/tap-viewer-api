@@ -88,7 +88,7 @@ def test_location_setup(test_app, location):
 def test_impact_analysis(test_app, location, season):
 
     params = {"season": season,
-              "oil_type": "diesel",
+              "oil_type": "Non-Weathering",
               "source_id": 3,
               "level_of_concern": [1.5, "bbl"],
               "amount_spilled": [1000, "bbl"],
@@ -108,7 +108,7 @@ def test_impact_analysis(test_app, location, season):
 def test_oiling_analysis(test_app, location):
 
     params = {"season": "AllYear",
-              "oil_type": "diesel",
+              "oil_type": "Non-Weathering",
               "source_id": 3,
               "receptor_id": 111,
               "amount_spilled": [1000, "bbl"],
@@ -129,7 +129,7 @@ def test_oiling_analysis(test_app, location):
 def test_response_time_analysis(test_app, location):
 
     params = {"season": "AllYear",
-              "oil_type": "diesel",
+              "oil_type": "Non-Weathering",
               "source_id": 3,
               "receptor_id": 111,
               "amount_spilled": [1000, "bbl"],
@@ -148,7 +148,7 @@ def test_response_time_analysis(test_app, location):
 def test_threat_analysis(test_app, location):
 
     params = {"season": "AllYear",
-              "oil_type": "diesel",
+              "oil_type": "Non-Weathering",
               "receptor_id": 314,
               "amount_spilled": [1000, "bbl"],
               "level_of_concern": [1.5, "bbl"],
@@ -166,7 +166,7 @@ def test_threat_analysis(test_app, location):
 def test_impact_by_spill(test_app, location):
 
     params = {"season": "AllYear",
-              "oil_type": "diesel",
+              "oil_type": "Non-Weathering",
               "source_id": 3,
               "output_time_index": 3,
               "spill_number": 7
@@ -183,7 +183,7 @@ def test_impact_by_spill(test_app, location):
 def test_response_time_by_spill(test_app, location):
 
     params = {"season": "AllYear",
-              "oil_type": "diesel",
+              "oil_type": "Non-Weathering",
               "source_id": 3,
               "amount_spilled": [1000, "bbl"],
               "level_of_concern": [1.5, "bbl"],
