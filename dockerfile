@@ -6,7 +6,7 @@ FROM registry.orr.noaa.gov/erd/centos-conda/ubuntu/ubuntuforge-python3.11
 
 RUN apt-get update
 RUN apt-get upgrade -y
-
+RUN apt-get install git -y
 
 COPY ./ /tap-viewer/
 RUN cd tap-viewer/TAP-Viewer-API && conda install --file conda_requirements.txt
