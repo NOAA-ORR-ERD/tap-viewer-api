@@ -16,7 +16,7 @@
 # (the --reload is if you want to change the code under development)
 #
 
-python >=3.10,<3.13
+python >=3.10,<3.12
 numpy >=1.20
 pyramid =2.*
 pyramid_debugtoolbar
