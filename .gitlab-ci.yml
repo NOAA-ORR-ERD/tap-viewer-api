@@ -49,7 +49,7 @@ build_api:
     stage: build
     script:
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-        - docker build -f dockerfile . -t registry.orr.noaa.gov/gnome/tap/tap-viewer
+        - docker build -f dockerfile . -t registry.orr.noaa.gov/gnome/tap/tap-viewer --progress=plain --no-cache
         - docker push registry.orr.noaa.gov/gnome/tap/tap-viewer
     tags:
         - shell
