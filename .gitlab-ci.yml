@@ -8,9 +8,7 @@ stages:
 
 test_develop:
   stage: test
-  #image: registry.orr.noaa.gov/erd/centos-conda/miniforge-python$PYTHON_VER
-  image: registry.orr.noaa.gov/erd/centos-conda/miniconda3-python$PYTHON_VER
-  #image: registry.orr.noaa.gov/erd/centos-conda/centos7-python3
+  image: registry.orr.noaa.gov/erd/centos-conda/ubuntu/ubuntuforge-python3.11
 
     # variables:
     #     HASH: '1e0de0123b0043031000b050bb7095a9b4f0015f'
