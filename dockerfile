@@ -1,7 +1,8 @@
 # TAP Viewer Docker configuration
 #
 
-FROM registry.orr.noaa.gov/erd/centos-conda/centos7-python3
+FROM registry.orr.noaa.gov/erd/centos-conda/ubuntu/ubuntuforge-python3.11
+#FROM registry.orr.noaa.gov/erd/centos-conda/centos7-python3
 RUN yum update -y
 
 COPY ./ /tap-viewer/
