@@ -1,8 +1,7 @@
 # TAP Viewer Docker configuration
 #
 
-FROM registry.orr.noaa.gov/erd/centos-conda/ubuntu/ubuntuforge-python3.11
-#FROM registry.orr.noaa.gov/erd/centos-conda/centos7-python3
+FROM registry.orr.noaa.gov/erd/environments/ubuntu/ubuntuforge-python3.11
 
 RUN apt-get update
 RUN apt-get upgrade -y
