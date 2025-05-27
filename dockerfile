@@ -8,7 +8,7 @@ RUN apt-get upgrade -y
 RUN apt-get install git -y
 
 COPY ./ /tap-viewer/
-RUN cd tap-viewer/TAP-Viewer-API && conda install --file conda_requirements.txt
+RUN cd tap-viewer/TAP-Viewer-API && conda install --file conda_requirements.txt -q
 RUN cd tap-viewer/TAP-Viewer-API && pip install -e ./
 
 RUN mkdir /config
