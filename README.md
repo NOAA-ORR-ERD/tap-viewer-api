@@ -7,7 +7,7 @@ Python application served up with Pyramid web framework for the new web-based TA
 
 Gennady Kachook: Web UI and back-end API developer
 Dylan Righi: Back end computation developer and subject matter expert
-Chris Barker: Subject mater expert, software architecture support -- maybe some code :-)
+Chris Barker: Subject matter expert, software architecture support -- maybe some code :-)
 
 ## Project Dependecies and Installation Instructions
 
