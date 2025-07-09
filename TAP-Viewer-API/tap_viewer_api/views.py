@@ -7,17 +7,19 @@ from pyramid.view import view_config
 
 from docutils.core import publish_string
 
-from . import models
+from . import models, LOCATION_DIR
 
 # FixMe: maybe this should be pulled from the ini file??
+# Amy fix to at least use the LOCATION_DIR defined in the init
+# rather than define it differently in both places!
 data_dir = os.path.dirname(__file__)
 # l_dir = os.path.join(data_dir,'locations')  # standard locations loc
-# l_dir = os.path.join(data_dir,"..\..\..")  # ddr locations for local server 
+# l_dir = os.path.join(data_dir,"..\..\..")  # ddr locations for local server
 # locations_dir = os.path.join(l_dir, 'locations')
-locations_dir = os.path.join(data_dir, 'locations')
+# locations_dir = os.path.join(data_dir, 'locations')
 
 # load up the locations:
-all_locations = models.load_locations(locations_dir)
+all_locations = models.load_locations(LOCATION_DIR)
 
 cors_policy = {'credentials': True}
 
@@ -186,7 +188,7 @@ def impact_by_spill(request):
     req_obj = request.json_body
     return {'impact_by_spill_results': loc_obj.impact_by_spill(**req_obj)}
 
-def response_time_by_spill(request):    
+def response_time_by_spill(request):
     """
     returns site impact by spill for the given parmeters
 
