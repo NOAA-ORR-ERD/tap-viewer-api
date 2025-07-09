@@ -8,33 +8,53 @@ from pathlib import Path
 import numpy as np
 
 
-def getcube(data_dir,season,oil_type,source_id,cubeshape):
+def getcube(data_dir, season, oil_type, source_id, cubeshape):
     """
     Returns numpy array of cube with shape [nrec_sites,ntime,n_spills???]
     """
     cubedir = Path(data_dir)/'TAPDATA'/season
-    if oil_type is None: 
-        oil_type = ''
-    else:
-        oil_type = "_" + oil_type.lower()        
-    print(["oil_type :: " + oil_type, source_id])
-    
-    # fix 
-    if oil_type in ("_non-weathering", "_"):
-        oil_type = ""
-    print(["oil_type :: " + oil_type, source_id])
-     
-    try:
-        cubetag = next(cubedir.glob("*" + str(source_id+1).zfill(4) + oil_type + ".[bB][iI][nN]")).name[0:4] # for cube files with oil_type in name
-        # cubetag = next(cubedir.glob("*001.[bB][iI][nN]")).name[:-8]  # 7/20/22 - G.K. - use case insensitive pattern for glob()
-    except StopIteration:
-        raise FileNotFoundError("no cubes found in "+str(cubedir))
+    # TAPDATA cube names are 1-base indexed (source_id is zero based)
+    cubefiles = list(cubedir.glob("*" + str(source_id + 1).zfill(4) + "*.[bB][iI][nN]"))
 
-    cube_id = source_id + 1  # TAPDATA are 1-base indexed (at least for Arctic/SoCal TAPS)  
-    # cubefile = cubedir/(cubetag+str(cube_id).zfill(4)+'.bin')
+    if len(cubefiles) > 1: #more than one cube for source/season -- look by oil type
+        if oil_type is not None:
+            cubefiles = [p for p in cubefiles if oil_type.lower() in p.name]
+    
+    try:
+        cubefile = cubefiles[0] 
+        #this *should* be length one unless multiple cubes based on something other than oil type...no use case yet
+    except IndexError:
+        raise FileNotFoundError("No cubes found in "+ str(cubedir))
+        
+    #AM comment: delete once I confirm with Dylan
+    # if oil_type is None: 
+        # oil_type = ''
+    # else:
+        # oil_type = "_" + oil_type.lower()        
+    # print(["oil_type :: " + oil_type, source_id])
+    
+    # # fix 
+    # if oil_type in ("_non-weathering", "_"):
+        # oil_type = ""
+    # print(["oil_type :: " + oil_type, source_id])
+    
+    # cube_id = source_id + 1
+    # try:
+        # cubetag = next(cubedir.glob("*" + str(source_id+1).zfill(4) + oil_type + ".[bB][iI][nN]")).name[0:4] # for cube files with oil_type in name
+        # cubefile = cubedir/next(cubedir.glob(cubetag + str(cube_id).zfill(4) + oil_type + ".[bB][iI][nN]"))
+    # except StopIteration:
+        # try:
+            # cubetag = next(cubedir.glob("*001.[bB][iI][nN]")).name[:-8]  # 7/20/22 - G.K. - use case insensitive pattern for glob()
+            # cubefile = cubedir/(cubetag+str(cube_id).zfill(4)+'.bin')
+        # except StopIteration:
+            # raise FileNotFoundError("no cubes found in "+str(cubedir))
+
+    #cube_id = source_id + 1  # TAPDATA are 1-base indexed (at least for Arctic/SoCal TAPS)  
+    #cubefile = cubedir/(cubetag+str(cube_id).zfill(4)+'.bin')
      # 7/20/22 - G.K. - build a cube file name with a case sensitive extension
-    cubefile = cubedir/next(cubedir.glob(cubetag + str(cube_id).zfill(4) + oil_type + ".[bB][iI][nN]"))
-    print(cubefile)
+    #cubefile = cubedir/next(cubedir.glob(cubetag + str(cube_id).zfill(4) + oil_type + ".[bB][iI][nN]"))
+    
+    print('cubefile', cubefile)
     cubesize = np.prod(cubeshape)
     cube = np.fromfile(str(cubefile),np.uint8)
 
@@ -52,7 +72,6 @@ def getcube(data_dir,season,oil_type,source_id,cubeshape):
         cube = cube.astype(float)   # was np.float - deprecated since NumPy ver. 1.20
         cube = (cube/max_val)**n  # * num_LE)
        
-
     else:
         print(cubeshape)
         print(cube.size)
@@ -74,7 +93,12 @@ def cube_impact_analysis(self,season,oil_type,source_id,level_of_concern,
     cube = getcube(self.data_dir,season,oil_type,source_id,cubeshape)
 
     # find values greater than LOC
-    scale = amount_spilled[0]/self.model_spill[0]
+    try: #each source might have spill amount or could be just one
+        scale = amount_spilled[0]/self.model_spill[source_id][0]
+    except TypeError:
+        scale = amount_spilled[0]/self.model_spill[0]
+        
+    print('scale', scale)
     boolcube = cube[output_time_index,:,:]*scale >= level_of_concern[0]
 
     # translate to percentage
@@ -92,8 +116,11 @@ def cube_oiling_analysis(self,season,oil_type,source_id,receptor_id,
     cube = getcube(self.data_dir,season,oil_type,source_id,cubeshape)
 
     # print(output_time_index)
-    scale = amount_spilled[0]/self.model_spill[0]
-    print(scale)
+    try: #each source might have spill amount or could be just one
+        scale = amount_spilled[0]/self.model_spill[source_id][0]
+    except TypeError:
+        scale = amount_spilled[0]/self.model_spill[0]
+    print('scale', scale)
     oil_cube = cube[output_time_index,receptor_id,:]*scale
     # print(np.amax(oil_cube))
     # print(oil_cube.shape)
@@ -113,7 +140,10 @@ def cube_response_time_analysis(self,season,oil_type,source_id,receptor_id,
 
     resp_time = np.ones(self.num_sites)*out_times[-1]*2
     # find values greater than LOC
-    scale = amount_spilled[0]/self.model_spill[0]
+    try: #each source might have spill amount or could be just one
+        scale = amount_spilled[0]/self.model_spill[source_id][0]
+    except TypeError:
+        scale = amount_spilled[0]/self.model_spill[0]
     for ss in range(0,self.num_sites):
         xx1 = np.sum(cube[:,ss,:]*scale >= level_of_concern[0],1)
         tmp = np.where(xx1 > self.num_spills*(100-response_threshold)/100.,1,0)
@@ -135,10 +165,14 @@ def cube_threat_analysis(self,season,oil_type,receptor_id,amount_spilled,
     cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
     print(receptor_id)
     
-    scale = amount_spilled[0]/self.model_spill[0]
+
     threat = np.zeros(self.num_sources)
     for s in range(0,self.num_sources):
-        cube = getcube(self.data_dir,season,oil_type,s,cubeshape)    
+        cube = getcube(self.data_dir,season,oil_type,s,cubeshape)  
+        try: #each source might have spill amount or could be just one
+            scale = amount_spilled[0]/self.model_spill[s][0]
+        except TypeError:
+            scale = amount_spilled[0]/self.model_spill[0]
         bool_rec = cube[output_time_index,receptor_id,:]*scale >= level_of_concern[0]        
         threat[s] = np.sum(bool_rec)/cubeshape[2]
     
@@ -152,8 +186,10 @@ def cube_impact_by_spill(self,season,oil_type,source_id,
     # get the correct cube
     cubeshape = (len(self.output_times), self.num_sites, self.num_spills)
     cube = getcube(self.data_dir,season,oil_type,source_id,cubeshape)    
-
-    temp = cube[output_time_index,:,spill_number]/self.model_spill[0]   
+    try: #multiple spill amounts
+        temp = cube[output_time_index,:,spill_number]/self.model_spill[source_id][0]
+    except TypeError:
+        temp = cube[output_time_index,:,spill_number]/self.model_spill[0]
     print(np.max(temp))    
     return temp
     
@@ -174,7 +210,10 @@ def cube_response_time_by_spill(self,season,oil_type,source_id,
 
     resp_time = np.ones(self.num_sites)*out_times[-1]*2  # initial fill with values > longest time
     # find values greater than LOC
-    scale = amount_spilled[0]/self.model_spill[0]
+    try: #each source might have spill amount or could be just one
+        scale = amount_spilled[0]/self.model_spill[source_id][0]
+    except TypeError:
+        scale = amount_spilled[0]/self.model_spill[0]
     for ss in range(0,self.num_sites):
         tmp = np.where(cube1[:,ss]*scale >= level_of_concern[0],1,0)
         if tmp.any(): resp_time[ss] = min(out_times[np.where(tmp)])
