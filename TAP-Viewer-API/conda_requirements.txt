@@ -24,5 +24,6 @@ pastedeploy =2.*
 waitress
 webob
 docutils >=0.21
+setuptools <82
 
 

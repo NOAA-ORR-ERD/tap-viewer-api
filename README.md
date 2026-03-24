@@ -88,3 +88,16 @@ base_url/locations/{location_name}/oiling_analysis
 ```
 
 Will return a JSON response which contains a randomized 100 element array of floating point numbers that range between 0 and 1. (For prototyping purposes currently)
+
+
+## AWS Configuration
+
+In 2026 TAP was migrated into AWS Fargate.  In this deployment, the locations files are stored in the AWS
+S3 Bucket s3://6001-tap-location-migration-bucket
+
+Once files are stored there, an administrator can execute the AWS DataSync task named 
+`Migration location data from S3 bucket to TAP EFS`, that task will copy the files from the S3 bucket to 
+the EFS volume.  The EFS Volume is mounted in the TAP Viewer API container at /locations.  
+
+If files need to be updated/added/removed from the EFS volume, those files need to be copied to the S3 bucket, and
+the AWS DataSync task should be executed again to update the EFS volume with the latest tap files.
