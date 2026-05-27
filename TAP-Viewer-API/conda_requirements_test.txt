@@ -1,5 +1,5 @@
 # for testing:
 webtest
-pytest
+pytest >=3.8.0
 pytest-cov
 requests

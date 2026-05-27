@@ -1,36 +1,30 @@
 # This can be used with conda to get the dependencies
 #
-#  NOTE: as of 3/7/2016, not all requirements were available for python 3.6 yet.
-#        so this file uses python3.6
+#  1) create an environment with the dependencies::
+#    conda create -n tap python=3.12 --file conda_requirements.txt
 #
-#  1) create an environment::
-#    conda create -n tap python=3.6
+#  2) active the environment
+#    conda activate tap
 #
-#  2) load the dependencies:
-#    conda install --file conda_requirements.txt
+#  3) install the app:
+#    cd TAP-Viewer-API
+#    pip install -e ./
 #
-#  3) active the environment
-#    activate tap  (Windows)
-#     or
-#    source activate tap  (OS-X, Linux)
-#
-#  4) install the app:
-#    python setup.py develop
-#
-#  5) start the app
+#  4) start the app
 #    pserve --reload development.ini
 #
+# (the --reload is if you want to change the code under development)
+#
 
-python=3.8.*
-numpy=1.16.*
-pyramid=1.*
+python >=3.10,<3.12
+numpy >=1.20
+pyramid =2.*
 pyramid_debugtoolbar
-pastedeploy=2.*
+pastedeploy =2.*
 waitress
 webob
-docutils>=0.15.2
-pytest>=3.8.0
-zarr
+docutils >=0.21
+setuptools <82
 
 
 
