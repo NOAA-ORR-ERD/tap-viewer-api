@@ -8,9 +8,12 @@ import os
 import json
 import numpy as np
 
-from tap_viewer_api.tap_comp.cube_crunching import (cube_impact_analysis, cube_oiling_analysis, 
+from tap_viewer_api.tap_comp.cube_crunching import (cube_impact_analysis,
+                                                    cube_oiling_analysis, 
                                                     cube_threat_analysis,
-                                                   cube_impact_by_spill)
+                                                    cube_response_time_analysis,
+                                                    cube_impact_by_spill,
+                                                    cube_response_time_by_spill)
 
 locations = {}
 
@@ -21,6 +24,7 @@ def load_locations(location_dir):
     """
     locations = os.listdir(location_dir)
     locations = [name for name in locations if os.path.isdir(os.path.join(location_dir, name))]
+    locations = [name for name in locations if not name.startswith('.')]
     return {loc: TapLocation(os.path.join(location_dir, loc)) for loc in locations}
 
 
@@ -39,6 +43,13 @@ class TapLocation:
         print(self.data_dir)
         print(self.site_data["num_sites"])
         self.num_sites = self.site_data["num_sites"]
+        print(self.site_data)
+        if "model_spill" in self.site_data:
+            self.model_spill = self.site_data["model_spill"]
+        else:
+            self.model_spill = [1.0, 'barrels']
+     
+
 
     @property
     def location_info(self):
@@ -95,7 +106,7 @@ class TapLocation:
 
         example input:
             {"season": "winter",
-             "oil_type": "diesel",
+             "oil_type": "AD01938",
              "source_id":3,
              "level_of_concern":[1.5, "bbl"],
              "amount_spilled": [1000, "bbl"],
@@ -120,7 +131,7 @@ class TapLocation:
 
         example input:
             {"season": "winter",
-             "oil_type": "diesel",
+             "oil_type": "AD01938",
              "source_id": 3,
              "receptor_id": 111,
              "amount_spilled": [1000, "bbl"],
@@ -143,12 +154,9 @@ class TapLocation:
 
         """
         Compute a response time analysis
-
-        For now, it only returns random values
-
         example input:
             {"season": "winter",
-             "oil_type": "diesel",
+             "oil_type": "AD01938",
              "source_id": 3,
              "receptor_id": 111,
              "amount_spilled": [1000, "bbl"],
@@ -156,33 +164,12 @@ class TapLocation:
              "response_threshold": 95
              }
         """
+        # return cube_response_time_analysis(self,season,oil_type,source_id,receptor_id,
+        #               amount_spilled,level_of_concern,response_threshold).tolist()
+        resp_time,resp_time_receptor = cube_response_time_analysis(self,season,oil_type,
+                    source_id,receptor_id,amount_spilled,level_of_concern,response_threshold)
         
-        #print(self.num_sites,self.num_spills)
-        #return (np.random.random(self.num_sites)).tolist(), (np.random.random(self.num_spills)).tolist()
-
-        # just for testing (instead of random values):
-        #  a) response times - impact analysis cube data adjusted for max_days
-        #  b) spill times - oiling analysis cube data adjusted for max_days
-        #  c) output_time_index = - 1 - the longest time (?)
-        max_days = np.array(self.output_times)[:,0].astype(np.float).max() / 24
-        response_times = cube_impact_analysis(self, season, oil_type, source_id, level_of_concern, amount_spilled, -1)
-        spill_times = cube_oiling_analysis(self, season, oil_type, source_id, receptor_id, amount_spilled, -1)
-
-        max_rt = np.max(response_times)
-        if (max_rt != 0):
-            ret_response_times = (response_times / max_rt * max_days)
-        else:
-            ret_response_times = response_times
-        ret_response_times = (max_days - ret_response_times).tolist()
-
-        max_st = np.max(spill_times)
-        if (max_st != 0):
-            ret_spill_times = (spill_times / max_st * max_days).tolist()
-        else:
-            ret_spill_times = spill_times.tolist()
-                
-        return ret_response_times, ret_spill_times
-        #return (np.random.random(self.num_sites) * max_days).tolist(), (np.random.random(self.num_spills) * max_days).tolist()
+        return (resp_time).tolist(),(resp_time_receptor).tolist()
 
 
     def threat_analysis(self,
@@ -201,7 +188,7 @@ class TapLocation:
 
         example input:
             {"season": "winter",
-             "oil_type": "diesel",
+             "oil_type": "AD01938",
              "receptor_id": 314,
              "amount_spilled": [1000, "bbl"],
              "level_of_concern": [1.5, "bbl"],
@@ -212,6 +199,7 @@ class TapLocation:
        
         return cube_threat_analysis(self,season,oil_type,receptor_id,
                         amount_spilled,level_of_concern,output_time_index).tolist()
+
 
     def impact_by_spill(self,
                         season=None,
@@ -229,7 +217,7 @@ class TapLocation:
         example input:
             {
             "season": "winter",
-            "oil_type": "diesel",
+            "oil_type": "AD01938",
             "source_id": 3,
             "output_time_index": 3,
             "spill_number": 7
@@ -247,32 +235,22 @@ class TapLocation:
                                amount_spilled=None,
                                level_of_concern=None,
                                spill_number=None,
-                              ):
+                               ):
 
         """
-        Compute a threat analysis
-
-        For now, it only returns random values
+        Compute response time by spill
 
         example input:
             {
             "season": "winter",
-            "oil_type": "diesel",
+            "oil_type": "AD01938",
             "source_id": 3,
             "amount_spilled": [1000, "bbl"],
             "level_of_concern": [1.5, "bbl"],
             "spill_number": 7
             }
-        """
-
-        #return (np.random.random(self.num_sites) * max_days).tolist()
-        # for testing (instead of random values):
-        #  response times - impact by spill cube data adjusted for max_days
-        #  output_time_index = - 1 - the longest time (?)
-        max_days = np.array(self.output_times)[:,0].astype(np.float).max() / 24
-        response_times = cube_impact_by_spill(self, season, oil_type, source_id, -1, spill_number)
-        max_rt = np.max(response_times)
-        if (max_rt != 0):
-            return (max_days * (1 - response_times / max_rt)).tolist()
-        else:
-            return response_times.tolist()
+        """ 
+        return cube_response_time_by_spill(self,season,oil_type,source_id,amount_spilled,
+                             level_of_concern,spill_number).tolist()
+        
+        

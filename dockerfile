@@ -1,12 +1,15 @@
 # TAP Viewer Docker configuration
 #
 
-FROM registry.orr.noaa.gov/erd/centos-conda/centos7-python3
-RUN yum update -y
+FROM registry.orr.noaa.gov/erd/environments/ubuntu/ubuntuforge-python3.11
+
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install git -y
 
 COPY ./ /tap-viewer/
-RUN cd tap-viewer/TAP-Viewer-API && conda install --file conda_requirements.txt
-RUN cd tap-viewer/TAP-Viewer-API && python setup.py develop
+RUN cd tap-viewer/TAP-Viewer-API && conda install --file conda_requirements.txt -q
+RUN cd tap-viewer/TAP-Viewer-API && pip install -e ./
 
 RUN mkdir /config
 RUN cp /tap-viewer/TAP-Viewer-API/config-deploy.ini /config/config.ini

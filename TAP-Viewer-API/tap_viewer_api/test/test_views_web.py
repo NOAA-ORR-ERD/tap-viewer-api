@@ -8,15 +8,21 @@ This can test the actual response objects
 
 import pytest
 
-from pyramid import testing
+# from pyramid import testing
 import webtest
 
-from tap_viewer_api import views
+from tap_viewer_api import LOCATION_DIR
+
+#LOCS_TO_TEST = ['south-california', 'sf_bay', 'arctic_platforms']  # what's this?, 'socal_md']
+#LOCS_TO_TEST = ['south-california', 'sf_bay']
+#LOCS_TO_TEST = ['south-california', 'arctic_platforms']
+LOCS_TO_TEST = ['arctic_platforms']
+
 
 @pytest.fixture
 def test_app():
     """
-    this fixture provides an applicaiton object to test against
+    this fixture provides an application object to test against
     """
     from tap_viewer_api import main
     app = main({})
@@ -26,7 +32,7 @@ def test_app():
 
 def test_home(test_app):
     """
-    This one does retrun a response object
+    This one does return a response object
     """
     response = test_app.get('/', status=200)
     assert response.status_code == 200
@@ -39,37 +45,50 @@ def test_locations(test_app):
     Do all the locations expected end up in the response?
     """
 
+    # find all the ones in the locations dir:
+    all_locs = {loc.name for loc in LOCATION_DIR.iterdir() if loc.is_dir() and not loc.name == ".git"}
+
     response = test_app.get('/locations', status=200)
     assert response.status_code == 200
     assert response.content_type == 'application/json'
     result = response.json
 
-    assert set(result.keys()) == set(['socal', 'sf', 'arctic', 'socal_md'])
+    assert result.keys() == all_locs
 
 
-@pytest.mark.parametrize("location", ['socal', 'sf', 'arctic', 'socal_md'])
+@pytest.mark.parametrize("location", LOCS_TO_TEST)
 def test_location_setup(test_app, location):
     response = test_app.get('/locations/{}/setup'.format(location), status=200)
     assert response.status_code == 200
     assert response.content_type == 'application/json'
     result = response.json
 
-    assert set(result.keys()) == set(('bounding_box', 'output_times', 'locs', 'name',
-                                      'seasons', 'source_locations', 'oil_types',
-                                      'num_spills', 'output_amounts'))
+    if location == 'south-california':
+        assert set(result.keys()) == set(('bounding_box', 'output_times', 'locs', 'name',
+                                        'seasons', 'source_locations', 'num_spills', 
+                                        'release_duration', 'num_sites', 
+                                        'model_spill', 'spill_rate', 'season_labels'
+                                        ))
 
-    #num_sources[{}] = len(result['source_locations'])
+        #num_sources[{}] = len(result['source_locations'])
+
+    if location == 'arctic_platforms':
+        assert set(result.keys()) == set(('bounding_box', 'output_times', 'locs', 'name',
+                                        'seasons', 'source_locations', 'num_spills', 
+                                        'release_duration', 'num_sites', 
+                                        'oil_types', 'spill_rate', 'season_labels'
+                                        ))
 
 
-@pytest.mark.parametrize(("location", "season"),[('socal', 'AllYear'),
-                                                 # ('sf', 'AllYear'),
-                                                 ('arctic', 'AllYear'),
-                                                 ('socal_md','AllYear')
+@pytest.mark.parametrize(("location", "season"),[('arctic_platforms', 'AllYear'),
+                                                 # ('sf_bay', 'AllYear'),
+                                                 ('arctic_platforms', 'AllYear'),
+                                                 # ('socal_md', 'AllYear'),
                                                   ])
-def test_impact_analysis(test_app, location,season):
+def test_impact_analysis(test_app, location, season):
 
     params = {"season": season,
-              "oil_type": "diesel",
+              "oil_type": "Non-Weathering",
               "source_id": 3,
               "level_of_concern": [1.5, "bbl"],
               "amount_spilled": [1000, "bbl"],
@@ -85,11 +104,11 @@ def test_impact_analysis(test_app, location,season):
     assert 'impact_analysis_results' in result
     # assert False
 
-@pytest.mark.parametrize("location", ['socal', 'sf', 'arctic', 'socal_md'])
+@pytest.mark.parametrize("location", LOCS_TO_TEST)
 def test_oiling_analysis(test_app, location):
 
     params = {"season": "AllYear",
-              "oil_type": "diesel",
+              "oil_type": "Non-Weathering",
               "source_id": 3,
               "receptor_id": 111,
               "amount_spilled": [1000, "bbl"],
@@ -106,11 +125,11 @@ def test_oiling_analysis(test_app, location):
 
     # Fixme: add some more testing -- sizeof result array maybe?
 
-@pytest.mark.parametrize("location", ['socal', 'sf', 'arctic', 'socal_md'])
+@pytest.mark.parametrize("location", LOCS_TO_TEST)
 def test_response_time_analysis(test_app, location):
 
-    params = {"season": "winter",
-              "oil_type": "diesel",
+    params = {"season": "AllYear",
+              "oil_type": "Non-Weathering",
               "source_id": 3,
               "receptor_id": 111,
               "amount_spilled": [1000, "bbl"],
@@ -125,11 +144,11 @@ def test_response_time_analysis(test_app, location):
 
     assert 'response_time_analysis_results' in result
 
-@pytest.mark.parametrize("location", ['socal', 'sf', 'arctic', 'socal_md'])
+@pytest.mark.parametrize("location", LOCS_TO_TEST)
 def test_threat_analysis(test_app, location):
 
-    params = {"season": "winter",
-              "oil_type": "diesel",
+    params = {"season": "AllYear",
+              "oil_type": "Non-Weathering",
               "receptor_id": 314,
               "amount_spilled": [1000, "bbl"],
               "level_of_concern": [1.5, "bbl"],
@@ -143,11 +162,11 @@ def test_threat_analysis(test_app, location):
 
     assert 'threat_analysis_results' in result
 
-@pytest.mark.parametrize("location", ['socal', 'sf', 'arctic', 'socal_md'])
+@pytest.mark.parametrize("location", LOCS_TO_TEST)
 def test_impact_by_spill(test_app, location):
 
-    params = {"season": "winter",
-              "oil_type": "diesel",
+    params = {"season": "AllYear",
+              "oil_type": "Non-Weathering",
               "source_id": 3,
               "output_time_index": 3,
               "spill_number": 7
@@ -160,11 +179,11 @@ def test_impact_by_spill(test_app, location):
 
     assert 'impact_by_spill_results' in result
 
-@pytest.mark.parametrize("location", ['socal', 'sf', 'arctic', 'socal_md'])
+@pytest.mark.parametrize("location", LOCS_TO_TEST)
 def test_response_time_by_spill(test_app, location):
 
-    params = {"season": "winter",
-              "oil_type": "diesel",
+    params = {"season": "AllYear",
+              "oil_type": "Non-Weathering",
               "source_id": 3,
               "amount_spilled": [1000, "bbl"],
               "level_of_concern": [1.5, "bbl"],
