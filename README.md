@@ -7,22 +7,29 @@ Python application served up with Pyramid web framework for the new web-based TA
 
 Gennady Kachook: Web UI and back-end API developer
 Dylan Righi: Back end computation developer and subject matter expert
-Chris Barker: Subject mater expert, software architecture support -- maybe some code :-)
+Chris Barker: Subject matter expert, software architecture support -- maybe some code :-)
 
 ## Project Dependecies and Installation Instructions
 
 In order to run the TAP-Viewer-API you need to install the dependencies:
 
 1) create an environment with the dependencies::
-   `conda create -n tap python=3.10 --file conda_requirements.txt`
+   `conda create -n tap --file conda_requirements.txt`
 
 2) active the environment
    `conda activate tap`
 
 3) install the app:
 
-   `cd TAP-Viewer-API`
    `pip install -e ./`
+
+5) add location data
+
+    You need to create a locations directory with location data.
+
+    then set the locations_dir variable in the ini file to that location
+
+    It defaults to "locations" one dir from where the ini file is.
 
 4) start the app
 
@@ -88,3 +95,16 @@ base_url/locations/{location_name}/oiling_analysis
 ```
 
 Will return a JSON response which contains a randomized 100 element array of floating point numbers that range between 0 and 1. (For prototyping purposes currently)
+
+
+## AWS Configuration
+
+In 2026 TAP was migrated into AWS Fargate.  In this deployment, the locations files are stored in the AWS
+S3 Bucket s3://6001-tap-location-migration-bucket
+
+Once files are stored there, an administrator can execute the AWS DataSync task named 
+`Migration location data from S3 bucket to TAP EFS`, that task will copy the files from the S3 bucket to 
+the EFS volume.  The EFS Volume is mounted in the TAP Viewer API container at /locations.  
+
+If files need to be updated/added/removed from the EFS volume, those files need to be copied to the S3 bucket, and
+the AWS DataSync task should be executed again to update the EFS volume with the latest tap files.
