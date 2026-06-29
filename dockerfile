@@ -14,6 +14,10 @@ RUN cd tap-viewer/ && pip install ./
 RUN mkdir /config
 RUN cp /tap-viewer/config-deploy.ini /config/config.ini
 RUN ln -s /config/config.ini /tap-viewer/config.ini
+RUN echo "working dir:" & pwd
+RUN ls
+RUN ls tap-viewer
+
 
 EXPOSE 9900
 VOLUME /config
