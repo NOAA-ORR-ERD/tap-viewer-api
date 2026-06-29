@@ -3,9 +3,9 @@ variables:
   GIT_DEPTH: 2
 
 stages:
+  - test
   - build
 #  - lint
-  - test
   - deploy
 
 
