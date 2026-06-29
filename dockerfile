@@ -8,12 +8,12 @@ RUN apt-get upgrade -y
 RUN apt-get install git -y
 
 COPY ./ /tap-viewer/
-RUN cd tap-viewer/TAP-Viewer-API && conda install --file conda_requirements.txt -q
-RUN cd tap-viewer/TAP-Viewer-API && pip install -e ./
+RUN cd tap-viewer/ && conda install --file conda_requirements.txt -q
+RUN cd tap-viewer/ && pip install ./
 
 RUN mkdir /config
-RUN cp /tap-viewer/TAP-Viewer-API/config-deploy.ini /config/config.ini
-RUN ln -s /config/config.ini /tap-viewer/TAP-Viewer-API/config.ini
+RUN cp /tap-viewer/config-deploy.ini /config/config.ini
+RUN ln -s /config/config.ini /tap-viewer/config.ini
 
 EXPOSE 9900
 VOLUME /config
