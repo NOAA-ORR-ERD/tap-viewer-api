@@ -1,20 +1,33 @@
 ﻿#!/usr/bin/env python
 
 import os
+from pathlib import Path
 
 from pyramid.response import Response
 from pyramid.view import view_config
+from pyramid.threadlocal import get_current_registry
 
 from docutils.core import publish_string
+
+import tap_viewer_api
 
 from . import models
 
 # FixMe: maybe this should be pulled from the ini file??
+#      I think all that's here is the API.rst file, so ??
+#      Perhaps there should be a static files dir somewhere?
 data_dir = os.path.dirname(__file__)
-locations_dir = os.path.join(data_dir, 'locations')
+
+print(get_current_registry())
+settings = get_current_registry().settings
+# settings = registry.settings
 
 # load up the locations:
-all_locations = models.load_locations(locations_dir)
+try:
+    all_locations = models.load_locations(Path(settings.get("locations_dir")))
+except AttributeError:
+    # if config hasn't been set up, then do this.
+    all_locations = models.load_locations(tap_viewer_api.LOCATION_DIR)
 
 cors_policy = {'credentials': True}
 
@@ -183,7 +196,7 @@ def impact_by_spill(request):
     req_obj = request.json_body
     return {'impact_by_spill_results': loc_obj.impact_by_spill(**req_obj)}
 
-def response_time_by_spill(request):    
+def response_time_by_spill(request):
     """
     returns site impact by spill for the given parmeters
 

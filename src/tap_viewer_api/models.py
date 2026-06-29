@@ -40,17 +40,13 @@ class TapLocation:
         self.num_spills = self.site_data["num_spills"]
         self.num_sources = len(self.site_data["source_locations"])
         self.output_times = self.site_data["output_times"]
-        print(self.data_dir)
-        print(self.site_data["num_sites"])
         self.num_sites = self.site_data["num_sites"]
-        print(self.site_data)
+        print(f"found: {self.site_data['name']}")
         if "model_spill" in self.site_data:
             self.model_spill = self.site_data["model_spill"]
         else:
             self.model_spill = [1.0, 'barrels']
      
-
-
     @property
     def location_info(self):
         """
@@ -106,7 +102,7 @@ class TapLocation:
 
         example input:
             {"season": "winter",
-             "oil_type": "diesel",
+             "oil_type": "AD01938",
              "source_id":3,
              "level_of_concern":[1.5, "bbl"],
              "amount_spilled": [1000, "bbl"],
@@ -131,7 +127,7 @@ class TapLocation:
 
         example input:
             {"season": "winter",
-             "oil_type": "diesel",
+             "oil_type": "AD01938",
              "source_id": 3,
              "receptor_id": 111,
              "amount_spilled": [1000, "bbl"],
@@ -156,7 +152,7 @@ class TapLocation:
         Compute a response time analysis
         example input:
             {"season": "winter",
-             "oil_type": "diesel",
+             "oil_type": "AD01938",
              "source_id": 3,
              "receptor_id": 111,
              "amount_spilled": [1000, "bbl"],
@@ -188,7 +184,7 @@ class TapLocation:
 
         example input:
             {"season": "winter",
-             "oil_type": "diesel",
+             "oil_type": "AD01938",
              "receptor_id": 314,
              "amount_spilled": [1000, "bbl"],
              "level_of_concern": [1.5, "bbl"],
@@ -217,7 +213,7 @@ class TapLocation:
         example input:
             {
             "season": "winter",
-            "oil_type": "diesel",
+            "oil_type": "AD01938",
             "source_id": 3,
             "output_time_index": 3,
             "spill_number": 7
@@ -243,7 +239,7 @@ class TapLocation:
         example input:
             {
             "season": "winter",
-            "oil_type": "diesel",
+            "oil_type": "AD01938",
             "source_id": 3,
             "amount_spilled": [1000, "bbl"],
             "level_of_concern": [1.5, "bbl"],

@@ -1,27 +1,158 @@
+variables:
+  PYTHON_VER: '3.13'
+  GIT_DEPTH: 2
+
 stages:
-#    - test
-    - build
-
-# test_develop:
-#     stage: test
-#     image: registry.orr.noaa.gov/erd/centos-conda
-
-#     script:
-#         - cd TAP-Viewer-API
-#         - conda install --file conda_requirements.txt
-# #        - pip install -r pip_requirements.txt
-#         - python setup.py develop
-#         - pytest tap_viewer_api/test
-        
-build:
-    stage: build
-    script:
-        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-        - docker build -f dockerfile . -t registry.orr.noaa.gov/gnome/tap/tap-viewer
-        - docker push registry.orr.noaa.gov/gnome/tap/tap-viewer
-    tags:
-        - shell
-        - build
+  - build
+#  - lint
+  - test
+  - deploy
 
 
+test_develop:
+  stage: test
+  image: registry.orr.noaa.gov/erd/environments/ubuntu/ubuntuforge-python$PYTHON_VER
 
+  before_script:
+    # Force git to fetch all remote tags so vcs versioning will work
+    # we also need git to get the locations
+    - apt-get install git -y
+    - git --version
+
+    - conda install --file conda_requirements.txt --file conda_requirements_test.txt
+    - git fetch --tags
+
+  script:
+    - pip install -e ./
+
+    ####
+    # get locations/arctic_platforms for tests (this hardcoded in test_cube_crunching.py at this moment)
+    ####
+    - cd ../
+    - rm -rf ./tap-test-data
+    - ls -al
+
+    # get data from 'tap-test-data' repository and clone the root directory only
+    - git clone --depth=1 https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.orr.noaa.gov/gnome/tap/tap-test-data.git
+    - ls -al
+    - ls -al ./tap-test-data
+    ####
+
+    # run tests
+    # so the tests can find them.
+    - export TAP_LOCATIONS_DIR=./tap-test-data/
+    - pytest --pyargs tap_viewer_api
+
+
+# The following will be set as project variables. These are just placeholders.
+# variables:
+#   ECR_REPO_URI: ""
+#   FARGATE_CLUSTER: ""
+#   FARGATE_SERVICES: "service1:3 service2:1"
+#   # Since these are project vars they will be picked up by the AWS CLI
+#   AWS_ACCESS_KEY_ID: ""
+#   AWS_SECRET_ACCESS_KEY: ""
+#   AWS_DEFAULT_REGION: ""
+
+
+.build_template: &build_definition
+  stage: build
+  image: docker:dind
+  services:
+    - docker:dind
+  before_script:
+    - unset DOCKER_AUTH_CONFIG
+  script:
+    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+    - >
+      docker build \
+        --build-arg git_commit_short_hash=${CI_COMMIT_SHORT_SHA} \
+        --build-arg build_env=${TARGET_ENV} \
+        --no-cache \
+        -f Dockerfile \
+        -t "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}" .
+    - docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}
+    - echo "GCR_IMAGE=${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}" >> build.env
+  artifacts:
+    reports:
+      dotenv: build.env
+  tags:
+    - "docker"
+    - "aws"
+    - "us-west-2"
+
+.deploy_template: &deploy_definition
+  stage: deploy
+  image: docker:dind
+  when: manual
+  services:
+    - docker:dind
+  before_script:
+    - unset DOCKER_AUTH_CONFIG
+  script:
+    - apk --update --no-cache add bash aws-cli
+    # Pull image from GCR using GCR_IMAGE from previous job.
+    - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" "${CI_REGISTRY}"
+    - echo "Pulling $GCR_IMAGE"
+    - docker pull "$GCR_IMAGE"
+    - docker logout "${CI_REGISTRY}"
+    - aws ecr get-login-password --region "$AWS_DEFAULT_REGION" | docker login --username AWS --password-stdin "$ECR_REPO_URI"
+    - docker tag "$GCR_IMAGE" "${ECR_REPO_URI}:latest"
+    - docker tag "$GCR_IMAGE" "${ECR_REPO_URI}:$CI_COMMIT_SHORT_SHA"
+    - echo "Pushing $GCR_IMAGE to ${ECR_REPO_URI}"
+    - docker push "${ECR_REPO_URI}:latest"
+    - docker push "${ECR_REPO_URI}:$CI_COMMIT_SHORT_SHA"
+    - |
+      for SERVICE in $FARGATE_SERVICES; do
+        SERVICE_NAME=$(echo $SERVICE | awk -F: '{print $1}')
+        SERVICE_COUNT=$(echo $SERVICE | awk -F: '{print $2}')
+        aws ecs update-service --cluster "$FARGATE_CLUSTER" \
+            --service "$SERVICE_NAME" \
+            --desired-count "$SERVICE_COUNT" \
+            --force-new-deployment --debug
+      done
+  tags:
+    - "docker"
+    - "aws"
+    - "us-west-2"
+
+.dev: &dev_definition
+  environment:
+    name: dev
+    url: https://tap-dev.nos-orr.net
+  variables:
+      API_URL: https://tap-dev.nos-orr.net/api
+      TARGET_ENV: dev
+  rules:
+  - if: $CI_PIPELINE_SOURCE == "merge_request_event"  # Skip for merge requests
+    when: never
+  - if: $CI_COMMIT_BRANCH == "develop"
+
+
+.prod: &prod_definition
+  environment:
+    name: prod
+    url: https://tap.orr.noaa.gov
+  variables:
+      API_URL: https://tap.orr.noaa.gov/api
+      TARGET_ENV: prod
+  rules:
+  - if: $CI_PIPELINE_SOURCE == "merge_request_event"  # Skip for merge requests
+    when: never
+  - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+Development Build Docker Image:
+  <<: *build_definition
+  <<: *dev_definition
+
+Production Build Docker Image:
+  <<: *build_definition
+  <<: *prod_definition
+
+Development Push to ECR and Update Fargate Service:
+  <<: *deploy_definition
+  <<: *dev_definition
+
+Production Push to ECR and Update Fargate Service:
+  <<: *deploy_definition
+  <<: *prod_definition
