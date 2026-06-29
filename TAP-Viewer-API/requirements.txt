@@ -1,4 +1,0 @@
-pyramid
-numpy
-waitress
-pyramid_debugtoolbar

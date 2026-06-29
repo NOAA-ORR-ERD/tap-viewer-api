@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "TAP-Viewer-API"
+dynamic = ["version"]
+description = "tap-viewer"
+license = "CC0-1.0"
+license-files = ["LICENSE.txt"]
+authors = [
+    { name = "Chris Barker", email = "Chris.Barker@noaa.gov" },
+    { name = "Gennady Kachook", email = "Gennady.Kachook@noaa.gov" },
+    { name = "Dylan Righi", email = "Dylan.Righi@noaa.gov" },
+]
+requires-python = ">=3.13"
+dependencies = [
+    "numpy>=2.5,<3.0",
+    "pyramid>=2.1,<3.0",
+    "pyramid_debugtoolbar",
+    "pastedeploy>=3.0,<4.0 ",
+    "waitress",
+    "webob",
+    "docutils",
+    "setuptools <82",
+#    "setuptools>=82.0.1",
+]
+
+[project.entry-points."paste.app_factory"]
+main = "tap_viewer_api:main"
+
+[project.urls]
+Homepage = "https://tap.orr.noaa.gov"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/tap_viewer_api/_version.py"
+
+[tool.setuptools_scm]
+tag.strict = false
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "./",
+]
