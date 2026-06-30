@@ -12,18 +12,21 @@ import pytest
 # from pyramid import testing
 import webtest
 
-LOCS_TO_TEST = ['arctic_platforms']
-
+LOCS_TO_TEST = ['arctic_platforms',
+                'sabine_lake',
+                'south-california'
+                ]
 
 @pytest.fixture
 def test_app(locations_dir):
     """
     this fixture provides an application object to test against
     """
-    config_uri = 'development.ini'
+    # config_uri = 'development.ini'
 
     from tap_viewer_api import main
     app = main({}, locations_dir=locations_dir)
+
     test_app = webtest.TestApp(app)
     return test_app
 
