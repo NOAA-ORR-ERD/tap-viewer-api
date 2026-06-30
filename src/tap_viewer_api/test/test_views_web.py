@@ -12,9 +12,10 @@ import pytest
 # from pyramid import testing
 import webtest
 
-LOCS_TO_TEST = ['arctic_platforms',
-                'sabine_lake',
-                'south-california'
+LOCS_TO_TEST = [
+        ('arctic_platforms'),
+        ('sabine_lake'),
+        ('south-california')
                 ]
 
 @pytest.fixture
@@ -82,15 +83,14 @@ def test_location_setup(test_app, location):
 
 
 @pytest.mark.parametrize(("location", "season"),[('arctic_platforms', 'AllYear'),
-                                                 # ('sf_bay', 'AllYear'),
-                                                 ('arctic_platforms', 'AllYear'),
+                                                 # ('sf_bay', 'AllYear')
                                                  # ('socal_md', 'AllYear'),
                                                   ])
 def test_impact_analysis(test_app, location, season):
 
     params = {"season": season,
               "oil_type": "Non-Weathering",
-              "source_id": 3,
+              "source_id": 1,
               "level_of_concern": [1.5, "bbl"],
               "amount_spilled": [1000, "bbl"],
               "output_time_index": 3,
@@ -110,7 +110,7 @@ def test_oiling_analysis(test_app, location):
 
     params = {"season": "AllYear",
               "oil_type": "Non-Weathering",
-              "source_id": 3,
+              "source_id": 1,
               "receptor_id": 111,
               "amount_spilled": [1000, "bbl"],
               "output_time_index": 3,
@@ -131,7 +131,7 @@ def test_response_time_analysis(test_app, location):
 
     params = {"season": "AllYear",
               "oil_type": "Non-Weathering",
-              "source_id": 3,
+              "source_id": 1,
               "receptor_id": 111,
               "amount_spilled": [1000, "bbl"],
               "level_of_concern": [1.5, "bbl"],
@@ -150,7 +150,7 @@ def test_threat_analysis(test_app, location):
 
     params = {"season": "AllYear",
               "oil_type": "Non-Weathering",
-              "receptor_id": 314,
+              "receptor_id": 201,
               "amount_spilled": [1000, "bbl"],
               "level_of_concern": [1.5, "bbl"],
               "output_time_index": 3,
@@ -168,7 +168,7 @@ def test_impact_by_spill(test_app, location):
 
     params = {"season": "AllYear",
               "oil_type": "Non-Weathering",
-              "source_id": 3,
+              "source_id": 1,
               "output_time_index": 3,
               "spill_number": 7
              }
@@ -185,7 +185,7 @@ def test_response_time_by_spill(test_app, location):
 
     params = {"season": "AllYear",
               "oil_type": "Non-Weathering",
-              "source_id": 3,
+              "source_id": 1,
               "amount_spilled": [1000, "bbl"],
               "level_of_concern": [1.5, "bbl"],
               "spill_number": 7
