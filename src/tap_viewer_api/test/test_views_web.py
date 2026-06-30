@@ -12,31 +12,7 @@ import pytest
 # from pyramid import testing
 import webtest
 
-# from tap_viewer_api import LOCATION_DIR
-
-#LOCS_TO_TEST = ['south-california', 'sf_bay', 'arctic_platforms']  # what's this?, 'socal_md']
-#LOCS_TO_TEST = ['south-california', 'sf_bay']
-#LOCS_TO_TEST = ['south-california', 'arctic_platforms']
 LOCS_TO_TEST = ['arctic_platforms']
-
-# setting to use for tests
-# this is stuff that is usually in the config.ini file
-# HERE = Path(__file__).parent
-
-
-# # get locations for environment variable, if there
-# LOCATION_DIR = os.getenv("TAP_LOCATIONS_DIR", None)
-# if LOCATION_DIR is None:
-#     # assume it's relative to the test dir
-#     LOCATION_DIR = HERE / "../../locationality"
-#     msg = ("No TAP_LOCATIONS_DIR env var set -- looked relative to test dir,\n"
-#            f"found: LOCATION_DIR")
-# else:
-#     msg = f"TAP_LOCATIONS_DIR env var set to: {LOCATION_DIR}"
-
-# LOCATION_DIR = Path(LOCATION_DIR)
-# if not LOCATION_DIR.is_dir():
-#     raise ValueError(f"{LOCATION_DIR} is not a dir:\n {msg}")
 
 
 @pytest.fixture

@@ -2,30 +2,14 @@
 
 from pyramid.config import Configurator
 from pyramid.events import NewRequest
-# from tap_viewer_api.views import cors_policy
+from . import views
 
 ALLOWED_ORIGINS = ()
-
-# This is now pulled from the config.ini!
-
-# LOCATION_DIR = Path(__file__).parent / 'locations'
-
-# # Is there something else to look for?
-# #if not (LOCATION_DIR / 'san_diego' / 'site.json').is_file():
-# # fixed (G.K.): only 'arctic_platforms' location is cloned for tests on the server at this moment (GitLab job)
-# if not (LOCATION_DIR / 'arctic_platforms' / 'site.json').is_file():
-#     print((LOCATION_DIR / 'arctic_platforms' / 'site.json'))
-#     print("Can't find locations in with code, looking outside, "
-#           "alongside this repo")
-#     # set locations DIR for tests
-#     LOCATION_DIR = Path(__file__).parents[3] / 'locations'
-
-# DATA_DIR = Path(__file__).parent
-
 
 def add_cors_headers_response_callback(event):
     def cors_headers(request, response):
         origin = request.headers.get('Origin')
+        # Fixme: can't this be pulled from the config/settings here?
         if origin in ALLOWED_ORIGINS:
             response.headers['Access-Control-Allow-Origin'] = origin
     event.request.add_response_callback(cors_headers)
@@ -33,11 +17,6 @@ def add_cors_headers_response_callback(event):
 
 def main(global_config, **settings):
     global ALLOWED_ORIGINS
-    global LOCATION_DIR
-
-    # Fixme: this could be accessed where it's needed, presumably ...
-    LOCATION_DIR = Path(settings.get("locations_dir"))
-    print(f"locations_dir set to: {LOCATION_DIR}")
 
     try:
         origins = settings['cors_policy.origins']
@@ -49,4 +28,8 @@ def main(global_config, **settings):
     config.include('tap_viewer_api.views')
     config.add_static_view(name='static', path='static')
     config.add_subscriber(add_cors_headers_response_callback, NewRequest)
+
+    # initialize the views (location data only for now)
+    views.initialize(settings)
+
     return config.make_wsgi_app()
