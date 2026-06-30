@@ -97,3 +97,5 @@ ENV/
 
 # Node 
 node_modules/
+
+.idea/
