@@ -19,14 +19,14 @@ LOCS_TO_TEST = [
                 ]
 
 @pytest.fixture
-def test_app(locations_dir):
+def test_app(test_settings):
     """
     this fixture provides an application object to test against
     """
     # config_uri = 'development.ini'
 
     from tap_viewer_api import main
-    app = main({}, locations_dir=locations_dir)
+    app = main({}, **test_settings)
 
     test_app = webtest.TestApp(app)
     return test_app
@@ -46,7 +46,6 @@ def test_locations(test_app, locations_dir):
     """
     Do all the locations expected end up in the response?
     """
-
     # find all the ones in the locations dir:
     all_locs = {loc.name for loc in locations_dir.iterdir() if loc.is_dir() and not loc.name == ".git"}
 
