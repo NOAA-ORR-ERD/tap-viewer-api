@@ -1,6 +1,9 @@
 TAP Viewer API
 ==============
 
+API version: <<insert version here>>
+
+
 This application is a JSON API -- no nifty html here
 
 
