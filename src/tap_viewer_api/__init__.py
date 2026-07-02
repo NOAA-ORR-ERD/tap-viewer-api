@@ -4,6 +4,9 @@ from pyramid.config import Configurator
 from pyramid.events import NewRequest
 from . import views
 
+from ._version import __version__
+
+
 ALLOWED_ORIGINS = ()
 
 def add_cors_headers_response_callback(event):

@@ -83,8 +83,13 @@ def home(request):
     """
     request.response.content_type = "text/html"
 
-    return Response(publish_string(open(os.path.join(data_dir, "API.rst")).read(),
-                                   writer='html'))
+    with open(data_dir / "API.rst") as infile:
+        rst_file = infile.read()
+
+    #Inject the API version info:
+    rst_file = rst_file.replace("<<insert version here>>", tap_viewer_api.__version__)
+
+    return Response(publish_string(rst_file, writer='html'))
 
 
 @view_config(renderer='json')

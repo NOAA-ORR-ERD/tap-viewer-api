@@ -12,6 +12,8 @@ import pytest
 # from pyramid import testing
 import webtest
 
+import tap_viewer_api
+
 LOCS_TO_TEST = [
         ('arctic_platforms'),
         ('sabine_lake'),
@@ -39,7 +41,13 @@ def test_home(test_app):
     response = test_app.get('/', status=200)
     assert response.status_code == 200
     assert response.content_type == "text/html"
-    assert "TAP Viewer API" in response.text
+    page_text = response.text
+
+    print(page_text)
+
+    assert "TAP Viewer API" in page_text
+
+    assert f"API version: {tap_viewer_api.__version__}" in page_text
 
 
 def test_locations(test_app, locations_dir):
