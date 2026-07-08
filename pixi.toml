@@ -1,11 +1,8 @@
 [workspace]
 authors = ["Chris Barker <Chris.Barker@noaa.gov>"]
 channels = ["conda-forge"]
-name = "TAP-Viewer-API"
-platforms = ["osx-64"]
-version = "0.1.0"
-
-[tasks]
+name = "tap-viewer-api"
+platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
 
 [dependencies] # note: this is a dev setup, with everything
 python = ">=3.13"
