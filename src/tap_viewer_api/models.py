@@ -42,7 +42,11 @@ class TapLocation:
         self.output_times = self.site_data["output_times"]
         self.num_sites = self.site_data["num_sites"]
         print(f"found: {self.site_data['name']}")
-        if "model_spill" in self.site_data:
+        if ("model_spill" in self.site_data["source_locations"][0]):
+            self.model_spill = []
+            for site in self.site_data["source_locations"]:
+                self.model_spill.append(site["model_spill"])
+        elif ("model_spill" in self.site_data):
             self.model_spill = self.site_data["model_spill"]
         else:
             self.model_spill = [1.0, 'barrels']
