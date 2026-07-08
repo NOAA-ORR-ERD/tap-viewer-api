@@ -1,0 +1,140 @@
+{
+  "name": "SoCal Update - 4040 High",
+  "num_spills": 250,
+  "seasons": [
+    "AllYear"
+  ],
+  "output_times": [
+    [
+      960,
+      "40 days"
+    ],
+    [
+      720,
+      "30 days"
+    ],
+    [
+      480,
+      "20 days"
+    ],
+    [
+      240,
+      "10 days"
+    ],
+    [
+      168,
+      "7 days"
+    ],
+    [
+      120,
+      "5 days"
+    ],
+    [
+      72,
+      "3 days"
+    ],
+    [
+      48,
+      "2 days"
+    ],
+    [
+      24,
+      "1 days"
+    ]
+  ],
+    "spill_rate": [
+    [
+      1991,
+      "barrels/day"
+    ],
+    [
+      6117,
+      "barrels/day"
+    ]
+  ],
+    "release_duration": [
+    40, "days"
+  ],
+  "locs": [
+    [
+      1.0,
+      "barrel"
+    ],
+    [
+      5.0,
+      "barrels"
+    ],
+    [
+      10.0,
+      "barrels"
+    ]
+  ],
+  "bounding_box": [
+    [
+      238.5,
+      35.5
+    ],
+    [
+      243.143981,
+      32.0
+    ]
+  ],
+  "num_sites": 20220,
+  "source_locations": [
+    {
+      "name": "Hypothetical Well #1",
+      "coordinates": [
+        240.2155932,
+        34.2556794
+      ],
+      "oil_type": "AD02323",
+      "model_spill": [
+        2000, "barrels/day"
+      ]
+    },
+    {
+      "name": "Hypothetical Well #2",
+      "coordinates": [
+        239.9874451,
+        34.3890245
+      ],
+      "oil_type": "AD02175",
+      "model_spill": [
+        6000, "barrels/day"
+      ]
+    },
+    {
+      "name": "Hypothetical Well #3",
+      "coordinates": [
+        239.2366937,
+        34.8378843
+      ],
+      "oil_type": "AD02286",
+      "model_spill": [
+        6000, "barrels/day"
+      ]
+    },
+    {
+      "name": "Hypothetical Well #4",
+      "coordinates": [
+        239.1640593,
+        35.056304
+      ],
+      "oil_type": "EC01464",
+      "model_spill": [
+        6000, "barrels/day"
+      ]
+    },
+    {
+      "name": "Hypothetical Well #5",
+      "coordinates": [
+        242.3579149,
+        33.072726
+      ],
+      "oil_type": "EC01482",
+      "model_spill": [
+        2000, "barrels/day"
+      ]
+    }
+  ]
+}
