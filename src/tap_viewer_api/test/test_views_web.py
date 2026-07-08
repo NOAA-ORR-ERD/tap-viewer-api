@@ -12,6 +12,8 @@ import pytest
 # from pyramid import testing
 import webtest
 
+import tap_viewer_api
+
 LOCS_TO_TEST = [
         ('arctic_platforms'),
         ('sabine_lake'),
@@ -19,14 +21,14 @@ LOCS_TO_TEST = [
                 ]
 
 @pytest.fixture
-def test_app(locations_dir):
+def test_app(test_settings):
     """
     this fixture provides an application object to test against
     """
     # config_uri = 'development.ini'
 
     from tap_viewer_api import main
-    app = main({}, locations_dir=locations_dir)
+    app = main({}, **test_settings)
 
     test_app = webtest.TestApp(app)
     return test_app
@@ -39,14 +41,19 @@ def test_home(test_app):
     response = test_app.get('/', status=200)
     assert response.status_code == 200
     assert response.content_type == "text/html"
-    assert "TAP Viewer API" in response.text
+    page_text = response.text
+
+    print(page_text)
+
+    assert "TAP Viewer API" in page_text
+
+    assert f"API version: {tap_viewer_api.__version__}" in page_text
 
 
 def test_locations(test_app, locations_dir):
     """
     Do all the locations expected end up in the response?
     """
-
     # find all the ones in the locations dir:
     all_locs = {loc.name for loc in locations_dir.iterdir() if loc.is_dir() and not loc.name == ".git"}
 

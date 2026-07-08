@@ -3,7 +3,7 @@ requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
-name = "TAP-Viewer-API"
+name = "tap-viewer-api"
 dynamic = ["version"]
 description = "tap-viewer"
 license = "CC0-1.0"
