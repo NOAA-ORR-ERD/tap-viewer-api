@@ -146,6 +146,19 @@ test_develop:
     when: never
   - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
+
+.boem: &boem_definition
+  environment:
+    name: boem
+    url: https://tap-boem.nos-orr.net
+  variables:
+      API_URL: https://tap-boem-api.nos-orr.net
+      TARGET_ENV: boem
+  rules:
+  - if: $CI_PIPELINE_SOURCE == "merge_request_event"  # Skip for merge requests
+    when: never
+  - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
 Development Build Docker Image:
   <<: *build_definition
   <<: *dev_definition
@@ -154,6 +167,10 @@ Production Build Docker Image:
   <<: *build_definition
   <<: *prod_definition
 
+BOEM Build Docker Image:
+  <<: *build_definition
+  <<: *boem_definition
+
 Development Push to ECR and Update Fargate Service:
   <<: *deploy_definition
   <<: *dev_definition
@@ -161,3 +178,7 @@ Development Push to ECR and Update Fargate Service:
 Production Push to ECR and Update Fargate Service:
   <<: *deploy_definition
   <<: *prod_definition
+
+BOEM Push to ECR and Update Fargate Service:
+  <<: *deploy_definition
+  <<: *boem_definition
