@@ -5,27 +5,32 @@ Integration tests for the views.
 
 This can test the actual response objects
 """
-
+import os
+from pathlib import Path
 import pytest
 
 # from pyramid import testing
 import webtest
 
-from tap_viewer_api import LOCATION_DIR
 
-#LOCS_TO_TEST = ['south-california', 'sf_bay', 'arctic_platforms']  # what's this?, 'socal_md']
-#LOCS_TO_TEST = ['south-california', 'sf_bay']
-#LOCS_TO_TEST = ['south-california', 'arctic_platforms']
-LOCS_TO_TEST = ['arctic_platforms']
+import tap_viewer_api
 
+LOCS_TO_TEST = [
+        ('arctic_platforms'),
+        ('sabine_lake'),
+        ('south-california')
+                ]
 
 @pytest.fixture
-def test_app():
+def test_app(test_settings):
     """
     this fixture provides an application object to test against
     """
+    # config_uri = 'development.ini'
+
     from tap_viewer_api import main
-    app = main({})
+    app = main({}, **test_settings)
+
     test_app = webtest.TestApp(app)
     return test_app
 
@@ -37,16 +42,21 @@ def test_home(test_app):
     response = test_app.get('/', status=200)
     assert response.status_code == 200
     assert response.content_type == "text/html"
-    assert "TAP Viewer API" in response.text
+    page_text = response.text
+
+    print(page_text)
+
+    assert "TAP Viewer API" in page_text
+
+    assert f"API version: {tap_viewer_api.__version__}" in page_text
 
 
-def test_locations(test_app):
+def test_locations(test_app, locations_dir):
     """
     Do all the locations expected end up in the response?
     """
-
     # find all the ones in the locations dir:
-    all_locs = {loc.name for loc in LOCATION_DIR.iterdir() if loc.is_dir() and not loc.name == ".git"}
+    all_locs = {loc.name for loc in locations_dir.iterdir() if loc.is_dir() and not loc.name == ".git"}
 
     response = test_app.get('/locations', status=200)
     assert response.status_code == 200
@@ -81,15 +91,13 @@ def test_location_setup(test_app, location):
 
 
 @pytest.mark.parametrize(("location", "season"),[('arctic_platforms', 'AllYear'),
-                                                 # ('sf_bay', 'AllYear'),
-                                                 ('arctic_platforms', 'AllYear'),
                                                  # ('socal_md', 'AllYear'),
                                                   ])
 def test_impact_analysis(test_app, location, season):
 
     params = {"season": season,
               "oil_type": "Non-Weathering",
-              "source_id": 3,
+              "source_id": 1,
               "level_of_concern": [1.5, "bbl"],
               "amount_spilled": [1000, "bbl"],
               "output_time_index": 3,
@@ -109,7 +117,7 @@ def test_oiling_analysis(test_app, location):
 
     params = {"season": "AllYear",
               "oil_type": "Non-Weathering",
-              "source_id": 3,
+              "source_id": 1,
               "receptor_id": 111,
               "amount_spilled": [1000, "bbl"],
               "output_time_index": 3,
@@ -130,7 +138,7 @@ def test_response_time_analysis(test_app, location):
 
     params = {"season": "AllYear",
               "oil_type": "Non-Weathering",
-              "source_id": 3,
+              "source_id": 1,
               "receptor_id": 111,
               "amount_spilled": [1000, "bbl"],
               "level_of_concern": [1.5, "bbl"],
@@ -149,7 +157,7 @@ def test_threat_analysis(test_app, location):
 
     params = {"season": "AllYear",
               "oil_type": "Non-Weathering",
-              "receptor_id": 314,
+              "receptor_id": 201,
               "amount_spilled": [1000, "bbl"],
               "level_of_concern": [1.5, "bbl"],
               "output_time_index": 3,
@@ -167,7 +175,7 @@ def test_impact_by_spill(test_app, location):
 
     params = {"season": "AllYear",
               "oil_type": "Non-Weathering",
-              "source_id": 3,
+              "source_id": 1,
               "output_time_index": 3,
               "spill_number": 7
              }
@@ -184,7 +192,8 @@ def test_response_time_by_spill(test_app, location):
 
     params = {"season": "AllYear",
               "oil_type": "Non-Weathering",
-              "source_id": 3,
+              "source_id": 1,
+
               "amount_spilled": [1000, "bbl"],
               "level_of_concern": [1.5, "bbl"],
               "spill_number": 7
