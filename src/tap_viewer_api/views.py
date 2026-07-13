@@ -1,28 +1,49 @@
 ﻿#!/usr/bin/env python
 
 import os
+from pathlib import Path
 
 from pyramid.response import Response
 from pyramid.view import view_config
+from pyramid.threadlocal import get_current_registry
 
 from docutils.core import publish_string
 
-from . import models, LOCATION_DIR
+import tap_viewer_api
+
+from . import models
 
 # FixMe: maybe this should be pulled from the ini file??
-# Amy fix to at least use the LOCATION_DIR defined in the init
-# rather than define it differently in both places!
-data_dir = os.path.dirname(__file__)
-# l_dir = os.path.join(data_dir,'locations')  # standard locations loc
-# l_dir = os.path.join(data_dir,"..\..\..")  # ddr locations for local server
-# locations_dir = os.path.join(l_dir, 'locations')
-# locations_dir = os.path.join(data_dir, 'locations')
+#      I think all that's here is the API.rst file, so ??
+#      Perhaps there should be a static files dir somewhere?
+data_dir = Path(__file__).parent
 
-# load up the locations:
-all_locations = models.load_locations(LOCATION_DIR)
+
+def initialize(settings):
+    """
+    initialized the views -- initializing all the locations in this case.
+
+    should be called by the app main.
+    """
+    global all_locations
+
+    loc_dir = Path(settings.get("locations_dir"))
+    print(f"using locations dir from settings: {loc_dir}")
+    load_locations(loc_dir)
+
+
+def load_locations(loc_dir):
+    """
+    sets the global all_locations dict.
+
+    here as a separate function so it can be called by tests outside of
+    an running app.
+    """
+    global all_locations
+    all_locations = models.load_locations(loc_dir)
+
 
 cors_policy = {'credentials': True}
-
 
 def includeme(config):
     config.add_view(home, route_name='home', renderer='string')
@@ -62,8 +83,13 @@ def home(request):
     """
     request.response.content_type = "text/html"
 
-    return Response(publish_string(open(os.path.join(data_dir, "API.rst")).read(),
-                                   writer_name='html'))
+    with open(data_dir / "API.rst") as infile:
+        rst_file = infile.read()
+
+    #Inject the API version info:
+    rst_file = rst_file.replace("<<insert version here>>", tap_viewer_api.__version__)
+
+    return Response(publish_string(rst_file, writer='html'))
 
 
 @view_config(renderer='json')

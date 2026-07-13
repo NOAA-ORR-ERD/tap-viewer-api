@@ -12,7 +12,6 @@ from pyramid import testing
 
 from tap_viewer_api import views, LOCATION_DIR
 
-
 @pytest.fixture
 def config():
     """
@@ -36,13 +35,13 @@ def test_home():
     assert "TAP Viewer API" in response.text
 
 
-def test_locations_all():
+def test_locations_all(locations_dir):
     """
     Do all the locations expected end up in the response?
     """
-
     # find all the ones in the locations dir:
-    all_locs = {loc.name for loc in LOCATION_DIR.iterdir() if loc.is_dir() and not loc.name == ".git"}
+    views.load_locations(locations_dir)
+    all_locs = {loc.name for loc in locations_dir.iterdir() if loc.is_dir() and not loc.name == ".git"}
 
     print(all_locs)
     request = testing.DummyRequest()
