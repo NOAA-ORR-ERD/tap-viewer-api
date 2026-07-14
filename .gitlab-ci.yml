@@ -1,52 +1,47 @@
 variables:
-  PYTHON_VER: '3.11'
+  PYTHON_VER: '3.13'
+  GIT_DEPTH: 2
 
 stages:
-  - build
-  - lint
   - test
+  - build
+#  - lint
   - deploy
 
 
 test_develop:
   stage: test
-  image: registry.orr.noaa.gov/erd/environments/ubuntu/ubuntuforge-python3.11
+  image: registry.orr.noaa.gov/erd/environments/ubuntu/ubuntuforge-python$PYTHON_VER
 
-    # variables:
-    #     HASH: '1e0de0123b0043031000b050bb7095a9b4f0015f'
-    #     LOCATION_IMAGE_PATH: registry.orr.noaa.gov/gnome/tap/locations/master:$HASH
-    ##     GIT_STRATEGY: none
+  before_script:
+    # Force git to fetch all remote tags so vcs versioning will work
+    # we also need git to get the locations
+    - apt-get install git -y
+    - git --version
+
+    - conda install --file conda_requirements.txt --file conda_requirements_test.txt
+    - git fetch --tags
 
   script:
-    - cd TAP-Viewer-API
-    - conda install --file conda_requirements.txt
-    - conda install --file conda_requirements_test.txt
-    # - pip install -r pip_requirements.txt
     - pip install -e ./
 
     ####
     # get locations/arctic_platforms for tests (this hardcoded in test_cube_crunching.py at this moment)
     ####
-    - cd tap_viewer_api
-    - rm -rf ./locations
+    - cd ../
+    - rm -rf ./tap-test-data
     - ls -al
-    # get metadate from 'locations' repository and clone the root directory only
-    - apt-get install git -y
-    - git --version
-    # # --filter option doesn't work with old git versions
-    # - git clone --filter=blob:none --sparse https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.orr.noaa.gov/gnome/tap/locations.git
-    # - ls -al
-    # # checkout arctic_platforms directory
-    # - cd locations
-    # - git sparse-checkout add arctic_platforms
-    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.orr.noaa.gov/gnome/tap/tap-test-data.git locations
+
+    # get data from 'tap-test-data' repository and clone the root directory only
+    - git clone --depth=1 https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.orr.noaa.gov/gnome/tap/tap-test-data.git
     - ls -al
+    - ls -al ./tap-test-data
     ####
 
     # run tests
-    - cd ..
-    - pytest tap_viewer_api/test
-
+    # so the tests can find them.
+    - export TAP_LOCATIONS_DIR=./tap-test-data/
+    - pytest --pyargs tap_viewer_api
 
 
 # The following will be set as project variables. These are just placeholders.
@@ -146,7 +141,6 @@ test_develop:
     when: never
   - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
-
 .boem: &boem_definition
   environment:
     name: boem
@@ -158,6 +152,7 @@ test_develop:
   - if: $CI_PIPELINE_SOURCE == "merge_request_event"  # Skip for merge requests
     when: never
   - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
 
 Development Build Docker Image:
   <<: *build_definition
