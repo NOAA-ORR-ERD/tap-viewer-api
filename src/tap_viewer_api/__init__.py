@@ -34,6 +34,7 @@ def add_cors_headers_response_callback(event):
         # Fixme: can't this be pulled from the config/settings here?
         if origin in ALLOWED_ORIGINS:
             response.headers['Access-Control-Allow-Origin'] = origin
+            response.headers['Access-Control-Allow-Credentials'] = 'true'
     event.request.add_response_callback(cors_headers)
 
 
